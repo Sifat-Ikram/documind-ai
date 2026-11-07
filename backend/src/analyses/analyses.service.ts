@@ -8,8 +8,10 @@ import { DocumentsService } from '../documents/documents.service';
 import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import type { AnalyzeDto, ListAnalysesQuery } from './analyses.schemas';
+import { ChunkSearchService } from '../documents/chunk-search.service';
 
 const TRANSLATE_MAX_CHARS = 5000;
+const QA_EXCERPT_CHUNKS = 10;
 
 const analysisListSelect = {
   id: true,
@@ -31,6 +33,7 @@ export class AnalysesService {
     private readonly documents: DocumentsService,
     private readonly detector: TaskDetectorService,
     private readonly workflows: WorkflowsService,
+    private readonly search: ChunkSearchService,
     config: ConfigService<Env, true>,
   ) {
     this.maxChars = config.get('AI_MAX_DOCUMENT_CHARS', { infer: true });
@@ -59,9 +62,16 @@ export class AnalysesService {
         "I wasn't sure what you wanted, so I treated your instruction as a question about the document.",
       );
     }
-    if (doc.extractedText.length > this.maxChars) {
+
+    const isLong = doc.extractedText.length > this.maxChars;
+    if (isLong && detection.tasks.some((t) => t !== 'DOCUMENT_QA')) {
       notes.push(
         `This document is long, so only the first ${this.maxChars.toLocaleString('en-US')} characters were analyzed.`,
+      );
+    }
+    if (isLong && detection.tasks.includes('DOCUMENT_QA')) {
+      notes.push(
+        'This document is long, so the answer is based on the parts most relevant to your question.',
       );
     }
     if (
@@ -74,15 +84,21 @@ export class AnalysesService {
     }
 
     const settled = await Promise.allSettled(
-      detection.tasks.map((task) =>
-        this.workflows.run({
+      detection.tasks.map(async (task) => {
+        const { text, excerptsOnly } = await this.textFor(
+          task,
+          doc,
+          dto.instruction,
+        );
+        return this.workflows.run({
           task,
           instruction: dto.instruction,
           documentName: doc.originalName,
-          text: doc.extractedText.slice(0, this.limitFor(task)),
+          text,
           targetLanguage: detection.targetLanguage,
-        }),
-      ),
+          excerptsOnly,
+        });
+      }),
     );
 
     if (settled.every((s) => s.status === 'rejected')) {
@@ -155,6 +171,30 @@ export class AnalysesService {
     });
     if (count === 0) throw new NotFoundException('Analysis not found');
     return { message: 'Analysis deleted' };
+  }
+
+  private async textFor(
+    task: TaskTypeValue,
+    doc: { id: string; extractedText: string },
+    instruction: string,
+  ): Promise<{ text: string; excerptsOnly: boolean }> {
+    if (task === 'DOCUMENT_QA' && doc.extractedText.length > this.maxChars) {
+      const { chunks } = await this.search.search(
+        doc.id,
+        instruction,
+        QA_EXCERPT_CHUNKS,
+      );
+      const text = [...chunks]
+        .sort((a, b) => a.index - b.index)
+        .map((c) => `[Excerpt ${c.index + 1}]\n${c.content}`)
+        .join('\n\n---\n\n')
+        .slice(0, this.maxChars);
+      return { text, excerptsOnly: true };
+    }
+    return {
+      text: doc.extractedText.slice(0, this.limitFor(task)),
+      excerptsOnly: false,
+    };
   }
 
   private limitFor(task: TaskTypeValue): number {

@@ -115,6 +115,7 @@ export interface WorkflowInput {
   documentName: string;
   text: string;
   targetLanguage: string | null;
+  excerptsOnly?: boolean;
 }
 
 export interface TaskSection {
@@ -145,7 +146,11 @@ export class WorkflowsService {
     const userMessage = [
       `Instruction:\n"""\n${input.instruction}\n"""`,
       languageLine,
-      `Document "${input.documentName}":\n"""\n${input.text}\n"""`,
+      `Document "${input.documentName}"${
+        input.excerptsOnly
+          ? ' (selected excerpts only; the rest of the document is not shown. If the answer is not in these excerpts, say it was not found in the excerpts provided)'
+          : ''
+      }:\n"""\n${input.text}\n"""`,
     ]
       .filter(Boolean)
       .join('\n\n');

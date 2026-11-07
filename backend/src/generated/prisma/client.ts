@@ -69,3 +69,8 @@ export type Message = Prisma.MessageModel
  * 
  */
 export type Analysis = Prisma.AnalysisModel
+/**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = Prisma.RefreshTokenModel

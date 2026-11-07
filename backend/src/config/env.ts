@@ -11,7 +11,9 @@ const envSchema = z.object({
   DATABASE_URL_UNPOOLED: z.string().optional(),
 
   JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
-  JWT_EXPIRES_IN_DAYS: z.coerce.number().int().min(1).default(7),
+  JWT_ACCESS_EXPIRES_SECONDS: z.coerce.number().int().min(5).default(1800),
+  JWT_REFRESH_EXPIRES_DAYS: z.coerce.number().int().min(1).default(30),
+  REFRESH_GRACE_SECONDS: z.coerce.number().int().min(0).default(20),
 
   CLOUDINARY_CLOUD_NAME: z.string().min(1, 'CLOUDINARY_CLOUD_NAME is required'),
   CLOUDINARY_API_KEY: z.string().min(1, 'CLOUDINARY_API_KEY is required'),

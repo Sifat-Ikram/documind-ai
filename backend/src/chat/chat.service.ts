@@ -192,7 +192,7 @@ export class ChatService {
     try {
       for await (const token of this.ai.streamText(
         prepared.aiMessages,
-        { temperature: 0.3, maxTokens: 2500 },
+        { temperature: 0.3, maxTokens: 4000 },
         signal,
       )) {
         answer += token;

@@ -1,11 +1,20 @@
-import { Body, Controller, Get, HttpCode, Post, Res } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Req,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import type { Env } from '../config/env';
+import { SessionCookies } from '../sessions/session-cookies.service';
+import { SessionsService } from '../sessions/sessions.service';
 import { UsersService } from '../users/users.service';
-import { AUTH_COOKIE } from './auth.constants';
+import { REFRESH_COOKIE } from './auth.constants';
 import {
   loginSchema,
   registerSchema,
@@ -17,15 +26,16 @@ import type { AuthUser } from './auth.types';
 import { CurrentUser } from './current-user.decorator';
 import { Public } from './public.decorator';
 
-// register/login এ কড়া limit: মিনিটে ১০ request
 const AUTH_THROTTLE = { default: { limit: 10, ttl: 60_000 } };
+const REFRESH_THROTTLE = { default: { limit: 30, ttl: 60_000 } };
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly auth: AuthService,
     private readonly users: UsersService,
-    private readonly config: ConfigService<Env, true>,
+    private readonly sessions: SessionsService,
+    private readonly cookies: SessionCookies,
   ) {}
 
   @Public()
@@ -35,8 +45,8 @@ export class AuthController {
     @Body(new ZodValidationPipe(registerSchema)) body: RegisterDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { user, token } = await this.auth.register(body);
-    this.setAuthCookie(res, token);
+    const { user, tokens } = await this.auth.register(body);
+    this.cookies.setSession(res, tokens);
     return { user };
   }
 
@@ -48,39 +58,47 @@ export class AuthController {
     @Body(new ZodValidationPipe(loginSchema)) body: LoginDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { user, token } = await this.auth.login(body);
-    this.setAuthCookie(res, token);
+    const { user, tokens } = await this.auth.login(body);
+    this.cookies.setSession(res, tokens);
     return { user };
   }
 
-  // Public: session শেষ হয়ে গেলেও cookie মোছা যাবে
+  @Public()
+  @Throttle(REFRESH_THROTTLE)
+  @HttpCode(200)
+  @Post('refresh')
+  async refresh(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    try {
+      const result = await this.sessions.rotate(req.cookies?.[REFRESH_COOKIE]);
+      if (result.refreshToken) {
+        this.cookies.setSession(res, {
+          accessToken: result.accessToken,
+          refreshToken: result.refreshToken,
+        });
+      } else {
+        this.cookies.setAccessOnly(res, result.accessToken);
+      }
+      return { user: result.user };
+    } catch (err) {
+      if (err instanceof UnauthorizedException) this.cookies.clearSession(res);
+      throw err;
+    }
+  }
+
   @Public()
   @HttpCode(200)
   @Post('logout')
-  logout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie(AUTH_COOKIE, this.cookieBaseOptions());
+  async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    await this.sessions.revokeByToken(req.cookies?.[REFRESH_COOKIE]);
+    this.cookies.clearSession(res);
     return { message: 'Logged out' };
   }
 
   @Get('me')
   async me(@CurrentUser() current: AuthUser) {
     return { user: await this.users.getProfile(current.id) };
-  }
-
-  private cookieBaseOptions() {
-    return {
-      httpOnly: true,
-      secure: this.config.get('NODE_ENV', { infer: true }) === 'production',
-      sameSite: 'lax' as const,
-      path: '/',
-    };
-  }
-
-  private setAuthCookie(res: Response, token: string) {
-    const days = this.config.get('JWT_EXPIRES_IN_DAYS', { infer: true });
-    res.cookie(AUTH_COOKIE, token, {
-      ...this.cookieBaseOptions(),
-      maxAge: days * 24 * 60 * 60 * 1000,
-    });
   }
 }
