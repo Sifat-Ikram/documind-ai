@@ -9,7 +9,7 @@ const envSchema = z.object({
   DATABASE_URL_UNPOOLED: z.string().min(1, 'DATABASE_URL_UNPOOLED is required'),
 
   JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
-  JWT_EXPIRES_IN: z.string().default('7d'),
+  JWT_EXPIRES_IN_DAYS: z.coerce.number().int().min(1).default(7),
 });
 
 export type Env = z.infer<typeof envSchema>;
