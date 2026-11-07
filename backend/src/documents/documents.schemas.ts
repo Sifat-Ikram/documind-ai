@@ -28,4 +28,10 @@ export const listDocumentsQuerySchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(50).default(12),
 });
+
 export type ListDocumentsQuery = z.infer<typeof listDocumentsQuerySchema>;
+
+export const searchQuerySchema = z.object({
+  q: z.string().trim().min(2, 'Search text is too short').max(200),
+});
+export type SearchQuery = z.infer<typeof searchQuerySchema>;

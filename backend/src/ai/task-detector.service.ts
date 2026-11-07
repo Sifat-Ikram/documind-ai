@@ -45,7 +45,7 @@ export class TaskDetectorService {
           { role: 'user', content: `Instruction:\n"""\n${instruction}\n"""` },
         ],
         detectionSchema,
-        { temperature: 0, maxTokens: 300 },
+        { temperature: 0, maxTokens: 1500 },
       );
 
       const tasks = [...new Set(detected.tasks)];

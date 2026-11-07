@@ -17,16 +17,22 @@ import {
   listDocumentsQuerySchema,
   renameDocumentSchema,
   uploadSignatureSchema,
+  searchQuerySchema,
+  type SearchQuery,
   type ConfirmUploadDto,
   type ListDocumentsQuery,
   type RenameDocumentDto,
   type UploadSignatureDto,
 } from './documents.schemas';
 import { DocumentsService } from './documents.service';
+import { ChunkSearchService } from './chunk-search.service';
 
 @Controller('documents')
 export class DocumentsController {
-  constructor(private readonly documents: DocumentsService) {}
+  constructor(
+    private readonly documents: DocumentsService,
+    private readonly chunkSearch: ChunkSearchService,
+  ) {}
 
   @HttpCode(200)
   @Post('upload-signature')
@@ -58,6 +64,17 @@ export class DocumentsController {
   @Get(':id')
   async detail(@CurrentUser() user: AuthUser, @Param('id') id: string) {
     return { document: await this.documents.getDetail(user.id, id) };
+  }
+
+  @Get(':id/search')
+  async search(
+    @CurrentUser() user: AuthUser,
+    @Param('id') id: string,
+    @Query(new ZodValidationPipe(searchQuerySchema)) query: SearchQuery,
+  ) {
+    await this.documents.assertOwned(user.id, id);
+    const { mode, chunks } = await this.chunkSearch.search(id, query.q, 5);
+    return { mode, results: chunks };
   }
 
   @Get(':id/download')

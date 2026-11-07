@@ -1,0 +1,35 @@
+Project Aurora - Kickoff Meeting Minutes
+
+Date: 12 March 2026
+
+Location: Dhaka Office, Conference Room B
+
+Attendees: Rahim Chowdhury (Project Manager), Nusrat Jahan (Lead Engineer), Tanvir Ahmed (Designer), and Sarah Mitchell (Client Representative, BrightPath Solutions).
+
+1. Purpose
+
+The purpose of this meeting was to align the team and the client on the scope, schedule and budget of Project Aurora, a customer portal that BrightPath Solutions will use to manage orders and support requests. The portal replaces three older tools that the client currently maintains separately.
+
+2. Scope and Budget
+
+The approved budget is BDT 4,500,000, including a 10 percent contingency of BDT 450,000. The team will consist of 6 people and the project is planned for 16 weeks. The first working release is due on 30 April 2026 and the public launch is targeted for 30 June 2026. Sarah Mitchell noted that BrightPath expects at least 2,000 customers to use the portal in the first month.
+
+3. Decisions
+
+The team will build the portal with Next.js and a PostgreSQL database hosted on Neon. A short demo will be held every Thursday at 4:00 PM. The first design review is scheduled for 2 April 2026. Any change request above BDT 100,000 must be approved in writing by Sarah Mitchell.
+
+4. Action Items
+
+- Nusrat Jahan will set up the code repository and the CI pipeline by 19 March 2026.
+- Tanvir Ahmed will deliver the first wireframes by 26 March 2026.
+- Rahim Chowdhury will send the signed contract to BrightPath Solutions by 15 March 2026.
+- Sarah Mitchell will provide the brand guidelines and API access credentials by 20 March 2026.
+- The whole team will attend the design review on 2 April 2026.
+
+5. Risks
+
+The client's API documentation is incomplete, which may delay the integration work. The timeline is tight because the launch date cannot move. Rahim Chowdhury will raise both risks again at the next meeting.
+
+6. Next Meeting
+
+The next meeting will be held on 19 March 2026 at 10:00 AM in the Dhaka Office.

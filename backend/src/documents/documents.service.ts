@@ -226,7 +226,7 @@ export class DocumentsService {
     return { url: doc.fileUrl, fileName };
   }
 
-  private async assertOwned(userId: string, id: string) {
+  async assertOwned(userId: string, id: string) {
     const exists = await this.prisma.document.findFirst({
       where: { id, userId },
       select: { id: true },

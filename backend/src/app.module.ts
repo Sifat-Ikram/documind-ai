@@ -10,6 +10,8 @@ import { UsersModule } from './users/users.module';
 import { DocumentsModule } from './documents/documents.module';
 import { AiModule } from './ai/ai.module';
 import { AnalysesModule } from './analyses/analyses.module';
+import { ChatModule } from './chat/chat.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -21,7 +23,9 @@ import { AnalysesModule } from './analyses/analyses.module';
     AuthModule,
     DocumentsModule,
     AiModule,
-    AnalysesModule
+    AnalysesModule,
+    ChatModule,
+    DashboardModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

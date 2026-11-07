@@ -156,7 +156,7 @@ export class WorkflowsService {
         { role: 'user', content: userMessage },
       ],
       def.schema,
-      { temperature: 0.2, maxTokens: def.maxTokens },
+      { temperature: 0.2, maxTokens: def.maxTokens + 1500 },
     );
 
     return { task: input.task, title: def.title, data };

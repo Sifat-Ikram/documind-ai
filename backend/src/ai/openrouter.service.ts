@@ -101,6 +101,32 @@ export class OpenRouterService {
     );
   }
 
+  async *streamText(
+    messages: AiMessage[],
+    options: CompleteOptions = {},
+    signal?: AbortSignal,
+  ): AsyncGenerator<string> {
+    try {
+      const stream = await this.client.chat.completions.create(
+        {
+          model: this.model,
+          messages,
+          temperature: options.temperature ?? 0.3,
+          max_tokens: options.maxTokens ?? 2000,
+          stream: true,
+        },
+        { signal },
+      );
+      for await (const chunk of stream) {
+        const delta = chunk.choices[0]?.delta?.content;
+        if (delta) yield delta;
+      }
+    } catch (err) {
+      if (signal?.aborted) return;
+      throw this.toHttpError(err);
+    }
+  }
+
   private toHttpError(err: unknown): HttpException {
     if (err instanceof HttpException) return err;
     if (err instanceof OpenAI.APIError) {
