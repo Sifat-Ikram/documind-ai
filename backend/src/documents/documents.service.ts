@@ -19,6 +19,7 @@ import type {
   UploadSignatureDto,
 } from './documents.schemas';
 import { ParserService } from './parser.service';
+import { CLOUDINARY_ROOT_FOLDER } from '../cloudinary/cloudinary.constants';
 
 const documentSummarySelect = {
   id: true,
@@ -59,7 +60,7 @@ export class DocumentsService {
 
   async confirmUpload(userId: string, dto: ConfirmUploadDto) {
     const pattern = new RegExp(
-      `^documind/${userId}/[0-9a-f-]{36}\\.(pdf|docx|txt)$`,
+      `^${CLOUDINARY_ROOT_FOLDER}/${userId}/[0-9a-f-]{36}\\.(pdf|docx|txt)$`,
     );
     if (!pattern.test(dto.publicId)) {
       throw new BadRequestException('Invalid upload reference');

@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary } from 'cloudinary';
 import { randomUUID } from 'node:crypto';
 import type { Env } from '../config/env';
+import { userFolder } from './cloudinary.constants';
 
 @Injectable()
 export class CloudinaryService {
@@ -24,18 +25,22 @@ export class CloudinaryService {
   }
 
   createUploadSignature(userId: string, extension: string) {
-    const publicId = `documind/${userId}/${randomUUID()}.${extension}`;
+    const assetFolder = userFolder(userId);
+    const publicId = `${assetFolder}/${randomUUID()}.${extension}`;
     const timestamp = Math.floor(Date.now() / 1000);
+
     const signature = cloudinary.utils.api_sign_request(
-      { public_id: publicId, timestamp },
+      { asset_folder: assetFolder, public_id: publicId, timestamp },
       this.apiSecret,
     );
+
     return {
       uploadUrl: `https://api.cloudinary.com/v1_1/${this.cloudName}/raw/upload`,
       apiKey: this.apiKey,
       timestamp,
       signature,
       publicId,
+      assetFolder,
     };
   }
 
