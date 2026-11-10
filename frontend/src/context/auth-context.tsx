@@ -40,34 +40,49 @@ function clearSessionFlag(): void {
   document.cookie = `${SESSION_FLAG}=; Max-Age=0; Path=/`;
 }
 
+type Loaded =
+  | { status: "authenticated"; user: User }
+  | { status: "unauthenticated" }
+  | { status: "error" };
+
+async function fetchSession(): Promise<Loaded> {
+  if (!hasSessionFlag()) return { status: "unauthenticated" };
+  try {
+    const res = await api<{ user: User }>("/auth/me");
+    return { status: "authenticated", user: res.user };
+  } catch (err) {
+    if (err instanceof ApiError && err.status === 401) {
+      clearSessionFlag();
+      return { status: "unauthenticated" };
+    }
+    return { status: "error" };
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [status, setStatus] = useState<Status>("loading");
 
-  const loadUser = useCallback(async () => {
-    if (!hasSessionFlag()) {
-      setStatus("unauthenticated");
-      return;
-    }
-    setStatus("loading");
-    try {
-      const res = await api<{ user: User }>("/auth/me");
-      setUser(res.user);
-      setStatus("authenticated");
-    } catch (err) {
-      if (err instanceof ApiError && err.status === 401) {
-        clearSessionFlag();
-        setStatus("unauthenticated");
-      } else {
-        setStatus("error");
-      }
-    }
+  const applyLoaded = useCallback((loaded: Loaded) => {
+    if (loaded.status === "authenticated") setUser(loaded.user);
+    setStatus(loaded.status);
   }, []);
 
   useEffect(() => {
-    void loadUser();
-  }, [loadUser]);
+    let cancelled = false;
+    void fetchSession().then((loaded) => {
+      if (!cancelled) applyLoaded(loaded);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [applyLoaded]);
+
+  const retry = useCallback(() => {
+    setStatus("loading");
+    void fetchSession().then(applyLoaded);
+  }, [applyLoaded]);
 
   useEffect(
     () =>
@@ -114,8 +129,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [router]);
 
   const value = useMemo<AuthContextValue>(
-    () => ({ user, status, login, register, logout, setUser, retry: loadUser }),
-    [user, status, login, register, logout, loadUser],
+    () => ({ user, status, login, register, logout, setUser, retry }),
+    [user, status, login, register, logout, retry],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
