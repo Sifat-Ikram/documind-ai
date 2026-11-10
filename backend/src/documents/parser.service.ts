@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import * as mammoth from 'mammoth';
-import { PasswordException, PDFParse } from 'pdf-parse';
 import type { FileTypeValue } from './documents.constants';
 
 @Injectable()
@@ -48,19 +47,33 @@ export class ParserService {
   }
 
   private async extractPdf(buffer: Buffer): Promise<string> {
-    const parser = new PDFParse({ data: new Uint8Array(buffer) });
+    let parser: InstanceType<typeof import('pdf-parse').PDFParse> | undefined;
+
     try {
+      // Load the worker before loading pdf-parse
+      const { CanvasFactory } = await import('pdf-parse/worker');
+      const { PDFParse } = await import('pdf-parse');
+
+      const parser = new PDFParse({
+        data: new Uint8Array(buffer),
+        CanvasFactory,
+      });
+
       const result = await parser.getText();
+
       return result.text.replace(/^-- \d+ of \d+ --$/gm, '');
     } catch (err) {
+      const { PasswordException } = await import('pdf-parse');
+
       if (err instanceof PasswordException) {
         throw new BadRequestException('This PDF is password-protected.');
       }
+
       throw new BadRequestException(
         'Could not read this PDF. The file may be damaged.',
       );
     } finally {
-      await parser.destroy().catch(() => undefined);
+      await parser?.destroy().catch(() => undefined);
     }
   }
 

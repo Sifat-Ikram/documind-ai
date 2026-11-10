@@ -1,17 +1,11 @@
 import type { NextConfig } from "next";
 
+const backendUrl =
+  process.env.BACKEND_URL ?? "https://documind-ai-backend-one.vercel.app";
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  experimental: {
-    agentFeedback: true,
-  },
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
+  async rewrites() {
+    return [{ source: "/api/:path*", destination: `${backendUrl}/api/:path*` }];
   },
 };
 

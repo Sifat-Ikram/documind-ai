@@ -1,26 +1,168 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   DocuMind AI colour system
+   Change a hex value here and it changes everywhere.
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  color-scheme: light;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* neutrals */
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-muted: #f4f4f5;
+  --surface-raised: #ffffff;
+  --border: #e4e4e7;
+  --border-strong: #8c8c96; /* inputs and outlined buttons */
+  --text: #18181b;
+  --text-muted: #52525b;
+
+  /* PRIMARY: TEMPORARY values, to be decided */
+  --primary: #2749f5;
+  --primary-hover: #1f3bd1;
+  --primary-foreground: #ffffff;
+  --primary-soft: #e8edff;
+  --link: #2749f5;
+
+  /* AI accent */
+  --ai: #6d28d9; /* text and icons */
+  --ai-soft: #f5f3ff;
+  --ai-decor: #8b5cf6; /* glow / decoration only, never text */
+  --focus: #7c3aed;
+
+  /* status */
+  --success: #15803d;
+  --success-soft: #f0fdf4;
+  --error: #dc2626; /* icons, borders, fills */
+  --error-text: #b91c1c; /* text */
+  --error-soft: #fef2f2;
+  --error-foreground: #ffffff; /* text on a solid error button */
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+
+  /* file type chips */
+  --file-pdf: #b91c1c;
+  --file-pdf-soft: #fef2f2;
+  --file-docx: #be185d;
+  --file-docx-soft: #fdf2f8;
+  --file-txt: #52525b;
+  --file-txt-soft: #f4f4f5;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+
+    --bg: #0b0b0d;
+    --surface: #131316;
+    --surface-muted: #1c1c20;
+    --surface-raised: #1c1c20;
+    --border: #2a2a30;
+    --border-strong: #6b6b75;
+    --text: #e4e4e7;
+    --text-muted: #a1a1aa;
+
+    /* PRIMARY: TEMPORARY values, to be decided */
+    --primary: #2749f5;
+    --primary-hover: #3a5bff;
+    --primary-foreground: #ffffff;
+    --primary-soft: color-mix(in srgb, #2749f5 15%, transparent);
+    --link: #8fa3ff;
+
+    --ai: #a78bfa;
+    --ai-soft: color-mix(in srgb, #a78bfa 14%, transparent);
+    --ai-decor: #8b5cf6;
+    --focus: #a78bfa;
+
+    --success: #4ade80;
+    --success-soft: color-mix(in srgb, #4ade80 14%, transparent);
+    --error: #f87171;
+    --error-text: #f87171;
+    --error-soft: color-mix(in srgb, #f87171 14%, transparent);
+    --error-foreground: #0b0b0d;
+    --warning: #fbbf24;
+    --warning-soft: color-mix(in srgb, #fbbf24 14%, transparent);
+
+    --file-pdf: #f87171;
+    --file-pdf-soft: color-mix(in srgb, #f87171 14%, transparent);
+    --file-docx: #f472b6;
+    --file-docx-soft: color-mix(in srgb, #f472b6 14%, transparent);
+    --file-txt: #a1a1aa;
+    --file-txt-soft: #1c1c20;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Role names become Tailwind classes: bg-surface, text-text-muted, border-border ... */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-link: var(--link);
+
+  --color-ai: var(--ai);
+  --color-ai-soft: var(--ai-soft);
+  --color-ai-decor: var(--ai-decor);
+  --color-focus: var(--focus);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-error: var(--error);
+  --color-error-text: var(--error-text);
+  --color-error-soft: var(--error-soft);
+  --color-error-foreground: var(--error-foreground);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
+  --color-file-pdf: var(--file-pdf);
+  --color-file-pdf-soft: var(--file-pdf-soft);
+  --color-file-docx: var(--file-docx);
+  --color-file-docx-soft: var(--file-docx-soft);
+  --color-file-txt: var(--file-txt);
+  --color-file-txt-soft: var(--file-txt-soft);
+
+  --font-sans:
+    var(--font-inter), var(--font-bengali), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--ai-decor) 30%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
