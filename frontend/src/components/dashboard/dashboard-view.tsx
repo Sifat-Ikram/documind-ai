@@ -229,7 +229,10 @@ function DocumentRow({ doc }: { doc: DocumentSummary }) {
 
 function ActivityRow({ item }: { item: ActivityItem }) {
   const isAnalysis = item.type === "analysis";
-  const href = isAnalysis ? "/history" : `/documents/${item.documentId}/chat`;
+  const href = isAnalysis
+    ? `/documents/${item.documentId}/analyze?analysis=${item.id}`
+    : `/documents/${item.documentId}/chat`;
+
   return (
     <li>
       <Link

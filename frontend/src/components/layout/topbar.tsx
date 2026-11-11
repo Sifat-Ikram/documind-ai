@@ -96,7 +96,7 @@ function UserMenu() {
 
 export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-bg/80 px-4 backdrop-blur sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-bg/80 px-4 backdrop-blur sm:px-6 lg:px-8 print:hidden">
       <button
         type="button"
         onClick={onMenuClick}

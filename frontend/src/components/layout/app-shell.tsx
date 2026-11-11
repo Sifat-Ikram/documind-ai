@@ -31,8 +31,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-bg">
-      {/* 1024px and above: fixed sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-border bg-surface lg:block">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-border bg-surface lg:block print:hidden">
         <SidebarContent />
       </aside>
 
@@ -67,9 +66,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         )}
       </AnimatePresence>
 
-      <div className="lg:pl-64">
+      <div className="lg:pl-64 print:pl-0">
         <Topbar onMenuClick={() => setDrawerOpen(true)} />
-        <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+        <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8 print:max-w-none print:p-0">
           {children}
         </main>
       </div>

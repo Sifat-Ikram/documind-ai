@@ -4,34 +4,39 @@ import { useCallback, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 
 interface State<T> {
+  key: string | null;
   data: T | null;
   error: unknown;
-  loading: boolean;
 }
 
-export function useApi<T>(path: string) {
+export function useApi<T>(path: string | null) {
+  const [nonce, setNonce] = useState(0);
   const [state, setState] = useState<State<T>>({
+    key: null,
     data: null,
     error: null,
-    loading: true,
   });
-  const [nonce, setNonce] = useState(0);
+  const key = path === null ? null : `${path}|${nonce}`;
 
   useEffect(() => {
+    if (path === null || key === null) return;
     const controller = new AbortController();
     api<T>(path, { signal: controller.signal })
-      .then((data) => setState({ data, error: null, loading: false }))
+      .then((data) => setState({ key, data, error: null }))
       .catch((error: unknown) => {
         if (controller.signal.aborted) return;
-        setState((s) => ({ ...s, error, loading: false }));
+        setState((s) => ({ key, data: s.data, error }));
       });
     return () => controller.abort();
-  }, [path, nonce]);
+  }, [path, key]);
 
-  const reload = useCallback(() => {
-    setState((s) => ({ ...s, error: null, loading: true }));
-    setNonce((n) => n + 1);
-  }, []);
+  const reload = useCallback(() => setNonce((n) => n + 1), []);
+  const settled = key !== null && state.key === key;
 
-  return { ...state, reload };
+  return {
+    data: path === null ? null : state.data,
+    error: settled ? state.error : null,
+    loading: key !== null && !settled,
+    reload,
+  };
 }

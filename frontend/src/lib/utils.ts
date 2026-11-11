@@ -62,3 +62,17 @@ export function formatToday(date = new Date()): string {
     month: "long",
   });
 }
+
+export function formatDateTime(iso: string): string {
+  return new Date(iso).toLocaleString("en", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+export function plural(count: number, word: string): string {
+  return `${count.toLocaleString("en")} ${word}${count === 1 ? "" : "s"}`;
+}
