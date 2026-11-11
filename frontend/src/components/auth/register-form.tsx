@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FiInfo } from "react-icons/fi";
+import { PasswordChecklist } from "@/components/auth/password-checklist";
 import { Button } from "@/components/ui/button";
 import { Input, PasswordInput } from "@/components/ui/input";
 import { useAuth } from "@/context/auth-context";
@@ -54,59 +56,71 @@ export function RegisterForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-5">
-      <div>
-        <h1 className="text-xl font-semibold tracking-tight text-text">
+    <div>
+      <h1 className="text-2xl font-semibold tracking-tight text-text">
+        Create your account
+      </h1>
+      <p className="mt-1.5 text-sm text-text-muted">
+        It takes less than a minute. No email verification needed.
+      </p>
+
+      <form onSubmit={onSubmit} noValidate className="mt-8 space-y-5">
+        {formError && (
+          <div
+            role="alert"
+            className="rounded-xl bg-error-soft px-4 py-3 text-sm text-error-text"
+          >
+            {formError}
+          </div>
+        )}
+
+        <Input
+          label="Name"
+          autoComplete="name"
+          placeholder="Your name"
+          value={values.name}
+          onChange={(e) => update("name", e.target.value)}
+          error={errors.name}
+        />
+        <Input
+          label="Email"
+          type="email"
+          autoComplete="email"
+          placeholder="you@example.com"
+          value={values.email}
+          onChange={(e) => update("email", e.target.value)}
+          error={errors.email}
+        />
+        <div className="space-y-3">
+          <PasswordInput
+            label="Password"
+            autoComplete="new-password"
+            value={values.password}
+            onChange={(e) => update("password", e.target.value)}
+            error={errors.password}
+          />
+          <PasswordChecklist value={values.password} />
+        </div>
+
+        <Button type="submit" size="lg" className="w-full" loading={submitting}>
           Create account
-        </h1>
-        <p className="mt-1 text-sm text-text-muted">
-          It takes less than a minute.
+        </Button>
+      </form>
+
+      <div className="mt-6 flex gap-3 rounded-xl border border-border bg-surface-muted p-3.5 text-sm text-text-muted">
+        <FiInfo className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+        <p>
+          Uploaded files are stored with a public link. Please do not upload
+          sensitive or private documents.
         </p>
       </div>
 
-      {formError && (
-        <div
-          role="alert"
-          className="rounded-lg bg-error-soft px-3 py-2 text-sm text-error-text"
-        >
-          {formError}
-        </div>
-      )}
-
-      <Input
-        label="Name"
-        autoComplete="name"
-        value={values.name}
-        onChange={(e) => update("name", e.target.value)}
-        error={errors.name}
-      />
-      <Input
-        label="Email"
-        type="email"
-        autoComplete="email"
-        value={values.email}
-        onChange={(e) => update("email", e.target.value)}
-        error={errors.email}
-      />
-      <PasswordInput
-        label="Password"
-        autoComplete="new-password"
-        value={values.password}
-        onChange={(e) => update("password", e.target.value)}
-        error={errors.password}
-        hint="At least 8 characters, with a letter and a number."
-      />
-
-      <Button type="submit" size="lg" className="w-full" loading={submitting}>
-        Create account
-      </Button>
-
-      <p className="text-center text-sm text-text-muted">
+      <p className="mt-8 text-center text-sm text-text-muted">
         Already have an account?{" "}
         <Link href="/login" className="font-medium text-link hover:underline">
           Log in
         </Link>
       </p>
-    </form>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AuthBrandPanel } from "@/components/auth/auth-brand-panel";
 import { Logo } from "@/components/ui/logo";
 
 export default function AuthLayout({
@@ -7,13 +8,20 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center px-4 py-10">
-      <Link href="/" className="mb-8" aria-label="DocuMind AI home">
-        <Logo className="text-xl" />
-      </Link>
-      <div className="w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
-        {children}
-      </div>
+    <div className="grid min-h-dvh lg:grid-cols-2">
+      <AuthBrandPanel />
+      <main className="flex min-h-dvh flex-col justify-center px-5 py-10 sm:px-10">
+        <div className="mx-auto w-full max-w-sm">
+          <Link
+            href="/"
+            className="mb-10 inline-block lg:hidden"
+            aria-label="DocuMind AI home"
+          >
+            <Logo className="text-xl" />
+          </Link>
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

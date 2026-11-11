@@ -166,3 +166,16 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(
+    ellipse at 30% 40%,
+    #000 20%,
+    transparent 70%
+  );
+  mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 70%);
+}

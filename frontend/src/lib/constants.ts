@@ -9,3 +9,5 @@ export const TASK_LABELS: Record<TaskType, string> = {
   TRANSLATE: "Translate",
   EXTRACT_ACTION_ITEMS: "Action items",
 };
+
+export const ALL_TASKS = Object.keys(TASK_LABELS) as TaskType[];

@@ -52,54 +52,55 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-5">
-      <div>
-        <h1 className="text-xl font-semibold tracking-tight text-text">
+    <div>
+      <h1 className="text-2xl font-semibold tracking-tight text-text">
+        Welcome back
+      </h1>
+      <p className="mt-1.5 text-sm text-text-muted">
+        Log in to continue to your documents.
+      </p>
+
+      <form onSubmit={onSubmit} noValidate className="mt-8 space-y-5">
+        {formError && (
+          <div
+            role="alert"
+            className="rounded-xl bg-error-soft px-4 py-3 text-sm text-error-text"
+          >
+            {formError}
+          </div>
+        )}
+
+        <Input
+          label="Email"
+          type="email"
+          autoComplete="email"
+          placeholder="you@example.com"
+          value={values.email}
+          onChange={(e) => update("email", e.target.value)}
+          error={errors.email}
+        />
+        <PasswordInput
+          label="Password"
+          autoComplete="current-password"
+          value={values.password}
+          onChange={(e) => update("password", e.target.value)}
+          error={errors.password}
+        />
+
+        <Button type="submit" size="lg" className="w-full" loading={submitting}>
           Log in
-        </h1>
-        <p className="mt-1 text-sm text-text-muted">
-          Enter your email and password.
-        </p>
-      </div>
+        </Button>
+      </form>
 
-      {formError && (
-        <div
-          role="alert"
-          className="rounded-lg bg-error-soft px-3 py-2 text-sm text-error-text"
-        >
-          {formError}
-        </div>
-      )}
-
-      <Input
-        label="Email"
-        type="email"
-        autoComplete="email"
-        value={values.email}
-        onChange={(e) => update("email", e.target.value)}
-        error={errors.email}
-      />
-      <PasswordInput
-        label="Password"
-        autoComplete="current-password"
-        value={values.password}
-        onChange={(e) => update("password", e.target.value)}
-        error={errors.password}
-      />
-
-      <Button type="submit" size="lg" className="w-full" loading={submitting}>
-        Log in
-      </Button>
-
-      <p className="text-center text-sm text-text-muted">
-        No account yet?{" "}
+      <p className="mt-8 text-center text-sm text-text-muted">
+        New here?{" "}
         <Link
           href="/register"
           className="font-medium text-link hover:underline"
         >
-          Create one
+          Create an account
         </Link>
       </p>
-    </form>
+    </div>
   );
 }

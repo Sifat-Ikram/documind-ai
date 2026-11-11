@@ -47,3 +47,18 @@ export function safeNextPath(value: string | null): string {
   }
   return value;
 }
+
+export function greeting(date = new Date()): string {
+  const hour = date.getHours();
+  if (hour < 12) return "Good morning";
+  if (hour < 18) return "Good afternoon";
+  return "Good evening";
+}
+
+export function formatToday(date = new Date()): string {
+  return date.toLocaleDateString("en", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+}
