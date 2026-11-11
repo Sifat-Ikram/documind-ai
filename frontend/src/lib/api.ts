@@ -79,7 +79,7 @@ async function send(path: string, options: RequestOptions): Promise<Response> {
   }
 }
 
-async function parseResponse<T>(res: Response): Promise<T> {
+export async function parseResponse<T>(res: Response): Promise<T> {
   const text = await res.text();
   let data: unknown = null;
   if (text) {
@@ -103,22 +103,29 @@ async function parseResponse<T>(res: Response): Promise<T> {
   return data as T;
 }
 
-export async function api<T>(
+export async function apiRaw(
   path: string,
   options: RequestOptions = {},
-): Promise<T> {
+): Promise<Response> {
   let res = await send(path, options);
 
   if (res.status === 401 && !NO_REFRESH.has(path)) {
     const result = await refreshSession();
     if (result === "ok") {
-      res = await send(path, options); // retry once with the new access token
+      res = await send(path, options);
     } else if (result === "expired") {
       expiredListeners.forEach((listener) => listener());
     }
   }
 
-  return parseResponse<T>(res);
+  return res;
+}
+
+export async function api<T>(
+  path: string,
+  options: RequestOptions = {},
+): Promise<T> {
+  return parseResponse<T>(await apiRaw(path, options));
 }
 
 export function errorMessage(err: unknown): string {

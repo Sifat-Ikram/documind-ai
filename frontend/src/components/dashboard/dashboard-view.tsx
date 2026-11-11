@@ -231,7 +231,7 @@ function ActivityRow({ item }: { item: ActivityItem }) {
   const isAnalysis = item.type === "analysis";
   const href = isAnalysis
     ? `/documents/${item.documentId}/analyze?analysis=${item.id}`
-    : `/documents/${item.documentId}/chat`;
+    : `/documents/${item.documentId}/chat?conversation=${item.id}`;
 
   return (
     <li>

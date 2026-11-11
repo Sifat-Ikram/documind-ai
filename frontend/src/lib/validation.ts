@@ -38,3 +38,20 @@ export const renameSchema = z.object({
     .max(120, "Name must be at most 120 characters")
     .refine((n) => !/[\\/]/.test(n), "Name cannot contain slashes"),
 });
+
+export const profileSchema = z.object({ name: nameSchema });
+
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, "Enter your current password"),
+    newPassword: passwordSchema,
+    confirmPassword: z.string().min(1, "Repeat the new password"),
+  })
+  .refine((d) => d.newPassword === d.confirmPassword, {
+    message: "The passwords do not match",
+    path: ["confirmPassword"],
+  })
+  .refine((d) => d.currentPassword !== d.newPassword, {
+    message: "The new password must be different from the current one",
+    path: ["newPassword"],
+  });

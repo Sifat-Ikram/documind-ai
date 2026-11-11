@@ -283,7 +283,7 @@ export function DocumentDetailsView({ id }: { id: string }) {
                 {chats.data.items.slice(0, 5).map((chat) => (
                   <li key={chat.id}>
                     <Link
-                      href={`/documents/${doc.id}/chat`}
+                      href={`/documents/${doc.id}/chat?conversation=${chat.id}`}
                       className="block rounded-xl px-2 py-2 hover:bg-surface-muted"
                     >
                       <p className="line-clamp-1 text-sm font-medium text-text">

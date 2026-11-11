@@ -145,3 +145,17 @@ export interface ActionItemsData {
   }[];
   found: boolean;
 }
+
+export type ContextMode = "full" | "excerpts";
+
+export interface ChatMessageDto {
+  id: string;
+  role: "USER" | "ASSISTANT";
+  content: string;
+  createdAt: string;
+}
+
+export interface ConversationMessages {
+  conversation: { id: string; documentId: string; title: string };
+  messages: ChatMessageDto[];
+}
