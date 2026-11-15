@@ -57,7 +57,25 @@ export const ModelName = {
   Conversation: 'Conversation',
   Message: 'Message',
   Analysis: 'Analysis',
-  RefreshToken: 'RefreshToken'
+  RefreshToken: 'RefreshToken',
+  Category: 'Category',
+  TrashItem: 'TrashItem',
+  DocumentVersion: 'DocumentVersion',
+  Tag: 'Tag',
+  DocumentTag: 'DocumentTag',
+  Favorite: 'Favorite',
+  Collection: 'Collection',
+  CollectionDocument: 'CollectionDocument',
+  CollectionMember: 'CollectionMember',
+  DocumentShare: 'DocumentShare',
+  Comment: 'Comment',
+  DocumentNote: 'DocumentNote',
+  DocumentView: 'DocumentView',
+  GeneratedDocument: 'GeneratedDocument',
+  GenerationLog: 'GenerationLog',
+  ConversionJob: 'ConversionJob',
+  UserPreference: 'UserPreference',
+  ContactMessage: 'ContactMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -98,6 +116,11 @@ export const DocumentScalarFieldEnum = {
   fileSize: 'fileSize',
   extractedText: 'extractedText',
   wordCount: 'wordCount',
+  categoryId: 'categoryId',
+  source: 'source',
+  currentVersion: 'currentVersion',
+  archivedAt: 'archivedAt',
+  trashedAt: 'trashedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -167,6 +190,216 @@ export const RefreshTokenScalarFieldEnum = {
 export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
 
 
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  name: 'name',
+  icon: 'icon',
+  sortOrder: 'sortOrder'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const TrashItemScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  trashedById: 'trashedById',
+  trashedAt: 'trashedAt',
+  purgeAt: 'purgeAt'
+} as const
+
+export type TrashItemScalarFieldEnum = (typeof TrashItemScalarFieldEnum)[keyof typeof TrashItemScalarFieldEnum]
+
+
+export const DocumentVersionScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  version: 'version',
+  title: 'title',
+  fileUrl: 'fileUrl',
+  publicId: 'publicId',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  extractedText: 'extractedText',
+  wordCount: 'wordCount',
+  createdById: 'createdById',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type DocumentVersionScalarFieldEnum = (typeof DocumentVersionScalarFieldEnum)[keyof typeof DocumentVersionScalarFieldEnum]
+
+
+export const TagScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  createdAt: 'createdAt'
+} as const
+
+export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
+
+
+export const DocumentTagScalarFieldEnum = {
+  documentId: 'documentId',
+  tagId: 'tagId'
+} as const
+
+export type DocumentTagScalarFieldEnum = (typeof DocumentTagScalarFieldEnum)[keyof typeof DocumentTagScalarFieldEnum]
+
+
+export const FavoriteScalarFieldEnum = {
+  userId: 'userId',
+  documentId: 'documentId',
+  createdAt: 'createdAt'
+} as const
+
+export type FavoriteScalarFieldEnum = (typeof FavoriteScalarFieldEnum)[keyof typeof FavoriteScalarFieldEnum]
+
+
+export const CollectionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CollectionScalarFieldEnum = (typeof CollectionScalarFieldEnum)[keyof typeof CollectionScalarFieldEnum]
+
+
+export const CollectionDocumentScalarFieldEnum = {
+  collectionId: 'collectionId',
+  documentId: 'documentId',
+  addedAt: 'addedAt'
+} as const
+
+export type CollectionDocumentScalarFieldEnum = (typeof CollectionDocumentScalarFieldEnum)[keyof typeof CollectionDocumentScalarFieldEnum]
+
+
+export const CollectionMemberScalarFieldEnum = {
+  collectionId: 'collectionId',
+  userId: 'userId',
+  role: 'role',
+  createdAt: 'createdAt'
+} as const
+
+export type CollectionMemberScalarFieldEnum = (typeof CollectionMemberScalarFieldEnum)[keyof typeof CollectionMemberScalarFieldEnum]
+
+
+export const DocumentShareScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  userId: 'userId',
+  sharedById: 'sharedById',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentShareScalarFieldEnum = (typeof DocumentShareScalarFieldEnum)[keyof typeof DocumentShareScalarFieldEnum]
+
+
+export const CommentScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  authorId: 'authorId',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+export const DocumentNoteScalarFieldEnum = {
+  documentId: 'documentId',
+  content: 'content',
+  revision: 'revision',
+  updatedById: 'updatedById',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentNoteScalarFieldEnum = (typeof DocumentNoteScalarFieldEnum)[keyof typeof DocumentNoteScalarFieldEnum]
+
+
+export const DocumentViewScalarFieldEnum = {
+  userId: 'userId',
+  documentId: 'documentId',
+  lastAccessedAt: 'lastAccessedAt'
+} as const
+
+export type DocumentViewScalarFieldEnum = (typeof DocumentViewScalarFieldEnum)[keyof typeof DocumentViewScalarFieldEnum]
+
+
+export const GeneratedDocumentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  docType: 'docType',
+  length: 'length',
+  language: 'language',
+  prompt: 'prompt',
+  content: 'content',
+  savedDocumentId: 'savedDocumentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GeneratedDocumentScalarFieldEnum = (typeof GeneratedDocumentScalarFieldEnum)[keyof typeof GeneratedDocumentScalarFieldEnum]
+
+
+export const GenerationLogScalarFieldEnum = {
+  id: 'id',
+  kind: 'kind',
+  actorKey: 'actorKey',
+  createdAt: 'createdAt'
+} as const
+
+export type GenerationLogScalarFieldEnum = (typeof GenerationLogScalarFieldEnum)[keyof typeof GenerationLogScalarFieldEnum]
+
+
+export const ConversionJobScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sourceName: 'sourceName',
+  sourceFormat: 'sourceFormat',
+  targetFormat: 'targetFormat',
+  publicId: 'publicId',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  warnings: 'warnings',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ConversionJobScalarFieldEnum = (typeof ConversionJobScalarFieldEnum)[keyof typeof ConversionJobScalarFieldEnum]
+
+
+export const UserPreferenceScalarFieldEnum = {
+  userId: 'userId',
+  data: 'data',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPreferenceScalarFieldEnum = (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum]
+
+
+export const ContactMessageScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  subject: 'subject',
+  message: 'message',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactMessageScalarFieldEnum = (typeof ContactMessageScalarFieldEnum)[keyof typeof ContactMessageScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -190,6 +423,14 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -197,12 +438,4 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

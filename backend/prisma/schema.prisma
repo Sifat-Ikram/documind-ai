@@ -29,6 +29,16 @@ enum MessageRole {
   ASSISTANT
 }
 
+enum ShareRole {
+  VIEWER
+  EDITOR
+}
+
+enum DocumentSource {
+  UPLOAD
+  GENERATED
+}
+
 model User {
   id            String         @id @default(cuid())
   name          String
@@ -38,6 +48,20 @@ model User {
   conversations Conversation[]
   analyses      Analysis[]
   refreshTokens RefreshToken[]
+  tags                  Tag[]
+  favorites             Favorite[]
+  collections           Collection[]
+  collectionMemberships CollectionMember[]
+  sharesReceived        DocumentShare[]     @relation("ShareRecipient")
+  sharesGiven           DocumentShare[]     @relation("ShareSender")
+  comments              Comment[]
+  views                 DocumentView[]
+  generations           GeneratedDocument[]
+  conversions           ConversionJob[]
+  preferences           UserPreference?
+  versionsCreated       DocumentVersion[]
+  trashItems            TrashItem[]
+  notesUpdated          DocumentNote[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -56,10 +80,28 @@ model Document {
   chunks        DocumentChunk[]
   conversations Conversation[]
   analyses      Analysis[]
+    categoryId     String?
+  category       Category?            @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  source         DocumentSource       @default(UPLOAD)
+  currentVersion Int                  @default(1)
+  archivedAt     DateTime?
+  trashedAt      DateTime?
+  versions       DocumentVersion[]
+  trashItem      TrashItem?
+  tags           DocumentTag[]
+  favorites      Favorite[]
+  collections    CollectionDocument[]
+  shares         DocumentShare[]
+  comments       Comment[]
+  views          DocumentView[]
+  note           DocumentNote?
+  generatedFrom  GeneratedDocument[]
+
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
   @@index([userId, createdAt])
+  @@index([userId, trashedAt, archivedAt, createdAt])
 }
 
 model DocumentChunk {
@@ -128,4 +170,233 @@ model RefreshToken {
 
   @@index([userId])
   @@index([familyId])
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  slug      String     @unique
+  name      String
+  icon      String
+  sortOrder Int        @default(0)
+  documents Document[]
+}
+
+model TrashItem {
+  id          String   @id @default(cuid())
+  documentId  String   @unique
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  trashedById String
+  trashedBy   User     @relation(fields: [trashedById], references: [id], onDelete: Cascade)
+  trashedAt   DateTime @default(now())
+  purgeAt     DateTime
+
+  @@index([purgeAt])
+  @@index([trashedById])
+}
+
+// Document holds the CURRENT version. This table holds the previous ones.
+model DocumentVersion {
+  id            String   @id @default(cuid())
+  documentId    String
+  document      Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  version       Int
+  title         String
+  fileUrl       String
+  publicId      String
+  fileType      FileType
+  fileSize      Int
+  extractedText String   @db.Text
+  wordCount     Int      @default(0)
+  createdById   String?
+  createdBy     User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  note          String?
+  createdAt     DateTime @default(now())
+
+  @@unique([documentId, version])
+  @@index([documentId, createdAt])
+}
+
+model Tag {
+  id        String        @id @default(cuid())
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  documents DocumentTag[]
+  createdAt DateTime      @default(now())
+
+  @@unique([userId, name])
+}
+
+model DocumentTag {
+  documentId String
+  tagId      String
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  tag        Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([documentId, tagId])
+  @@index([tagId])
+}
+
+model Favorite {
+  userId     String
+  documentId String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([userId, documentId])
+  @@index([documentId])
+}
+
+model Collection {
+  id          String               @id @default(cuid())
+  userId      String
+  owner       User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  documents   CollectionDocument[]
+  members     CollectionMember[]
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model CollectionDocument {
+  collectionId String
+  documentId   String
+  addedAt      DateTime   @default(now())
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  document     Document   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([collectionId, documentId])
+  @@index([documentId])
+}
+
+model CollectionMember {
+  collectionId String
+  userId       String
+  role         ShareRole
+  createdAt    DateTime   @default(now())
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([collectionId, userId])
+  @@index([userId])
+}
+
+model DocumentShare {
+  id         String    @id @default(cuid())
+  documentId String
+  document   Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User      @relation("ShareRecipient", fields: [userId], references: [id], onDelete: Cascade)
+  sharedById String
+  sharedBy   User      @relation("ShareSender", fields: [sharedById], references: [id], onDelete: Cascade)
+  role       ShareRole
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@unique([documentId, userId])
+  @@index([userId])
+}
+
+model Comment {
+  id         String   @id @default(cuid())
+  documentId String
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  content    String   @db.Text
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([documentId, createdAt])
+}
+
+model DocumentNote {
+  documentId  String   @id
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  content     String   @default("") @db.Text
+  revision    Int      @default(0)
+  updatedById String?
+  updatedBy   User?    @relation(fields: [updatedById], references: [id], onDelete: SetNull)
+  updatedAt   DateTime @updatedAt
+}
+
+model DocumentView {
+  userId         String
+  documentId     String
+  lastAccessedAt DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  document       Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([userId, documentId])
+  @@index([userId, lastAccessedAt])
+}
+
+model GeneratedDocument {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  docType         String
+  length          String
+  language        String?
+  prompt          String    @db.Text
+  content         String    @db.Text
+  savedDocumentId String?
+  savedDocument   Document? @relation(fields: [savedDocumentId], references: [id], onDelete: SetNull)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId, createdAt])
+}
+
+model GenerationLog {
+  id        String   @id @default(cuid())
+  kind      String
+  actorKey  String
+  createdAt DateTime @default(now())
+
+  @@index([kind, createdAt])
+  @@index([actorKey, createdAt])
+}
+
+model ConversionJob {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sourceName   String
+  sourceFormat String
+  targetFormat String
+  publicId     String
+  fileUrl      String
+  fileSize     Int
+  warnings     String[]
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([expiresAt])
+}
+
+model UserPreference {
+  userId    String   @id
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  data      Json     @default("{}")
+  updatedAt DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String    @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String    @db.Text
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([createdAt])
 }

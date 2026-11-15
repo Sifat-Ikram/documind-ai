@@ -496,10 +496,6 @@ export type AnalysisUpdatedetectedTasksInput = {
   push?: $Enums.TaskType | $Enums.TaskType[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }

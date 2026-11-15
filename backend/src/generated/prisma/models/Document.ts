@@ -29,11 +29,13 @@ export type AggregateDocument = {
 export type DocumentAvgAggregateOutputType = {
   fileSize: number | null
   wordCount: number | null
+  currentVersion: number | null
 }
 
 export type DocumentSumAggregateOutputType = {
   fileSize: number | null
   wordCount: number | null
+  currentVersion: number | null
 }
 
 export type DocumentMinAggregateOutputType = {
@@ -46,6 +48,11 @@ export type DocumentMinAggregateOutputType = {
   fileSize: number | null
   extractedText: string | null
   wordCount: number | null
+  categoryId: string | null
+  source: $Enums.DocumentSource | null
+  currentVersion: number | null
+  archivedAt: Date | null
+  trashedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -60,6 +67,11 @@ export type DocumentMaxAggregateOutputType = {
   fileSize: number | null
   extractedText: string | null
   wordCount: number | null
+  categoryId: string | null
+  source: $Enums.DocumentSource | null
+  currentVersion: number | null
+  archivedAt: Date | null
+  trashedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -74,6 +86,11 @@ export type DocumentCountAggregateOutputType = {
   fileSize: number
   extractedText: number
   wordCount: number
+  categoryId: number
+  source: number
+  currentVersion: number
+  archivedAt: number
+  trashedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -83,11 +100,13 @@ export type DocumentCountAggregateOutputType = {
 export type DocumentAvgAggregateInputType = {
   fileSize?: true
   wordCount?: true
+  currentVersion?: true
 }
 
 export type DocumentSumAggregateInputType = {
   fileSize?: true
   wordCount?: true
+  currentVersion?: true
 }
 
 export type DocumentMinAggregateInputType = {
@@ -100,6 +119,11 @@ export type DocumentMinAggregateInputType = {
   fileSize?: true
   extractedText?: true
   wordCount?: true
+  categoryId?: true
+  source?: true
+  currentVersion?: true
+  archivedAt?: true
+  trashedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -114,6 +138,11 @@ export type DocumentMaxAggregateInputType = {
   fileSize?: true
   extractedText?: true
   wordCount?: true
+  categoryId?: true
+  source?: true
+  currentVersion?: true
+  archivedAt?: true
+  trashedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -128,6 +157,11 @@ export type DocumentCountAggregateInputType = {
   fileSize?: true
   extractedText?: true
   wordCount?: true
+  categoryId?: true
+  source?: true
+  currentVersion?: true
+  archivedAt?: true
+  trashedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -229,6 +263,11 @@ export type DocumentGroupByOutputType = {
   fileSize: number
   extractedText: string
   wordCount: number
+  categoryId: string | null
+  source: $Enums.DocumentSource
+  currentVersion: number
+  archivedAt: Date | null
+  trashedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: DocumentCountAggregateOutputType | null
@@ -266,12 +305,28 @@ export type DocumentWhereInput = {
   fileSize?: Prisma.IntFilter<"Document"> | number
   extractedText?: Prisma.StringFilter<"Document"> | string
   wordCount?: Prisma.IntFilter<"Document"> | number
+  categoryId?: Prisma.StringNullableFilter<"Document"> | string | null
+  source?: Prisma.EnumDocumentSourceFilter<"Document"> | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFilter<"Document"> | number
+  archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   chunks?: Prisma.DocumentChunkListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   analyses?: Prisma.AnalysisListRelationFilter
+  category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
+  versions?: Prisma.DocumentVersionListRelationFilter
+  trashItem?: Prisma.XOR<Prisma.TrashItemNullableScalarRelationFilter, Prisma.TrashItemWhereInput> | null
+  tags?: Prisma.DocumentTagListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  collections?: Prisma.CollectionDocumentListRelationFilter
+  shares?: Prisma.DocumentShareListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  views?: Prisma.DocumentViewListRelationFilter
+  note?: Prisma.XOR<Prisma.DocumentNoteNullableScalarRelationFilter, Prisma.DocumentNoteWhereInput> | null
+  generatedFrom?: Prisma.GeneratedDocumentListRelationFilter
 }
 
 export type DocumentOrderByWithRelationInput = {
@@ -284,12 +339,28 @@ export type DocumentOrderByWithRelationInput = {
   fileSize?: Prisma.SortOrder
   extractedText?: Prisma.SortOrder
   wordCount?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrder
+  currentVersion?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  trashedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   chunks?: Prisma.DocumentChunkOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
   analyses?: Prisma.AnalysisOrderByRelationAggregateInput
+  category?: Prisma.CategoryOrderByWithRelationInput
+  versions?: Prisma.DocumentVersionOrderByRelationAggregateInput
+  trashItem?: Prisma.TrashItemOrderByWithRelationInput
+  tags?: Prisma.DocumentTagOrderByRelationAggregateInput
+  favorites?: Prisma.FavoriteOrderByRelationAggregateInput
+  collections?: Prisma.CollectionDocumentOrderByRelationAggregateInput
+  shares?: Prisma.DocumentShareOrderByRelationAggregateInput
+  comments?: Prisma.CommentOrderByRelationAggregateInput
+  views?: Prisma.DocumentViewOrderByRelationAggregateInput
+  note?: Prisma.DocumentNoteOrderByWithRelationInput
+  generatedFrom?: Prisma.GeneratedDocumentOrderByRelationAggregateInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -305,12 +376,28 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   fileSize?: Prisma.IntFilter<"Document"> | number
   extractedText?: Prisma.StringFilter<"Document"> | string
   wordCount?: Prisma.IntFilter<"Document"> | number
+  categoryId?: Prisma.StringNullableFilter<"Document"> | string | null
+  source?: Prisma.EnumDocumentSourceFilter<"Document"> | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFilter<"Document"> | number
+  archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   chunks?: Prisma.DocumentChunkListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   analyses?: Prisma.AnalysisListRelationFilter
+  category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
+  versions?: Prisma.DocumentVersionListRelationFilter
+  trashItem?: Prisma.XOR<Prisma.TrashItemNullableScalarRelationFilter, Prisma.TrashItemWhereInput> | null
+  tags?: Prisma.DocumentTagListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  collections?: Prisma.CollectionDocumentListRelationFilter
+  shares?: Prisma.DocumentShareListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  views?: Prisma.DocumentViewListRelationFilter
+  note?: Prisma.XOR<Prisma.DocumentNoteNullableScalarRelationFilter, Prisma.DocumentNoteWhereInput> | null
+  generatedFrom?: Prisma.GeneratedDocumentListRelationFilter
 }, "id">
 
 export type DocumentOrderByWithAggregationInput = {
@@ -323,6 +410,11 @@ export type DocumentOrderByWithAggregationInput = {
   fileSize?: Prisma.SortOrder
   extractedText?: Prisma.SortOrder
   wordCount?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrder
+  currentVersion?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  trashedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DocumentCountOrderByAggregateInput
@@ -345,6 +437,11 @@ export type DocumentScalarWhereWithAggregatesInput = {
   fileSize?: Prisma.IntWithAggregatesFilter<"Document"> | number
   extractedText?: Prisma.StringWithAggregatesFilter<"Document"> | string
   wordCount?: Prisma.IntWithAggregatesFilter<"Document"> | number
+  categoryId?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
+  source?: Prisma.EnumDocumentSourceWithAggregatesFilter<"Document"> | $Enums.DocumentSource
+  currentVersion?: Prisma.IntWithAggregatesFilter<"Document"> | number
+  archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
+  trashedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
 }
@@ -358,12 +455,27 @@ export type DocumentCreateInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
@@ -376,11 +488,26 @@ export type DocumentUncheckedCreateInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentUpdateInput = {
@@ -392,12 +519,27 @@ export type DocumentUpdateInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
@@ -410,11 +552,26 @@ export type DocumentUncheckedUpdateInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentCreateManyInput = {
@@ -427,6 +584,11 @@ export type DocumentCreateManyInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -440,6 +602,10 @@ export type DocumentUpdateManyMutationInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -454,6 +620,11 @@ export type DocumentUncheckedUpdateManyInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -478,6 +649,11 @@ export type DocumentCountOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   extractedText?: Prisma.SortOrder
   wordCount?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  currentVersion?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
+  trashedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -485,6 +661,7 @@ export type DocumentCountOrderByAggregateInput = {
 export type DocumentAvgOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   wordCount?: Prisma.SortOrder
+  currentVersion?: Prisma.SortOrder
 }
 
 export type DocumentMaxOrderByAggregateInput = {
@@ -497,6 +674,11 @@ export type DocumentMaxOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   extractedText?: Prisma.SortOrder
   wordCount?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  currentVersion?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
+  trashedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -511,6 +693,11 @@ export type DocumentMinOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   extractedText?: Prisma.SortOrder
   wordCount?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  currentVersion?: Prisma.SortOrder
+  archivedAt?: Prisma.SortOrder
+  trashedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -518,11 +705,17 @@ export type DocumentMinOrderByAggregateInput = {
 export type DocumentSumOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
   wordCount?: Prisma.SortOrder
+  currentVersion?: Prisma.SortOrder
 }
 
 export type DocumentScalarRelationFilter = {
   is?: Prisma.DocumentWhereInput
   isNot?: Prisma.DocumentWhereInput
+}
+
+export type DocumentNullableScalarRelationFilter = {
+  is?: Prisma.DocumentWhereInput | null
+  isNot?: Prisma.DocumentWhereInput | null
 }
 
 export type DocumentCreateNestedManyWithoutUserInput = {
@@ -579,6 +772,18 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type EnumDocumentSourceFieldUpdateOperationsInput = {
+  set?: $Enums.DocumentSource
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type DocumentCreateNestedOneWithoutChunksInput = {
   create?: Prisma.XOR<Prisma.DocumentCreateWithoutChunksInput, Prisma.DocumentUncheckedCreateWithoutChunksInput>
   connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutChunksInput
@@ -621,6 +826,190 @@ export type DocumentUpdateOneRequiredWithoutAnalysesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutAnalysesInput, Prisma.DocumentUpdateWithoutAnalysesInput>, Prisma.DocumentUncheckedUpdateWithoutAnalysesInput>
 }
 
+export type DocumentCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCategoryInput, Prisma.DocumentUncheckedCreateWithoutCategoryInput> | Prisma.DocumentCreateWithoutCategoryInput[] | Prisma.DocumentUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCategoryInput | Prisma.DocumentCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.DocumentCreateManyCategoryInputEnvelope
+  connect?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+}
+
+export type DocumentUncheckedCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCategoryInput, Prisma.DocumentUncheckedCreateWithoutCategoryInput> | Prisma.DocumentCreateWithoutCategoryInput[] | Prisma.DocumentUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCategoryInput | Prisma.DocumentCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.DocumentCreateManyCategoryInputEnvelope
+  connect?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+}
+
+export type DocumentUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCategoryInput, Prisma.DocumentUncheckedCreateWithoutCategoryInput> | Prisma.DocumentCreateWithoutCategoryInput[] | Prisma.DocumentUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCategoryInput | Prisma.DocumentCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.DocumentUpsertWithWhereUniqueWithoutCategoryInput | Prisma.DocumentUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.DocumentCreateManyCategoryInputEnvelope
+  set?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  disconnect?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  delete?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  connect?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  update?: Prisma.DocumentUpdateWithWhereUniqueWithoutCategoryInput | Prisma.DocumentUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.DocumentUpdateManyWithWhereWithoutCategoryInput | Prisma.DocumentUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.DocumentScalarWhereInput | Prisma.DocumentScalarWhereInput[]
+}
+
+export type DocumentUncheckedUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCategoryInput, Prisma.DocumentUncheckedCreateWithoutCategoryInput> | Prisma.DocumentCreateWithoutCategoryInput[] | Prisma.DocumentUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCategoryInput | Prisma.DocumentCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.DocumentUpsertWithWhereUniqueWithoutCategoryInput | Prisma.DocumentUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.DocumentCreateManyCategoryInputEnvelope
+  set?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  disconnect?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  delete?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  connect?: Prisma.DocumentWhereUniqueInput | Prisma.DocumentWhereUniqueInput[]
+  update?: Prisma.DocumentUpdateWithWhereUniqueWithoutCategoryInput | Prisma.DocumentUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.DocumentUpdateManyWithWhereWithoutCategoryInput | Prisma.DocumentUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.DocumentScalarWhereInput | Prisma.DocumentScalarWhereInput[]
+}
+
+export type DocumentCreateNestedOneWithoutTrashItemInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutTrashItemInput, Prisma.DocumentUncheckedCreateWithoutTrashItemInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutTrashItemInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutTrashItemNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutTrashItemInput, Prisma.DocumentUncheckedCreateWithoutTrashItemInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutTrashItemInput
+  upsert?: Prisma.DocumentUpsertWithoutTrashItemInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutTrashItemInput, Prisma.DocumentUpdateWithoutTrashItemInput>, Prisma.DocumentUncheckedUpdateWithoutTrashItemInput>
+}
+
+export type DocumentCreateNestedOneWithoutVersionsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutVersionsInput, Prisma.DocumentUncheckedCreateWithoutVersionsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutVersionsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutVersionsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutVersionsInput, Prisma.DocumentUncheckedCreateWithoutVersionsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutVersionsInput
+  upsert?: Prisma.DocumentUpsertWithoutVersionsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutVersionsInput, Prisma.DocumentUpdateWithoutVersionsInput>, Prisma.DocumentUncheckedUpdateWithoutVersionsInput>
+}
+
+export type DocumentCreateNestedOneWithoutTagsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutTagsInput, Prisma.DocumentUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutTagsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutTagsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutTagsInput, Prisma.DocumentUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutTagsInput
+  upsert?: Prisma.DocumentUpsertWithoutTagsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutTagsInput, Prisma.DocumentUpdateWithoutTagsInput>, Prisma.DocumentUncheckedUpdateWithoutTagsInput>
+}
+
+export type DocumentCreateNestedOneWithoutFavoritesInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutFavoritesInput, Prisma.DocumentUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutFavoritesInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutFavoritesNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutFavoritesInput, Prisma.DocumentUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutFavoritesInput
+  upsert?: Prisma.DocumentUpsertWithoutFavoritesInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutFavoritesInput, Prisma.DocumentUpdateWithoutFavoritesInput>, Prisma.DocumentUncheckedUpdateWithoutFavoritesInput>
+}
+
+export type DocumentCreateNestedOneWithoutCollectionsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCollectionsInput, Prisma.DocumentUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCollectionsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutCollectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCollectionsInput, Prisma.DocumentUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCollectionsInput
+  upsert?: Prisma.DocumentUpsertWithoutCollectionsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutCollectionsInput, Prisma.DocumentUpdateWithoutCollectionsInput>, Prisma.DocumentUncheckedUpdateWithoutCollectionsInput>
+}
+
+export type DocumentCreateNestedOneWithoutSharesInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutSharesInput, Prisma.DocumentUncheckedCreateWithoutSharesInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutSharesInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutSharesNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutSharesInput, Prisma.DocumentUncheckedCreateWithoutSharesInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutSharesInput
+  upsert?: Prisma.DocumentUpsertWithoutSharesInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutSharesInput, Prisma.DocumentUpdateWithoutSharesInput>, Prisma.DocumentUncheckedUpdateWithoutSharesInput>
+}
+
+export type DocumentCreateNestedOneWithoutCommentsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCommentsInput, Prisma.DocumentUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCommentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutCommentsInput, Prisma.DocumentUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutCommentsInput
+  upsert?: Prisma.DocumentUpsertWithoutCommentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutCommentsInput, Prisma.DocumentUpdateWithoutCommentsInput>, Prisma.DocumentUncheckedUpdateWithoutCommentsInput>
+}
+
+export type DocumentCreateNestedOneWithoutNoteInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutNoteInput, Prisma.DocumentUncheckedCreateWithoutNoteInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutNoteInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutNoteNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutNoteInput, Prisma.DocumentUncheckedCreateWithoutNoteInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutNoteInput
+  upsert?: Prisma.DocumentUpsertWithoutNoteInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutNoteInput, Prisma.DocumentUpdateWithoutNoteInput>, Prisma.DocumentUncheckedUpdateWithoutNoteInput>
+}
+
+export type DocumentCreateNestedOneWithoutViewsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutViewsInput, Prisma.DocumentUncheckedCreateWithoutViewsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutViewsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutViewsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutViewsInput, Prisma.DocumentUncheckedCreateWithoutViewsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutViewsInput
+  upsert?: Prisma.DocumentUpsertWithoutViewsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutViewsInput, Prisma.DocumentUpdateWithoutViewsInput>, Prisma.DocumentUncheckedUpdateWithoutViewsInput>
+}
+
+export type DocumentCreateNestedOneWithoutGeneratedFromInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutGeneratedFromInput, Prisma.DocumentUncheckedCreateWithoutGeneratedFromInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutGeneratedFromInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneWithoutGeneratedFromNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutGeneratedFromInput, Prisma.DocumentUncheckedCreateWithoutGeneratedFromInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutGeneratedFromInput
+  upsert?: Prisma.DocumentUpsertWithoutGeneratedFromInput
+  disconnect?: Prisma.DocumentWhereInput | boolean
+  delete?: Prisma.DocumentWhereInput | boolean
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutGeneratedFromInput, Prisma.DocumentUpdateWithoutGeneratedFromInput>, Prisma.DocumentUncheckedUpdateWithoutGeneratedFromInput>
+}
+
 export type DocumentCreateWithoutUserInput = {
   id?: string
   originalName: string
@@ -630,11 +1019,26 @@ export type DocumentCreateWithoutUserInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutUserInput = {
@@ -646,11 +1050,26 @@ export type DocumentUncheckedCreateWithoutUserInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutUserInput = {
@@ -692,6 +1111,11 @@ export type DocumentScalarWhereInput = {
   fileSize?: Prisma.IntFilter<"Document"> | number
   extractedText?: Prisma.StringFilter<"Document"> | string
   wordCount?: Prisma.IntFilter<"Document"> | number
+  categoryId?: Prisma.StringNullableFilter<"Document"> | string | null
+  source?: Prisma.EnumDocumentSourceFilter<"Document"> | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFilter<"Document"> | number
+  archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
 }
@@ -705,11 +1129,26 @@ export type DocumentCreateWithoutChunksInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutChunksInput = {
@@ -722,10 +1161,25 @@ export type DocumentUncheckedCreateWithoutChunksInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutChunksInput = {
@@ -753,11 +1207,26 @@ export type DocumentUpdateWithoutChunksInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutChunksInput = {
@@ -770,10 +1239,25 @@ export type DocumentUncheckedUpdateWithoutChunksInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentCreateWithoutConversationsInput = {
@@ -785,11 +1269,26 @@ export type DocumentCreateWithoutConversationsInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutConversationsInput = {
@@ -802,10 +1301,25 @@ export type DocumentUncheckedCreateWithoutConversationsInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutConversationsInput = {
@@ -833,11 +1347,26 @@ export type DocumentUpdateWithoutConversationsInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutConversationsInput = {
@@ -850,10 +1379,25 @@ export type DocumentUncheckedUpdateWithoutConversationsInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentCreateWithoutAnalysesInput = {
@@ -865,11 +1409,26 @@ export type DocumentCreateWithoutAnalysesInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutAnalysesInput = {
@@ -882,10 +1441,25 @@ export type DocumentUncheckedCreateWithoutAnalysesInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutAnalysesInput = {
@@ -913,11 +1487,26 @@ export type DocumentUpdateWithoutAnalysesInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutAnalysesInput = {
@@ -930,10 +1519,1513 @@ export type DocumentUncheckedUpdateWithoutAnalysesInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutCategoryInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutCategoryInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutCategoryInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCategoryInput, Prisma.DocumentUncheckedCreateWithoutCategoryInput>
+}
+
+export type DocumentCreateManyCategoryInputEnvelope = {
+  data: Prisma.DocumentCreateManyCategoryInput | Prisma.DocumentCreateManyCategoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type DocumentUpsertWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutCategoryInput, Prisma.DocumentUncheckedUpdateWithoutCategoryInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCategoryInput, Prisma.DocumentUncheckedCreateWithoutCategoryInput>
+}
+
+export type DocumentUpdateWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutCategoryInput, Prisma.DocumentUncheckedUpdateWithoutCategoryInput>
+}
+
+export type DocumentUpdateManyWithWhereWithoutCategoryInput = {
+  where: Prisma.DocumentScalarWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateManyMutationInput, Prisma.DocumentUncheckedUpdateManyWithoutCategoryInput>
+}
+
+export type DocumentCreateWithoutTrashItemInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutTrashItemInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutTrashItemInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutTrashItemInput, Prisma.DocumentUncheckedCreateWithoutTrashItemInput>
+}
+
+export type DocumentUpsertWithoutTrashItemInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutTrashItemInput, Prisma.DocumentUncheckedUpdateWithoutTrashItemInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutTrashItemInput, Prisma.DocumentUncheckedCreateWithoutTrashItemInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutTrashItemInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutTrashItemInput, Prisma.DocumentUncheckedUpdateWithoutTrashItemInput>
+}
+
+export type DocumentUpdateWithoutTrashItemInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutTrashItemInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutVersionsInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutVersionsInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutVersionsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutVersionsInput, Prisma.DocumentUncheckedCreateWithoutVersionsInput>
+}
+
+export type DocumentUpsertWithoutVersionsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutVersionsInput, Prisma.DocumentUncheckedUpdateWithoutVersionsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutVersionsInput, Prisma.DocumentUncheckedCreateWithoutVersionsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutVersionsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutVersionsInput, Prisma.DocumentUncheckedUpdateWithoutVersionsInput>
+}
+
+export type DocumentUpdateWithoutVersionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutVersionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutTagsInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutTagsInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutTagsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutTagsInput, Prisma.DocumentUncheckedCreateWithoutTagsInput>
+}
+
+export type DocumentUpsertWithoutTagsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutTagsInput, Prisma.DocumentUncheckedUpdateWithoutTagsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutTagsInput, Prisma.DocumentUncheckedCreateWithoutTagsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutTagsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutTagsInput, Prisma.DocumentUncheckedUpdateWithoutTagsInput>
+}
+
+export type DocumentUpdateWithoutTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutFavoritesInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutFavoritesInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutFavoritesInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutFavoritesInput, Prisma.DocumentUncheckedCreateWithoutFavoritesInput>
+}
+
+export type DocumentUpsertWithoutFavoritesInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutFavoritesInput, Prisma.DocumentUncheckedUpdateWithoutFavoritesInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutFavoritesInput, Prisma.DocumentUncheckedCreateWithoutFavoritesInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutFavoritesInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutFavoritesInput, Prisma.DocumentUncheckedUpdateWithoutFavoritesInput>
+}
+
+export type DocumentUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutCollectionsInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutCollectionsInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutCollectionsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCollectionsInput, Prisma.DocumentUncheckedCreateWithoutCollectionsInput>
+}
+
+export type DocumentUpsertWithoutCollectionsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutCollectionsInput, Prisma.DocumentUncheckedUpdateWithoutCollectionsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCollectionsInput, Prisma.DocumentUncheckedCreateWithoutCollectionsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutCollectionsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutCollectionsInput, Prisma.DocumentUncheckedUpdateWithoutCollectionsInput>
+}
+
+export type DocumentUpdateWithoutCollectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutCollectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutSharesInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutSharesInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutSharesInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutSharesInput, Prisma.DocumentUncheckedCreateWithoutSharesInput>
+}
+
+export type DocumentUpsertWithoutSharesInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutSharesInput, Prisma.DocumentUncheckedUpdateWithoutSharesInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutSharesInput, Prisma.DocumentUncheckedCreateWithoutSharesInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutSharesInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutSharesInput, Prisma.DocumentUncheckedUpdateWithoutSharesInput>
+}
+
+export type DocumentUpdateWithoutSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutSharesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutCommentsInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutCommentsInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutCommentsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCommentsInput, Prisma.DocumentUncheckedCreateWithoutCommentsInput>
+}
+
+export type DocumentUpsertWithoutCommentsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutCommentsInput, Prisma.DocumentUncheckedUpdateWithoutCommentsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutCommentsInput, Prisma.DocumentUncheckedCreateWithoutCommentsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutCommentsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutCommentsInput, Prisma.DocumentUncheckedUpdateWithoutCommentsInput>
+}
+
+export type DocumentUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutNoteInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutNoteInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutNoteInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutNoteInput, Prisma.DocumentUncheckedCreateWithoutNoteInput>
+}
+
+export type DocumentUpsertWithoutNoteInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutNoteInput, Prisma.DocumentUncheckedUpdateWithoutNoteInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutNoteInput, Prisma.DocumentUncheckedCreateWithoutNoteInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutNoteInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutNoteInput, Prisma.DocumentUncheckedUpdateWithoutNoteInput>
+}
+
+export type DocumentUpdateWithoutNoteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutNoteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutViewsInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutViewsInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSavedDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutViewsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutViewsInput, Prisma.DocumentUncheckedCreateWithoutViewsInput>
+}
+
+export type DocumentUpsertWithoutViewsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutViewsInput, Prisma.DocumentUncheckedUpdateWithoutViewsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutViewsInput, Prisma.DocumentUncheckedCreateWithoutViewsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutViewsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutViewsInput, Prisma.DocumentUncheckedUpdateWithoutViewsInput>
+}
+
+export type DocumentUpdateWithoutViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentCreateWithoutGeneratedFromInput = {
+  id?: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDocumentsInput
+  chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutDocumentInput
+  category?: Prisma.CategoryCreateNestedOneWithoutDocumentsInput
+  versions?: Prisma.DocumentVersionCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteCreateNestedOneWithoutDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutGeneratedFromInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutDocumentInput
+  versions?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutDocumentInput
+  trashItem?: Prisma.TrashItemUncheckedCreateNestedOneWithoutDocumentInput
+  tags?: Prisma.DocumentTagUncheckedCreateNestedManyWithoutDocumentInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutDocumentInput
+  collections?: Prisma.CollectionDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  shares?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutDocumentInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutDocumentInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutDocumentInput
+  note?: Prisma.DocumentNoteUncheckedCreateNestedOneWithoutDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutGeneratedFromInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutGeneratedFromInput, Prisma.DocumentUncheckedCreateWithoutGeneratedFromInput>
+}
+
+export type DocumentUpsertWithoutGeneratedFromInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutGeneratedFromInput, Prisma.DocumentUncheckedUpdateWithoutGeneratedFromInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutGeneratedFromInput, Prisma.DocumentUncheckedCreateWithoutGeneratedFromInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutGeneratedFromInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutGeneratedFromInput, Prisma.DocumentUncheckedUpdateWithoutGeneratedFromInput>
+}
+
+export type DocumentUpdateWithoutGeneratedFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutGeneratedFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyUserInput = {
@@ -945,6 +3037,11 @@ export type DocumentCreateManyUserInput = {
   fileSize: number
   extractedText: string
   wordCount?: number
+  categoryId?: string | null
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -958,11 +3055,26 @@ export type DocumentUpdateWithoutUserInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutDocumentsNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutUserInput = {
@@ -974,11 +3086,26 @@ export type DocumentUncheckedUpdateWithoutUserInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateManyWithoutUserInput = {
@@ -990,6 +3117,109 @@ export type DocumentUncheckedUpdateManyWithoutUserInput = {
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   extractedText?: Prisma.StringFieldUpdateOperationsInput | string
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DocumentCreateManyCategoryInput = {
+  id?: string
+  userId: string
+  originalName: string
+  fileUrl: string
+  publicId: string
+  fileType: $Enums.FileType
+  fileSize: number
+  extractedText: string
+  wordCount?: number
+  source?: $Enums.DocumentSource
+  currentVersion?: number
+  archivedAt?: Date | string | null
+  trashedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DocumentUpdateWithoutCategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
+  chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutCategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutDocumentNestedInput
+  versions?: Prisma.DocumentVersionUncheckedUpdateManyWithoutDocumentNestedInput
+  trashItem?: Prisma.TrashItemUncheckedUpdateOneWithoutDocumentNestedInput
+  tags?: Prisma.DocumentTagUncheckedUpdateManyWithoutDocumentNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutDocumentNestedInput
+  collections?: Prisma.CollectionDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  shares?: Prisma.DocumentShareUncheckedUpdateManyWithoutDocumentNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutDocumentNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutDocumentNestedInput
+  note?: Prisma.DocumentNoteUncheckedUpdateOneWithoutDocumentNestedInput
+  generatedFrom?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSavedDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateManyWithoutCategoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  originalName?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileType?: Prisma.EnumFileTypeFieldUpdateOperationsInput | $Enums.FileType
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  extractedText?: Prisma.StringFieldUpdateOperationsInput | string
+  wordCount?: Prisma.IntFieldUpdateOperationsInput | number
+  source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
+  currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1003,12 +3233,28 @@ export type DocumentCountOutputType = {
   chunks: number
   conversations: number
   analyses: number
+  versions: number
+  tags: number
+  favorites: number
+  collections: number
+  shares: number
+  comments: number
+  views: number
+  generatedFrom: number
 }
 
 export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chunks?: boolean | DocumentCountOutputTypeCountChunksArgs
   conversations?: boolean | DocumentCountOutputTypeCountConversationsArgs
   analyses?: boolean | DocumentCountOutputTypeCountAnalysesArgs
+  versions?: boolean | DocumentCountOutputTypeCountVersionsArgs
+  tags?: boolean | DocumentCountOutputTypeCountTagsArgs
+  favorites?: boolean | DocumentCountOutputTypeCountFavoritesArgs
+  collections?: boolean | DocumentCountOutputTypeCountCollectionsArgs
+  shares?: boolean | DocumentCountOutputTypeCountSharesArgs
+  comments?: boolean | DocumentCountOutputTypeCountCommentsArgs
+  views?: boolean | DocumentCountOutputTypeCountViewsArgs
+  generatedFrom?: boolean | DocumentCountOutputTypeCountGeneratedFromArgs
 }
 
 /**
@@ -1042,6 +3288,62 @@ export type DocumentCountOutputTypeCountAnalysesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.AnalysisWhereInput
 }
 
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountVersionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentVersionWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentTagWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FavoriteWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountCollectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CollectionDocumentWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountSharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentShareWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommentWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountViewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentViewWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountGeneratedFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeneratedDocumentWhereInput
+}
+
 
 export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1053,12 +3355,28 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   fileSize?: boolean
   extractedText?: boolean
   wordCount?: boolean
+  categoryId?: boolean
+  source?: boolean
+  currentVersion?: boolean
+  archivedAt?: boolean
+  trashedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chunks?: boolean | Prisma.Document$chunksArgs<ExtArgs>
   conversations?: boolean | Prisma.Document$conversationsArgs<ExtArgs>
   analyses?: boolean | Prisma.Document$analysesArgs<ExtArgs>
+  category?: boolean | Prisma.Document$categoryArgs<ExtArgs>
+  versions?: boolean | Prisma.Document$versionsArgs<ExtArgs>
+  trashItem?: boolean | Prisma.Document$trashItemArgs<ExtArgs>
+  tags?: boolean | Prisma.Document$tagsArgs<ExtArgs>
+  favorites?: boolean | Prisma.Document$favoritesArgs<ExtArgs>
+  collections?: boolean | Prisma.Document$collectionsArgs<ExtArgs>
+  shares?: boolean | Prisma.Document$sharesArgs<ExtArgs>
+  comments?: boolean | Prisma.Document$commentsArgs<ExtArgs>
+  views?: boolean | Prisma.Document$viewsArgs<ExtArgs>
+  note?: boolean | Prisma.Document$noteArgs<ExtArgs>
+  generatedFrom?: boolean | Prisma.Document$generatedFromArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
@@ -1072,9 +3390,15 @@ export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   fileSize?: boolean
   extractedText?: boolean
   wordCount?: boolean
+  categoryId?: boolean
+  source?: boolean
+  currentVersion?: boolean
+  archivedAt?: boolean
+  trashedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.Document$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1087,9 +3411,15 @@ export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   fileSize?: boolean
   extractedText?: boolean
   wordCount?: boolean
+  categoryId?: boolean
+  source?: boolean
+  currentVersion?: boolean
+  archivedAt?: boolean
+  trashedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.Document$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectScalar = {
@@ -1102,23 +3432,41 @@ export type DocumentSelectScalar = {
   fileSize?: boolean
   extractedText?: boolean
   wordCount?: boolean
+  categoryId?: boolean
+  source?: boolean
+  currentVersion?: boolean
+  archivedAt?: boolean
+  trashedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "originalName" | "fileUrl" | "publicId" | "fileType" | "fileSize" | "extractedText" | "wordCount" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "originalName" | "fileUrl" | "publicId" | "fileType" | "fileSize" | "extractedText" | "wordCount" | "categoryId" | "source" | "currentVersion" | "archivedAt" | "trashedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chunks?: boolean | Prisma.Document$chunksArgs<ExtArgs>
   conversations?: boolean | Prisma.Document$conversationsArgs<ExtArgs>
   analyses?: boolean | Prisma.Document$analysesArgs<ExtArgs>
+  category?: boolean | Prisma.Document$categoryArgs<ExtArgs>
+  versions?: boolean | Prisma.Document$versionsArgs<ExtArgs>
+  trashItem?: boolean | Prisma.Document$trashItemArgs<ExtArgs>
+  tags?: boolean | Prisma.Document$tagsArgs<ExtArgs>
+  favorites?: boolean | Prisma.Document$favoritesArgs<ExtArgs>
+  collections?: boolean | Prisma.Document$collectionsArgs<ExtArgs>
+  shares?: boolean | Prisma.Document$sharesArgs<ExtArgs>
+  comments?: boolean | Prisma.Document$commentsArgs<ExtArgs>
+  views?: boolean | Prisma.Document$viewsArgs<ExtArgs>
+  note?: boolean | Prisma.Document$noteArgs<ExtArgs>
+  generatedFrom?: boolean | Prisma.Document$generatedFromArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.Document$categoryArgs<ExtArgs>
 }
 export type DocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.Document$categoryArgs<ExtArgs>
 }
 
 export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1128,6 +3476,17 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     chunks: Prisma.$DocumentChunkPayload<ExtArgs>[]
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
     analyses: Prisma.$AnalysisPayload<ExtArgs>[]
+    category: Prisma.$CategoryPayload<ExtArgs> | null
+    versions: Prisma.$DocumentVersionPayload<ExtArgs>[]
+    trashItem: Prisma.$TrashItemPayload<ExtArgs> | null
+    tags: Prisma.$DocumentTagPayload<ExtArgs>[]
+    favorites: Prisma.$FavoritePayload<ExtArgs>[]
+    collections: Prisma.$CollectionDocumentPayload<ExtArgs>[]
+    shares: Prisma.$DocumentSharePayload<ExtArgs>[]
+    comments: Prisma.$CommentPayload<ExtArgs>[]
+    views: Prisma.$DocumentViewPayload<ExtArgs>[]
+    note: Prisma.$DocumentNotePayload<ExtArgs> | null
+    generatedFrom: Prisma.$GeneratedDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1139,6 +3498,11 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     fileSize: number
     extractedText: string
     wordCount: number
+    categoryId: string | null
+    source: $Enums.DocumentSource
+    currentVersion: number
+    archivedAt: Date | null
+    trashedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["document"]>
@@ -1539,6 +3903,17 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
   chunks<T extends Prisma.Document$chunksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$chunksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentChunkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Document$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   analyses<T extends Prisma.Document$analysesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$analysesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  category<T extends Prisma.Document$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$categoryArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  versions<T extends Prisma.Document$versionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$versionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trashItem<T extends Prisma.Document$trashItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$trashItemArgs<ExtArgs>>): Prisma.Prisma__TrashItemClient<runtime.Types.Result.GetResult<Prisma.$TrashItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tags<T extends Prisma.Document$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  favorites<T extends Prisma.Document$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  collections<T extends Prisma.Document$collectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shares<T extends Prisma.Document$sharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$sharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comments<T extends Prisma.Document$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  views<T extends Prisma.Document$viewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$viewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  note<T extends Prisma.Document$noteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$noteArgs<ExtArgs>>): Prisma.Prisma__DocumentNoteClient<runtime.Types.Result.GetResult<Prisma.$DocumentNotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  generatedFrom<T extends Prisma.Document$generatedFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$generatedFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneratedDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1577,6 +3952,11 @@ export interface DocumentFieldRefs {
   readonly fileSize: Prisma.FieldRef<"Document", 'Int'>
   readonly extractedText: Prisma.FieldRef<"Document", 'String'>
   readonly wordCount: Prisma.FieldRef<"Document", 'Int'>
+  readonly categoryId: Prisma.FieldRef<"Document", 'String'>
+  readonly source: Prisma.FieldRef<"Document", 'DocumentSource'>
+  readonly currentVersion: Prisma.FieldRef<"Document", 'Int'>
+  readonly archivedAt: Prisma.FieldRef<"Document", 'DateTime'>
+  readonly trashedAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Document", 'DateTime'>
 }
@@ -2049,6 +4429,255 @@ export type Document$analysesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.AnalysisScalarFieldEnum | Prisma.AnalysisScalarFieldEnum[]
+}
+
+/**
+ * Document.category
+ */
+export type Document$categoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Category
+   */
+  select?: Prisma.CategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Category
+   */
+  omit?: Prisma.CategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryInclude<ExtArgs> | null
+  where?: Prisma.CategoryWhereInput
+}
+
+/**
+ * Document.versions
+ */
+export type Document$versionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentVersion
+   */
+  select?: Prisma.DocumentVersionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentVersion
+   */
+  omit?: Prisma.DocumentVersionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentVersionInclude<ExtArgs> | null
+  where?: Prisma.DocumentVersionWhereInput
+  orderBy?: Prisma.DocumentVersionOrderByWithRelationInput | Prisma.DocumentVersionOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentVersionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentVersionScalarFieldEnum | Prisma.DocumentVersionScalarFieldEnum[]
+}
+
+/**
+ * Document.trashItem
+ */
+export type Document$trashItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrashItem
+   */
+  select?: Prisma.TrashItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrashItem
+   */
+  omit?: Prisma.TrashItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrashItemInclude<ExtArgs> | null
+  where?: Prisma.TrashItemWhereInput
+}
+
+/**
+ * Document.tags
+ */
+export type Document$tagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentTag
+   */
+  select?: Prisma.DocumentTagSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentTag
+   */
+  omit?: Prisma.DocumentTagOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentTagInclude<ExtArgs> | null
+  where?: Prisma.DocumentTagWhereInput
+  orderBy?: Prisma.DocumentTagOrderByWithRelationInput | Prisma.DocumentTagOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentTagWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentTagScalarFieldEnum | Prisma.DocumentTagScalarFieldEnum[]
+}
+
+/**
+ * Document.favorites
+ */
+export type Document$favoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Favorite
+   */
+  select?: Prisma.FavoriteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Favorite
+   */
+  omit?: Prisma.FavoriteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FavoriteInclude<ExtArgs> | null
+  where?: Prisma.FavoriteWhereInput
+  orderBy?: Prisma.FavoriteOrderByWithRelationInput | Prisma.FavoriteOrderByWithRelationInput[]
+  cursor?: Prisma.FavoriteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FavoriteScalarFieldEnum | Prisma.FavoriteScalarFieldEnum[]
+}
+
+/**
+ * Document.collections
+ */
+export type Document$collectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CollectionDocument
+   */
+  select?: Prisma.CollectionDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CollectionDocument
+   */
+  omit?: Prisma.CollectionDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CollectionDocumentInclude<ExtArgs> | null
+  where?: Prisma.CollectionDocumentWhereInput
+  orderBy?: Prisma.CollectionDocumentOrderByWithRelationInput | Prisma.CollectionDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.CollectionDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CollectionDocumentScalarFieldEnum | Prisma.CollectionDocumentScalarFieldEnum[]
+}
+
+/**
+ * Document.shares
+ */
+export type Document$sharesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentShare
+   */
+  select?: Prisma.DocumentShareSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentShare
+   */
+  omit?: Prisma.DocumentShareOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentShareInclude<ExtArgs> | null
+  where?: Prisma.DocumentShareWhereInput
+  orderBy?: Prisma.DocumentShareOrderByWithRelationInput | Prisma.DocumentShareOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentShareWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentShareScalarFieldEnum | Prisma.DocumentShareScalarFieldEnum[]
+}
+
+/**
+ * Document.comments
+ */
+export type Document$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Comment
+   */
+  select?: Prisma.CommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Comment
+   */
+  omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  where?: Prisma.CommentWhereInput
+  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
+  cursor?: Prisma.CommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * Document.views
+ */
+export type Document$viewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentView
+   */
+  select?: Prisma.DocumentViewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentView
+   */
+  omit?: Prisma.DocumentViewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentViewInclude<ExtArgs> | null
+  where?: Prisma.DocumentViewWhereInput
+  orderBy?: Prisma.DocumentViewOrderByWithRelationInput | Prisma.DocumentViewOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentViewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentViewScalarFieldEnum | Prisma.DocumentViewScalarFieldEnum[]
+}
+
+/**
+ * Document.note
+ */
+export type Document$noteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentNote
+   */
+  select?: Prisma.DocumentNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentNote
+   */
+  omit?: Prisma.DocumentNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentNoteInclude<ExtArgs> | null
+  where?: Prisma.DocumentNoteWhereInput
+}
+
+/**
+ * Document.generatedFrom
+ */
+export type Document$generatedFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GeneratedDocument
+   */
+  select?: Prisma.GeneratedDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GeneratedDocument
+   */
+  omit?: Prisma.GeneratedDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeneratedDocumentInclude<ExtArgs> | null
+  where?: Prisma.GeneratedDocumentWhereInput
+  orderBy?: Prisma.GeneratedDocumentOrderByWithRelationInput | Prisma.GeneratedDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.GeneratedDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeneratedDocumentScalarFieldEnum | Prisma.GeneratedDocumentScalarFieldEnum[]
 }
 
 /**

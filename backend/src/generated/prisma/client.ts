@@ -74,3 +74,93 @@ export type Analysis = Prisma.AnalysisModel
  * 
  */
 export type RefreshToken = Prisma.RefreshTokenModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model TrashItem
+ * 
+ */
+export type TrashItem = Prisma.TrashItemModel
+/**
+ * Model DocumentVersion
+ * 
+ */
+export type DocumentVersion = Prisma.DocumentVersionModel
+/**
+ * Model Tag
+ * 
+ */
+export type Tag = Prisma.TagModel
+/**
+ * Model DocumentTag
+ * 
+ */
+export type DocumentTag = Prisma.DocumentTagModel
+/**
+ * Model Favorite
+ * 
+ */
+export type Favorite = Prisma.FavoriteModel
+/**
+ * Model Collection
+ * 
+ */
+export type Collection = Prisma.CollectionModel
+/**
+ * Model CollectionDocument
+ * 
+ */
+export type CollectionDocument = Prisma.CollectionDocumentModel
+/**
+ * Model CollectionMember
+ * 
+ */
+export type CollectionMember = Prisma.CollectionMemberModel
+/**
+ * Model DocumentShare
+ * 
+ */
+export type DocumentShare = Prisma.DocumentShareModel
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
+/**
+ * Model DocumentNote
+ * 
+ */
+export type DocumentNote = Prisma.DocumentNoteModel
+/**
+ * Model DocumentView
+ * 
+ */
+export type DocumentView = Prisma.DocumentViewModel
+/**
+ * Model GeneratedDocument
+ * 
+ */
+export type GeneratedDocument = Prisma.GeneratedDocumentModel
+/**
+ * Model GenerationLog
+ * 
+ */
+export type GenerationLog = Prisma.GenerationLogModel
+/**
+ * Model ConversionJob
+ * 
+ */
+export type ConversionJob = Prisma.ConversionJobModel
+/**
+ * Model UserPreference
+ * 
+ */
+export type UserPreference = Prisma.UserPreferenceModel
+/**
+ * Model ContactMessage
+ * 
+ */
+export type ContactMessage = Prisma.ContactMessageModel

@@ -194,6 +194,20 @@ export type UserWhereInput = {
   conversations?: Prisma.ConversationListRelationFilter
   analyses?: Prisma.AnalysisListRelationFilter
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
+  tags?: Prisma.TagListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  collections?: Prisma.CollectionListRelationFilter
+  collectionMemberships?: Prisma.CollectionMemberListRelationFilter
+  sharesReceived?: Prisma.DocumentShareListRelationFilter
+  sharesGiven?: Prisma.DocumentShareListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  views?: Prisma.DocumentViewListRelationFilter
+  generations?: Prisma.GeneratedDocumentListRelationFilter
+  conversions?: Prisma.ConversionJobListRelationFilter
+  preferences?: Prisma.XOR<Prisma.UserPreferenceNullableScalarRelationFilter, Prisma.UserPreferenceWhereInput> | null
+  versionsCreated?: Prisma.DocumentVersionListRelationFilter
+  trashItems?: Prisma.TrashItemListRelationFilter
+  notesUpdated?: Prisma.DocumentNoteListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -207,6 +221,20 @@ export type UserOrderByWithRelationInput = {
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
   analyses?: Prisma.AnalysisOrderByRelationAggregateInput
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
+  tags?: Prisma.TagOrderByRelationAggregateInput
+  favorites?: Prisma.FavoriteOrderByRelationAggregateInput
+  collections?: Prisma.CollectionOrderByRelationAggregateInput
+  collectionMemberships?: Prisma.CollectionMemberOrderByRelationAggregateInput
+  sharesReceived?: Prisma.DocumentShareOrderByRelationAggregateInput
+  sharesGiven?: Prisma.DocumentShareOrderByRelationAggregateInput
+  comments?: Prisma.CommentOrderByRelationAggregateInput
+  views?: Prisma.DocumentViewOrderByRelationAggregateInput
+  generations?: Prisma.GeneratedDocumentOrderByRelationAggregateInput
+  conversions?: Prisma.ConversionJobOrderByRelationAggregateInput
+  preferences?: Prisma.UserPreferenceOrderByWithRelationInput
+  versionsCreated?: Prisma.DocumentVersionOrderByRelationAggregateInput
+  trashItems?: Prisma.TrashItemOrderByRelationAggregateInput
+  notesUpdated?: Prisma.DocumentNoteOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -223,6 +251,20 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   conversations?: Prisma.ConversationListRelationFilter
   analyses?: Prisma.AnalysisListRelationFilter
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
+  tags?: Prisma.TagListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  collections?: Prisma.CollectionListRelationFilter
+  collectionMemberships?: Prisma.CollectionMemberListRelationFilter
+  sharesReceived?: Prisma.DocumentShareListRelationFilter
+  sharesGiven?: Prisma.DocumentShareListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  views?: Prisma.DocumentViewListRelationFilter
+  generations?: Prisma.GeneratedDocumentListRelationFilter
+  conversions?: Prisma.ConversionJobListRelationFilter
+  preferences?: Prisma.XOR<Prisma.UserPreferenceNullableScalarRelationFilter, Prisma.UserPreferenceWhereInput> | null
+  versionsCreated?: Prisma.DocumentVersionListRelationFilter
+  trashItems?: Prisma.TrashItemListRelationFilter
+  notesUpdated?: Prisma.DocumentNoteListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -260,6 +302,20 @@ export type UserCreateInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -273,6 +329,20 @@ export type UserUncheckedCreateInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUpdateInput = {
@@ -286,6 +356,20 @@ export type UserUpdateInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -299,6 +383,20 @@ export type UserUncheckedUpdateInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -358,6 +456,11 @@ export type UserMinOrderByAggregateInput = {
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -424,6 +527,206 @@ export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRefreshTokensInput, Prisma.UserUpdateWithoutRefreshTokensInput>, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
 }
 
+export type UserCreateNestedOneWithoutTrashItemsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrashItemsInput, Prisma.UserUncheckedCreateWithoutTrashItemsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrashItemsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTrashItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTrashItemsInput, Prisma.UserUncheckedCreateWithoutTrashItemsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrashItemsInput
+  upsert?: Prisma.UserUpsertWithoutTrashItemsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTrashItemsInput, Prisma.UserUpdateWithoutTrashItemsInput>, Prisma.UserUncheckedUpdateWithoutTrashItemsInput>
+}
+
+export type UserCreateNestedOneWithoutVersionsCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVersionsCreatedInput, Prisma.UserUncheckedCreateWithoutVersionsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVersionsCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutVersionsCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVersionsCreatedInput, Prisma.UserUncheckedCreateWithoutVersionsCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVersionsCreatedInput
+  upsert?: Prisma.UserUpsertWithoutVersionsCreatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVersionsCreatedInput, Prisma.UserUpdateWithoutVersionsCreatedInput>, Prisma.UserUncheckedUpdateWithoutVersionsCreatedInput>
+}
+
+export type UserCreateNestedOneWithoutTagsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagsInput, Prisma.UserUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTagsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTagsInput, Prisma.UserUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTagsInput
+  upsert?: Prisma.UserUpsertWithoutTagsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTagsInput, Prisma.UserUpdateWithoutTagsInput>, Prisma.UserUncheckedUpdateWithoutTagsInput>
+}
+
+export type UserCreateNestedOneWithoutFavoritesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoritesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFavoritesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoritesInput
+  upsert?: Prisma.UserUpsertWithoutFavoritesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFavoritesInput, Prisma.UserUpdateWithoutFavoritesInput>, Prisma.UserUncheckedUpdateWithoutFavoritesInput>
+}
+
+export type UserCreateNestedOneWithoutCollectionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCollectionsInput, Prisma.UserUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCollectionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCollectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCollectionsInput, Prisma.UserUncheckedCreateWithoutCollectionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCollectionsInput
+  upsert?: Prisma.UserUpsertWithoutCollectionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCollectionsInput, Prisma.UserUpdateWithoutCollectionsInput>, Prisma.UserUncheckedUpdateWithoutCollectionsInput>
+}
+
+export type UserCreateNestedOneWithoutCollectionMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCollectionMembershipsInput, Prisma.UserUncheckedCreateWithoutCollectionMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCollectionMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCollectionMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCollectionMembershipsInput, Prisma.UserUncheckedCreateWithoutCollectionMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCollectionMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutCollectionMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCollectionMembershipsInput, Prisma.UserUpdateWithoutCollectionMembershipsInput>, Prisma.UserUncheckedUpdateWithoutCollectionMembershipsInput>
+}
+
+export type UserCreateNestedOneWithoutSharesReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSharesReceivedInput, Prisma.UserUncheckedCreateWithoutSharesReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSharesReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutSharesGivenInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSharesGivenInput, Prisma.UserUncheckedCreateWithoutSharesGivenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSharesGivenInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSharesReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSharesReceivedInput, Prisma.UserUncheckedCreateWithoutSharesReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSharesReceivedInput
+  upsert?: Prisma.UserUpsertWithoutSharesReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSharesReceivedInput, Prisma.UserUpdateWithoutSharesReceivedInput>, Prisma.UserUncheckedUpdateWithoutSharesReceivedInput>
+}
+
+export type UserUpdateOneRequiredWithoutSharesGivenNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSharesGivenInput, Prisma.UserUncheckedCreateWithoutSharesGivenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSharesGivenInput
+  upsert?: Prisma.UserUpsertWithoutSharesGivenInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSharesGivenInput, Prisma.UserUpdateWithoutSharesGivenInput>, Prisma.UserUncheckedUpdateWithoutSharesGivenInput>
+}
+
+export type UserCreateNestedOneWithoutCommentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCommentsInput, Prisma.UserUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCommentsInput, Prisma.UserUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCommentsInput
+  upsert?: Prisma.UserUpsertWithoutCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommentsInput, Prisma.UserUpdateWithoutCommentsInput>, Prisma.UserUncheckedUpdateWithoutCommentsInput>
+}
+
+export type UserCreateNestedOneWithoutNotesUpdatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotesUpdatedInput, Prisma.UserUncheckedCreateWithoutNotesUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotesUpdatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutNotesUpdatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotesUpdatedInput, Prisma.UserUncheckedCreateWithoutNotesUpdatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotesUpdatedInput
+  upsert?: Prisma.UserUpsertWithoutNotesUpdatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotesUpdatedInput, Prisma.UserUpdateWithoutNotesUpdatedInput>, Prisma.UserUncheckedUpdateWithoutNotesUpdatedInput>
+}
+
+export type UserCreateNestedOneWithoutViewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutViewsInput, Prisma.UserUncheckedCreateWithoutViewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutViewsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutViewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutViewsInput, Prisma.UserUncheckedCreateWithoutViewsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutViewsInput
+  upsert?: Prisma.UserUpsertWithoutViewsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutViewsInput, Prisma.UserUpdateWithoutViewsInput>, Prisma.UserUncheckedUpdateWithoutViewsInput>
+}
+
+export type UserCreateNestedOneWithoutGenerationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGenerationsInput, Prisma.UserUncheckedCreateWithoutGenerationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGenerationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutGenerationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGenerationsInput, Prisma.UserUncheckedCreateWithoutGenerationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGenerationsInput
+  upsert?: Prisma.UserUpsertWithoutGenerationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGenerationsInput, Prisma.UserUpdateWithoutGenerationsInput>, Prisma.UserUncheckedUpdateWithoutGenerationsInput>
+}
+
+export type UserCreateNestedOneWithoutConversionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutConversionsInput, Prisma.UserUncheckedCreateWithoutConversionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutConversionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutConversionsInput, Prisma.UserUncheckedCreateWithoutConversionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversionsInput
+  upsert?: Prisma.UserUpsertWithoutConversionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConversionsInput, Prisma.UserUpdateWithoutConversionsInput>, Prisma.UserUncheckedUpdateWithoutConversionsInput>
+}
+
+export type UserCreateNestedOneWithoutPreferencesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPreferencesInput, Prisma.UserUncheckedCreateWithoutPreferencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPreferencesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPreferencesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPreferencesInput, Prisma.UserUncheckedCreateWithoutPreferencesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPreferencesInput
+  upsert?: Prisma.UserUpsertWithoutPreferencesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPreferencesInput, Prisma.UserUpdateWithoutPreferencesInput>, Prisma.UserUncheckedUpdateWithoutPreferencesInput>
+}
+
 export type UserCreateWithoutDocumentsInput = {
   id?: string
   name: string
@@ -434,6 +737,20 @@ export type UserCreateWithoutDocumentsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -446,6 +763,20 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -474,6 +805,20 @@ export type UserUpdateWithoutDocumentsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -486,6 +831,20 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutConversationsInput = {
@@ -498,6 +857,20 @@ export type UserCreateWithoutConversationsInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutConversationsInput = {
@@ -510,6 +883,20 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutConversationsInput = {
@@ -538,6 +925,20 @@ export type UserUpdateWithoutConversationsInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -550,6 +951,20 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutAnalysesInput = {
@@ -562,6 +977,20 @@ export type UserCreateWithoutAnalysesInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutAnalysesInput = {
@@ -574,6 +1003,20 @@ export type UserUncheckedCreateWithoutAnalysesInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutAnalysesInput = {
@@ -602,6 +1045,20 @@ export type UserUpdateWithoutAnalysesInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnalysesInput = {
@@ -614,6 +1071,20 @@ export type UserUncheckedUpdateWithoutAnalysesInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -626,6 +1097,20 @@ export type UserCreateWithoutRefreshTokensInput = {
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -638,6 +1123,20 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -666,6 +1165,20 @@ export type UserUpdateWithoutRefreshTokensInput = {
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -678,6 +1191,1700 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutTrashItemsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutTrashItemsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutTrashItemsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrashItemsInput, Prisma.UserUncheckedCreateWithoutTrashItemsInput>
+}
+
+export type UserUpsertWithoutTrashItemsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTrashItemsInput, Prisma.UserUncheckedUpdateWithoutTrashItemsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTrashItemsInput, Prisma.UserUncheckedCreateWithoutTrashItemsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTrashItemsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTrashItemsInput, Prisma.UserUncheckedUpdateWithoutTrashItemsInput>
+}
+
+export type UserUpdateWithoutTrashItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTrashItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutVersionsCreatedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutVersionsCreatedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutVersionsCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutVersionsCreatedInput, Prisma.UserUncheckedCreateWithoutVersionsCreatedInput>
+}
+
+export type UserUpsertWithoutVersionsCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutVersionsCreatedInput, Prisma.UserUncheckedUpdateWithoutVersionsCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutVersionsCreatedInput, Prisma.UserUncheckedCreateWithoutVersionsCreatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutVersionsCreatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutVersionsCreatedInput, Prisma.UserUncheckedUpdateWithoutVersionsCreatedInput>
+}
+
+export type UserUpdateWithoutVersionsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutVersionsCreatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutTagsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutTagsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutTagsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagsInput, Prisma.UserUncheckedCreateWithoutTagsInput>
+}
+
+export type UserUpsertWithoutTagsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTagsInput, Prisma.UserUncheckedUpdateWithoutTagsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTagsInput, Prisma.UserUncheckedCreateWithoutTagsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTagsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTagsInput, Prisma.UserUncheckedUpdateWithoutTagsInput>
+}
+
+export type UserUpdateWithoutTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutFavoritesInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutFavoritesInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutFavoritesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+}
+
+export type UserUpsertWithoutFavoritesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFavoritesInput, Prisma.UserUncheckedUpdateWithoutFavoritesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFavoritesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFavoritesInput, Prisma.UserUncheckedUpdateWithoutFavoritesInput>
+}
+
+export type UserUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutCollectionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutCollectionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutCollectionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCollectionsInput, Prisma.UserUncheckedCreateWithoutCollectionsInput>
+}
+
+export type UserUpsertWithoutCollectionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCollectionsInput, Prisma.UserUncheckedUpdateWithoutCollectionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCollectionsInput, Prisma.UserUncheckedCreateWithoutCollectionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCollectionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCollectionsInput, Prisma.UserUncheckedUpdateWithoutCollectionsInput>
+}
+
+export type UserUpdateWithoutCollectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCollectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutCollectionMembershipsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutCollectionMembershipsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutCollectionMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCollectionMembershipsInput, Prisma.UserUncheckedCreateWithoutCollectionMembershipsInput>
+}
+
+export type UserUpsertWithoutCollectionMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCollectionMembershipsInput, Prisma.UserUncheckedUpdateWithoutCollectionMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCollectionMembershipsInput, Prisma.UserUncheckedCreateWithoutCollectionMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCollectionMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCollectionMembershipsInput, Prisma.UserUncheckedUpdateWithoutCollectionMembershipsInput>
+}
+
+export type UserUpdateWithoutCollectionMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCollectionMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutSharesReceivedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutSharesReceivedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutSharesReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSharesReceivedInput, Prisma.UserUncheckedCreateWithoutSharesReceivedInput>
+}
+
+export type UserCreateWithoutSharesGivenInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutSharesGivenInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutSharesGivenInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSharesGivenInput, Prisma.UserUncheckedCreateWithoutSharesGivenInput>
+}
+
+export type UserUpsertWithoutSharesReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSharesReceivedInput, Prisma.UserUncheckedUpdateWithoutSharesReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSharesReceivedInput, Prisma.UserUncheckedCreateWithoutSharesReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSharesReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSharesReceivedInput, Prisma.UserUncheckedUpdateWithoutSharesReceivedInput>
+}
+
+export type UserUpdateWithoutSharesReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSharesReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutSharesGivenInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSharesGivenInput, Prisma.UserUncheckedUpdateWithoutSharesGivenInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSharesGivenInput, Prisma.UserUncheckedCreateWithoutSharesGivenInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSharesGivenInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSharesGivenInput, Prisma.UserUncheckedUpdateWithoutSharesGivenInput>
+}
+
+export type UserUpdateWithoutSharesGivenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSharesGivenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutCommentsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutCommentsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutCommentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCommentsInput, Prisma.UserUncheckedCreateWithoutCommentsInput>
+}
+
+export type UserUpsertWithoutCommentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCommentsInput, Prisma.UserUncheckedUpdateWithoutCommentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCommentsInput, Prisma.UserUncheckedCreateWithoutCommentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCommentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCommentsInput, Prisma.UserUncheckedUpdateWithoutCommentsInput>
+}
+
+export type UserUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutNotesUpdatedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+}
+
+export type UserUncheckedCreateWithoutNotesUpdatedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+}
+
+export type UserCreateOrConnectWithoutNotesUpdatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotesUpdatedInput, Prisma.UserUncheckedCreateWithoutNotesUpdatedInput>
+}
+
+export type UserUpsertWithoutNotesUpdatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotesUpdatedInput, Prisma.UserUncheckedUpdateWithoutNotesUpdatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotesUpdatedInput, Prisma.UserUncheckedCreateWithoutNotesUpdatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotesUpdatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotesUpdatedInput, Prisma.UserUncheckedUpdateWithoutNotesUpdatedInput>
+}
+
+export type UserUpdateWithoutNotesUpdatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotesUpdatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+}
+
+export type UserCreateWithoutViewsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutViewsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutViewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutViewsInput, Prisma.UserUncheckedCreateWithoutViewsInput>
+}
+
+export type UserUpsertWithoutViewsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutViewsInput, Prisma.UserUncheckedUpdateWithoutViewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutViewsInput, Prisma.UserUncheckedCreateWithoutViewsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutViewsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutViewsInput, Prisma.UserUncheckedUpdateWithoutViewsInput>
+}
+
+export type UserUpdateWithoutViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutViewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutGenerationsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutGenerationsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutGenerationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutGenerationsInput, Prisma.UserUncheckedCreateWithoutGenerationsInput>
+}
+
+export type UserUpsertWithoutGenerationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutGenerationsInput, Prisma.UserUncheckedUpdateWithoutGenerationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutGenerationsInput, Prisma.UserUncheckedCreateWithoutGenerationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutGenerationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutGenerationsInput, Prisma.UserUncheckedUpdateWithoutGenerationsInput>
+}
+
+export type UserUpdateWithoutGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutGenerationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutConversionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutConversionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutConversionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversionsInput, Prisma.UserUncheckedCreateWithoutConversionsInput>
+}
+
+export type UserUpsertWithoutConversionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutConversionsInput, Prisma.UserUncheckedUpdateWithoutConversionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversionsInput, Prisma.UserUncheckedCreateWithoutConversionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutConversionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutConversionsInput, Prisma.UserUncheckedUpdateWithoutConversionsInput>
+}
+
+export type UserUpdateWithoutConversionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutConversionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutPreferencesInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutPreferencesInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutPreferencesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPreferencesInput, Prisma.UserUncheckedCreateWithoutPreferencesInput>
+}
+
+export type UserUpsertWithoutPreferencesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPreferencesInput, Prisma.UserUncheckedUpdateWithoutPreferencesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPreferencesInput, Prisma.UserUncheckedCreateWithoutPreferencesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPreferencesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPreferencesInput, Prisma.UserUncheckedUpdateWithoutPreferencesInput>
+}
+
+export type UserUpdateWithoutPreferencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPreferencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 
@@ -690,6 +2897,19 @@ export type UserCountOutputType = {
   conversations: number
   analyses: number
   refreshTokens: number
+  tags: number
+  favorites: number
+  collections: number
+  collectionMemberships: number
+  sharesReceived: number
+  sharesGiven: number
+  comments: number
+  views: number
+  generations: number
+  conversions: number
+  versionsCreated: number
+  trashItems: number
+  notesUpdated: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -697,6 +2917,19 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   conversations?: boolean | UserCountOutputTypeCountConversationsArgs
   analyses?: boolean | UserCountOutputTypeCountAnalysesArgs
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
+  tags?: boolean | UserCountOutputTypeCountTagsArgs
+  favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
+  collections?: boolean | UserCountOutputTypeCountCollectionsArgs
+  collectionMemberships?: boolean | UserCountOutputTypeCountCollectionMembershipsArgs
+  sharesReceived?: boolean | UserCountOutputTypeCountSharesReceivedArgs
+  sharesGiven?: boolean | UserCountOutputTypeCountSharesGivenArgs
+  comments?: boolean | UserCountOutputTypeCountCommentsArgs
+  views?: boolean | UserCountOutputTypeCountViewsArgs
+  generations?: boolean | UserCountOutputTypeCountGenerationsArgs
+  conversions?: boolean | UserCountOutputTypeCountConversionsArgs
+  versionsCreated?: boolean | UserCountOutputTypeCountVersionsCreatedArgs
+  trashItems?: boolean | UserCountOutputTypeCountTrashItemsArgs
+  notesUpdated?: boolean | UserCountOutputTypeCountNotesUpdatedArgs
 }
 
 /**
@@ -737,6 +2970,97 @@ export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends runtime.Ty
   where?: Prisma.RefreshTokenWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TagWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FavoriteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCollectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CollectionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCollectionMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CollectionMemberWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSharesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentShareWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSharesGivenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentShareWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountViewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentViewWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountGenerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeneratedDocumentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountConversionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversionJobWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVersionsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentVersionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTrashItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TrashItemWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotesUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentNoteWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -749,6 +3073,20 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   conversations?: boolean | Prisma.User$conversationsArgs<ExtArgs>
   analyses?: boolean | Prisma.User$analysesArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
+  tags?: boolean | Prisma.User$tagsArgs<ExtArgs>
+  favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  collections?: boolean | Prisma.User$collectionsArgs<ExtArgs>
+  collectionMemberships?: boolean | Prisma.User$collectionMembershipsArgs<ExtArgs>
+  sharesReceived?: boolean | Prisma.User$sharesReceivedArgs<ExtArgs>
+  sharesGiven?: boolean | Prisma.User$sharesGivenArgs<ExtArgs>
+  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  views?: boolean | Prisma.User$viewsArgs<ExtArgs>
+  generations?: boolean | Prisma.User$generationsArgs<ExtArgs>
+  conversions?: boolean | Prisma.User$conversionsArgs<ExtArgs>
+  preferences?: boolean | Prisma.User$preferencesArgs<ExtArgs>
+  versionsCreated?: boolean | Prisma.User$versionsCreatedArgs<ExtArgs>
+  trashItems?: boolean | Prisma.User$trashItemsArgs<ExtArgs>
+  notesUpdated?: boolean | Prisma.User$notesUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -785,6 +3123,20 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   conversations?: boolean | Prisma.User$conversationsArgs<ExtArgs>
   analyses?: boolean | Prisma.User$analysesArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
+  tags?: boolean | Prisma.User$tagsArgs<ExtArgs>
+  favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  collections?: boolean | Prisma.User$collectionsArgs<ExtArgs>
+  collectionMemberships?: boolean | Prisma.User$collectionMembershipsArgs<ExtArgs>
+  sharesReceived?: boolean | Prisma.User$sharesReceivedArgs<ExtArgs>
+  sharesGiven?: boolean | Prisma.User$sharesGivenArgs<ExtArgs>
+  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  views?: boolean | Prisma.User$viewsArgs<ExtArgs>
+  generations?: boolean | Prisma.User$generationsArgs<ExtArgs>
+  conversions?: boolean | Prisma.User$conversionsArgs<ExtArgs>
+  preferences?: boolean | Prisma.User$preferencesArgs<ExtArgs>
+  versionsCreated?: boolean | Prisma.User$versionsCreatedArgs<ExtArgs>
+  trashItems?: boolean | Prisma.User$trashItemsArgs<ExtArgs>
+  notesUpdated?: boolean | Prisma.User$notesUpdatedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -797,6 +3149,20 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
     analyses: Prisma.$AnalysisPayload<ExtArgs>[]
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
+    tags: Prisma.$TagPayload<ExtArgs>[]
+    favorites: Prisma.$FavoritePayload<ExtArgs>[]
+    collections: Prisma.$CollectionPayload<ExtArgs>[]
+    collectionMemberships: Prisma.$CollectionMemberPayload<ExtArgs>[]
+    sharesReceived: Prisma.$DocumentSharePayload<ExtArgs>[]
+    sharesGiven: Prisma.$DocumentSharePayload<ExtArgs>[]
+    comments: Prisma.$CommentPayload<ExtArgs>[]
+    views: Prisma.$DocumentViewPayload<ExtArgs>[]
+    generations: Prisma.$GeneratedDocumentPayload<ExtArgs>[]
+    conversions: Prisma.$ConversionJobPayload<ExtArgs>[]
+    preferences: Prisma.$UserPreferencePayload<ExtArgs> | null
+    versionsCreated: Prisma.$DocumentVersionPayload<ExtArgs>[]
+    trashItems: Prisma.$TrashItemPayload<ExtArgs>[]
+    notesUpdated: Prisma.$DocumentNotePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1203,6 +3569,20 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   conversations<T extends Prisma.User$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   analyses<T extends Prisma.User$analysesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$analysesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnalysisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tags<T extends Prisma.User$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  collections<T extends Prisma.User$collectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  collectionMemberships<T extends Prisma.User$collectionMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$collectionMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sharesReceived<T extends Prisma.User$sharesReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sharesReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sharesGiven<T extends Prisma.User$sharesGivenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sharesGivenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  views<T extends Prisma.User$viewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$viewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  generations<T extends Prisma.User$generationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$generationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneratedDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conversions<T extends Prisma.User$conversionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversionJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  preferences<T extends Prisma.User$preferencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$preferencesArgs<ExtArgs>>): Prisma.Prisma__UserPreferenceClient<runtime.Types.Result.GetResult<Prisma.$UserPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  versionsCreated<T extends Prisma.User$versionsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$versionsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trashItems<T extends Prisma.User$trashItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trashItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrashItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notesUpdated<T extends Prisma.User$notesUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notesUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1724,6 +4104,337 @@ export type User$refreshTokensArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.RefreshTokenScalarFieldEnum | Prisma.RefreshTokenScalarFieldEnum[]
+}
+
+/**
+ * User.tags
+ */
+export type User$tagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tag
+   */
+  select?: Prisma.TagSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tag
+   */
+  omit?: Prisma.TagOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TagInclude<ExtArgs> | null
+  where?: Prisma.TagWhereInput
+  orderBy?: Prisma.TagOrderByWithRelationInput | Prisma.TagOrderByWithRelationInput[]
+  cursor?: Prisma.TagWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TagScalarFieldEnum | Prisma.TagScalarFieldEnum[]
+}
+
+/**
+ * User.favorites
+ */
+export type User$favoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Favorite
+   */
+  select?: Prisma.FavoriteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Favorite
+   */
+  omit?: Prisma.FavoriteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FavoriteInclude<ExtArgs> | null
+  where?: Prisma.FavoriteWhereInput
+  orderBy?: Prisma.FavoriteOrderByWithRelationInput | Prisma.FavoriteOrderByWithRelationInput[]
+  cursor?: Prisma.FavoriteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FavoriteScalarFieldEnum | Prisma.FavoriteScalarFieldEnum[]
+}
+
+/**
+ * User.collections
+ */
+export type User$collectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Collection
+   */
+  select?: Prisma.CollectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Collection
+   */
+  omit?: Prisma.CollectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CollectionInclude<ExtArgs> | null
+  where?: Prisma.CollectionWhereInput
+  orderBy?: Prisma.CollectionOrderByWithRelationInput | Prisma.CollectionOrderByWithRelationInput[]
+  cursor?: Prisma.CollectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CollectionScalarFieldEnum | Prisma.CollectionScalarFieldEnum[]
+}
+
+/**
+ * User.collectionMemberships
+ */
+export type User$collectionMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CollectionMember
+   */
+  select?: Prisma.CollectionMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CollectionMember
+   */
+  omit?: Prisma.CollectionMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CollectionMemberInclude<ExtArgs> | null
+  where?: Prisma.CollectionMemberWhereInput
+  orderBy?: Prisma.CollectionMemberOrderByWithRelationInput | Prisma.CollectionMemberOrderByWithRelationInput[]
+  cursor?: Prisma.CollectionMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CollectionMemberScalarFieldEnum | Prisma.CollectionMemberScalarFieldEnum[]
+}
+
+/**
+ * User.sharesReceived
+ */
+export type User$sharesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentShare
+   */
+  select?: Prisma.DocumentShareSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentShare
+   */
+  omit?: Prisma.DocumentShareOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentShareInclude<ExtArgs> | null
+  where?: Prisma.DocumentShareWhereInput
+  orderBy?: Prisma.DocumentShareOrderByWithRelationInput | Prisma.DocumentShareOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentShareWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentShareScalarFieldEnum | Prisma.DocumentShareScalarFieldEnum[]
+}
+
+/**
+ * User.sharesGiven
+ */
+export type User$sharesGivenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentShare
+   */
+  select?: Prisma.DocumentShareSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentShare
+   */
+  omit?: Prisma.DocumentShareOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentShareInclude<ExtArgs> | null
+  where?: Prisma.DocumentShareWhereInput
+  orderBy?: Prisma.DocumentShareOrderByWithRelationInput | Prisma.DocumentShareOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentShareWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentShareScalarFieldEnum | Prisma.DocumentShareScalarFieldEnum[]
+}
+
+/**
+ * User.comments
+ */
+export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Comment
+   */
+  select?: Prisma.CommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Comment
+   */
+  omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  where?: Prisma.CommentWhereInput
+  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
+  cursor?: Prisma.CommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * User.views
+ */
+export type User$viewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentView
+   */
+  select?: Prisma.DocumentViewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentView
+   */
+  omit?: Prisma.DocumentViewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentViewInclude<ExtArgs> | null
+  where?: Prisma.DocumentViewWhereInput
+  orderBy?: Prisma.DocumentViewOrderByWithRelationInput | Prisma.DocumentViewOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentViewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentViewScalarFieldEnum | Prisma.DocumentViewScalarFieldEnum[]
+}
+
+/**
+ * User.generations
+ */
+export type User$generationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GeneratedDocument
+   */
+  select?: Prisma.GeneratedDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GeneratedDocument
+   */
+  omit?: Prisma.GeneratedDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeneratedDocumentInclude<ExtArgs> | null
+  where?: Prisma.GeneratedDocumentWhereInput
+  orderBy?: Prisma.GeneratedDocumentOrderByWithRelationInput | Prisma.GeneratedDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.GeneratedDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeneratedDocumentScalarFieldEnum | Prisma.GeneratedDocumentScalarFieldEnum[]
+}
+
+/**
+ * User.conversions
+ */
+export type User$conversionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConversionJob
+   */
+  select?: Prisma.ConversionJobSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ConversionJob
+   */
+  omit?: Prisma.ConversionJobOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversionJobInclude<ExtArgs> | null
+  where?: Prisma.ConversionJobWhereInput
+  orderBy?: Prisma.ConversionJobOrderByWithRelationInput | Prisma.ConversionJobOrderByWithRelationInput[]
+  cursor?: Prisma.ConversionJobWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversionJobScalarFieldEnum | Prisma.ConversionJobScalarFieldEnum[]
+}
+
+/**
+ * User.preferences
+ */
+export type User$preferencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPreference
+   */
+  select?: Prisma.UserPreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPreference
+   */
+  omit?: Prisma.UserPreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPreferenceInclude<ExtArgs> | null
+  where?: Prisma.UserPreferenceWhereInput
+}
+
+/**
+ * User.versionsCreated
+ */
+export type User$versionsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentVersion
+   */
+  select?: Prisma.DocumentVersionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentVersion
+   */
+  omit?: Prisma.DocumentVersionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentVersionInclude<ExtArgs> | null
+  where?: Prisma.DocumentVersionWhereInput
+  orderBy?: Prisma.DocumentVersionOrderByWithRelationInput | Prisma.DocumentVersionOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentVersionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentVersionScalarFieldEnum | Prisma.DocumentVersionScalarFieldEnum[]
+}
+
+/**
+ * User.trashItems
+ */
+export type User$trashItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TrashItem
+   */
+  select?: Prisma.TrashItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TrashItem
+   */
+  omit?: Prisma.TrashItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrashItemInclude<ExtArgs> | null
+  where?: Prisma.TrashItemWhereInput
+  orderBy?: Prisma.TrashItemOrderByWithRelationInput | Prisma.TrashItemOrderByWithRelationInput[]
+  cursor?: Prisma.TrashItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TrashItemScalarFieldEnum | Prisma.TrashItemScalarFieldEnum[]
+}
+
+/**
+ * User.notesUpdated
+ */
+export type User$notesUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentNote
+   */
+  select?: Prisma.DocumentNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentNote
+   */
+  omit?: Prisma.DocumentNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentNoteInclude<ExtArgs> | null
+  where?: Prisma.DocumentNoteWhereInput
+  orderBy?: Prisma.DocumentNoteOrderByWithRelationInput | Prisma.DocumentNoteOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentNoteScalarFieldEnum | Prisma.DocumentNoteScalarFieldEnum[]
 }
 
 /**

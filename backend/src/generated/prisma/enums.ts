@@ -37,3 +37,19 @@ export const MessageRole = {
 } as const
 
 export type MessageRole = (typeof MessageRole)[keyof typeof MessageRole]
+
+
+export const ShareRole = {
+  VIEWER: 'VIEWER',
+  EDITOR: 'EDITOR'
+} as const
+
+export type ShareRole = (typeof ShareRole)[keyof typeof ShareRole]
+
+
+export const DocumentSource = {
+  UPLOAD: 'UPLOAD',
+  GENERATED: 'GENERATED'
+} as const
+
+export type DocumentSource = (typeof DocumentSource)[keyof typeof DocumentSource]
