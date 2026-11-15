@@ -12,6 +12,13 @@ import { AiModule } from './ai/ai.module';
 import { AnalysesModule } from './analyses/analyses.module';
 import { ChatModule } from './chat/chat.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { CategoriesModule } from './categories/categories.module';
+import { TrashModule } from './trash/trash.module';
+import { CronModule } from './cron/cron.module';
+import { PreferencesModule } from './preferences/preferences.module';
+import { TagsModule } from './tags/tags.module';
+import { CollectionsModule } from './collections/collections.module';
+import { BulkModule } from './bulk/bulk.module';
 
 @Module({
   imports: [
@@ -26,6 +33,13 @@ import { DashboardModule } from './dashboard/dashboard.module';
     AnalysesModule,
     ChatModule,
     DashboardModule,
+    CategoriesModule,
+    TrashModule,
+    CronModule,
+    PreferencesModule,
+    TagsModule,
+    CollectionsModule,
+    BulkModule
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

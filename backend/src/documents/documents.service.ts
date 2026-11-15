@@ -2,11 +2,15 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
+import { CLOUDINARY_ROOT_FOLDER } from '../cloudinary/cloudinary.constants';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { ChunkService } from './chunk.service';
+import { summarySelect, withUserData } from './document-select';
 import {
   MAX_FILE_BYTES,
   MAX_TEXT_CHARS,
@@ -19,22 +23,20 @@ import type {
   UploadSignatureDto,
 } from './documents.schemas';
 import { ParserService } from './parser.service';
-import { CLOUDINARY_ROOT_FOLDER } from '../cloudinary/cloudinary.constants';
-
-const documentSummarySelect = {
-  id: true,
-  originalName: true,
-  fileType: true,
-  fileSize: true,
-  wordCount: true,
-  createdAt: true,
-  updatedAt: true,
-} as const;
 
 const PREVIEW_CHARS = 5000;
 
+const SORT_FIELDS = {
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'originalName',
+  size: 'fileSize',
+} as const;
+
 @Injectable()
 export class DocumentsService {
+  private readonly logger = new Logger(DocumentsService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly cloudinary: CloudinaryService,
@@ -123,10 +125,11 @@ export class DocumentsService {
             },
           },
         },
-        select: documentSummarySelect,
+        select: summarySelect(userId),
       });
 
-      return { document, warnings };
+      await this.touch(userId, document.id);
+      return { document: withUserData(document), warnings };
     } catch (err) {
       await this.cloudinary.delete(dto.publicId);
       throw err;
@@ -134,19 +137,44 @@ export class DocumentsService {
   }
 
   async list(userId: string, q: ListDocumentsQuery) {
-    const where = {
+    const where: Prisma.DocumentWhereInput = {
       userId,
+      trashedAt: null,
+      archivedAt: q.status === 'archived' ? { not: null } : null,
       ...(q.type ? { fileType: q.type } : {}),
       ...(q.search
-        ? { originalName: { contains: q.search, mode: 'insensitive' as const } }
+        ? { originalName: { contains: q.search, mode: 'insensitive' } }
+        : {}),
+      ...(q.favorite ? { favorites: { some: { userId } } } : {}),
+      ...(q.category === 'none'
+        ? { categoryId: null }
+        : q.category
+          ? { category: { slug: q.category } }
+          : {}),
+      ...(q.collectionId
+        ? {
+            collections: {
+              some: { collectionId: q.collectionId, collection: { userId } },
+            },
+          }
+        : {}),
+      ...(q.tagId
+        ? { tags: { some: { tagId: q.tagId, tag: { userId } } } }
         : {}),
     };
+
+    const orderBy: Prisma.DocumentOrderByWithRelationInput[] = [
+      {
+        [SORT_FIELDS[q.sort]]: q.order,
+      } as Prisma.DocumentOrderByWithRelationInput,
+      { id: 'desc' },
+    ];
 
     const [items, total] = await this.prisma.$transaction([
       this.prisma.document.findMany({
         where,
-        select: documentSummarySelect,
-        orderBy: { createdAt: 'desc' },
+        select: summarySelect(userId),
+        orderBy,
         skip: (q.page - 1) * q.limit,
         take: q.limit,
       }),
@@ -154,7 +182,7 @@ export class DocumentsService {
     ]);
 
     return {
-      items,
+      items: items.map(withUserData),
       total,
       page: q.page,
       limit: q.limit,
@@ -162,11 +190,32 @@ export class DocumentsService {
     };
   }
 
+  async listRecent(userId: string, limit: number) {
+    const rows = await this.prisma.documentView.findMany({
+      where: {
+        userId,
+        document: { userId, trashedAt: null, archivedAt: null },
+      },
+      orderBy: { lastAccessedAt: 'desc' },
+      take: limit,
+      select: {
+        lastAccessedAt: true,
+        document: { select: summarySelect(userId) },
+      },
+    });
+    return {
+      items: rows.map((r) => ({
+        ...withUserData(r.document),
+        lastAccessedAt: r.lastAccessedAt,
+      })),
+    };
+  }
+
   async getDetail(userId: string, id: string) {
     const doc = await this.prisma.document.findFirst({
-      where: { id, userId },
+      where: { id, userId, trashedAt: null },
       select: {
-        ...documentSummarySelect,
+        ...summarySelect(userId),
         fileUrl: true,
         extractedText: true,
         _count: { select: { analyses: true, conversations: true } },
@@ -174,7 +223,8 @@ export class DocumentsService {
     });
     if (!doc) throw new NotFoundException('Document not found');
 
-    const { extractedText, ...rest } = doc;
+    await this.touch(userId, id);
+    const { extractedText, ...rest } = withUserData(doc);
     return {
       ...rest,
       textPreview: extractedText.slice(0, PREVIEW_CHARS),
@@ -183,39 +233,56 @@ export class DocumentsService {
     };
   }
 
+  /** Ownership check + full text. Used by analysis and chat. */
   async getForAnalysis(userId: string, id: string) {
     const doc = await this.prisma.document.findFirst({
-      where: { id, userId },
+      where: { id, userId, trashedAt: null },
       select: { id: true, originalName: true, extractedText: true },
     });
     if (!doc) throw new NotFoundException('Document not found');
+    await this.touch(userId, id);
     return doc;
   }
 
   async rename(userId: string, id: string, dto: RenameDocumentDto) {
     await this.assertOwned(userId, id);
-    return this.prisma.document.update({
+    const document = await this.prisma.document.update({
       where: { id },
       data: { originalName: dto.name },
-      select: documentSummarySelect,
+      select: summarySelect(userId),
     });
+    return withUserData(document);
   }
 
-  async remove(userId: string, id: string) {
-    const doc = await this.prisma.document.findFirst({
-      where: { id, userId },
-      select: { id: true, publicId: true },
+  async setArchived(userId: string, id: string, archived: boolean) {
+    await this.assertOwned(userId, id);
+    const document = await this.prisma.document.update({
+      where: { id },
+      data: { archivedAt: archived ? new Date() : null },
+      select: summarySelect(userId),
     });
-    if (!doc) throw new NotFoundException('Document not found');
+    return withUserData(document);
+  }
 
-    await this.prisma.document.delete({ where: { id } });
-    await this.cloudinary.delete(doc.publicId);
-    return { message: 'Document deleted' };
+  async setFavorite(userId: string, id: string, favorite: boolean) {
+    await this.assertOwned(userId, id);
+    if (favorite) {
+      await this.prisma.favorite.upsert({
+        where: { userId_documentId: { userId, documentId: id } },
+        create: { userId, documentId: id },
+        update: {},
+      });
+    } else {
+      await this.prisma.favorite.deleteMany({
+        where: { userId, documentId: id },
+      });
+    }
+    return { isFavorite: favorite };
   }
 
   async getDownload(userId: string, id: string) {
     const doc = await this.prisma.document.findFirst({
-      where: { id, userId },
+      where: { id, userId, trashedAt: null },
       select: { originalName: true, fileUrl: true, fileType: true },
     });
     if (!doc) throw new NotFoundException('Document not found');
@@ -227,9 +294,23 @@ export class DocumentsService {
     return { url: doc.fileUrl, fileName };
   }
 
-  async assertOwned(userId: string, id: string) {
+  /** Remembers that the user opened this document (it feeds the "Recent" list). */
+  async touch(userId: string, documentId: string): Promise<void> {
+    try {
+      await this.prisma.documentView.upsert({
+        where: { userId_documentId: { userId, documentId } },
+        create: { userId, documentId },
+        update: { lastAccessedAt: new Date() },
+      });
+    } catch (err) {
+      this.logger.warn(`Could not record access: ${String(err)}`);
+    }
+  }
+
+  /** Only the owner, and only for documents that are not in the trash. */
+  async assertOwned(userId: string, id: string): Promise<void> {
     const exists = await this.prisma.document.findFirst({
-      where: { id, userId },
+      where: { id, userId, trashedAt: null },
       select: { id: true },
     });
     if (!exists) throw new NotFoundException('Document not found');

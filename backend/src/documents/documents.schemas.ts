@@ -25,11 +25,22 @@ export type RenameDocumentDto = z.infer<typeof renameDocumentSchema>;
 export const listDocumentsQuerySchema = z.object({
   search: z.string().trim().max(100).optional(),
   type: z.enum(['PDF', 'DOCX', 'TXT']).optional(),
+  status: z.enum(['active', 'archived']).default('active'),
+  favorite: z.enum(['true']).optional(),
+  category: z.string().trim().min(1).max(40).optional(), // a category slug, or "none"
+  collectionId: z.string().min(1).max(40).optional(),
+  tagId: z.string().min(1).max(40).optional(),
+  sort: z.enum(['createdAt', 'updatedAt', 'name', 'size']).default('createdAt'),
+  order: z.enum(['asc', 'desc']).default('desc'),
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(50).default(12),
 });
-
 export type ListDocumentsQuery = z.infer<typeof listDocumentsQuerySchema>;
+
+export const recentQuerySchema = z.object({
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+});
+export type RecentQuery = z.infer<typeof recentQuerySchema>;
 
 export const searchQuerySchema = z.object({
   q: z.string().trim().min(2, 'Search text is too short').max(200),

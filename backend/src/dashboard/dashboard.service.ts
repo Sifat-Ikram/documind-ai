@@ -11,19 +11,33 @@ export class DashboardService {
       analyses,
       conversations,
       storage,
+      archived,
+      trashed,
       recentDocuments,
       recentAnalyses,
       recentConversations,
     ] = await this.prisma.$transaction([
-      this.prisma.document.count({ where: { userId } }),
-      this.prisma.analysis.count({ where: { userId } }),
-      this.prisma.conversation.count({ where: { userId } }),
+      this.prisma.document.count({
+        where: { userId, trashedAt: null, archivedAt: null },
+      }),
+      this.prisma.analysis.count({
+        where: { userId, document: { trashedAt: null } },
+      }),
+      this.prisma.conversation.count({
+        where: { userId, document: { trashedAt: null } },
+      }),
       this.prisma.document.aggregate({
-        where: { userId },
+        where: { userId, trashedAt: null },
         _sum: { fileSize: true },
       }),
+      this.prisma.document.count({
+        where: { userId, trashedAt: null, archivedAt: { not: null } },
+      }),
+      this.prisma.document.count({
+        where: { userId, trashedAt: { not: null } },
+      }),
       this.prisma.document.findMany({
-        where: { userId },
+        where: { userId, trashedAt: null, archivedAt: null },
         orderBy: { createdAt: 'desc' },
         take: 5,
         select: {
@@ -36,7 +50,7 @@ export class DashboardService {
         },
       }),
       this.prisma.analysis.findMany({
-        where: { userId },
+        where: { userId, document: { trashedAt: null } },
         orderBy: { createdAt: 'desc' },
         take: 8,
         select: {
@@ -49,7 +63,7 @@ export class DashboardService {
         },
       }),
       this.prisma.conversation.findMany({
-        where: { userId },
+        where: { userId, document: { trashedAt: null } },
         orderBy: { updatedAt: 'desc' },
         take: 8,
         select: {
@@ -91,6 +105,8 @@ export class DashboardService {
         analyses,
         conversations,
         storageBytes: storage._sum.fileSize ?? 0,
+        archived,
+        trashed,
       },
       recentDocuments,
       recentActivity,

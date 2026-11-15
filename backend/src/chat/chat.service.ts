@@ -74,7 +74,7 @@ export class ChatService {
 
   async getMessages(userId: string, conversationId: string) {
     const conversation = await this.prisma.conversation.findFirst({
-      where: { id: conversationId, userId },
+      where: { id: conversationId, userId, document: { trashedAt: null } },
       select: { id: true, documentId: true, title: true },
     });
     if (!conversation) throw new NotFoundException('Conversation not found');
@@ -101,7 +101,7 @@ export class ChatService {
     content: string,
   ): Promise<PreparedReply> {
     const conversation = await this.prisma.conversation.findFirst({
-      where: { id: conversationId, userId },
+      where: { id: conversationId, userId, document: { trashedAt: null } },
       select: {
         id: true,
         title: true,
@@ -110,6 +110,8 @@ export class ChatService {
       },
     });
     if (!conversation) throw new NotFoundException('Conversation not found');
+
+    await this.documents.touch(userId, conversation.documentId);
 
     const previous = await this.prisma.message.findMany({
       where: { conversationId },

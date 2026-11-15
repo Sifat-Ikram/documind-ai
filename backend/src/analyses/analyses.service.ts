@@ -135,6 +135,7 @@ export class AnalysesService {
   async list(userId: string, q: ListAnalysesQuery) {
     const where = {
       userId,
+      document: { trashedAt: null },
       ...(q.documentId ? { documentId: q.documentId } : {}),
     };
     const [items, total] = await this.prisma.$transaction([
@@ -158,7 +159,7 @@ export class AnalysesService {
 
   async getOne(userId: string, id: string) {
     const analysis = await this.prisma.analysis.findFirst({
-      where: { id, userId },
+      where: { id, userId, document: { trashedAt: null } },
       select: { ...analysisListSelect, result: true },
     });
     if (!analysis) throw new NotFoundException('Analysis not found');

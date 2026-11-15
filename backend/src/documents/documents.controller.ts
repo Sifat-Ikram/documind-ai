@@ -12,26 +12,30 @@ import {
 import type { AuthUser } from '../auth/auth.types';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
+import { TrashService } from '../trash/trash.service';
+import { ChunkSearchService } from './chunk-search.service';
 import {
   confirmUploadSchema,
   listDocumentsQuerySchema,
+  recentQuerySchema,
   renameDocumentSchema,
-  uploadSignatureSchema,
   searchQuerySchema,
-  type SearchQuery,
+  uploadSignatureSchema,
   type ConfirmUploadDto,
   type ListDocumentsQuery,
+  type RecentQuery,
   type RenameDocumentDto,
+  type SearchQuery,
   type UploadSignatureDto,
 } from './documents.schemas';
 import { DocumentsService } from './documents.service';
-import { ChunkSearchService } from './chunk-search.service';
 
 @Controller('documents')
 export class DocumentsController {
   constructor(
     private readonly documents: DocumentsService,
     private readonly chunkSearch: ChunkSearchService,
+    private readonly trash: TrashService,
   ) {}
 
   @HttpCode(200)
@@ -59,6 +63,15 @@ export class DocumentsController {
     query: ListDocumentsQuery,
   ) {
     return this.documents.list(user.id, query);
+  }
+
+  // must stay above ":id"
+  @Get('recent')
+  recent(
+    @CurrentUser() user: AuthUser,
+    @Query(new ZodValidationPipe(recentQuerySchema)) query: RecentQuery,
+  ) {
+    return this.documents.listRecent(user.id, query.limit);
   }
 
   @Get(':id')
@@ -91,8 +104,32 @@ export class DocumentsController {
     return { document: await this.documents.rename(user.id, id, body) };
   }
 
+  /** "Delete" now moves the document to the trash. */
   @Delete(':id')
   remove(@CurrentUser() user: AuthUser, @Param('id') id: string) {
-    return this.documents.remove(user.id, id);
+    return this.trash.moveToTrash(user.id, id);
+  }
+
+  @HttpCode(200)
+  @Post(':id/archive')
+  async archive(@CurrentUser() user: AuthUser, @Param('id') id: string) {
+    return { document: await this.documents.setArchived(user.id, id, true) };
+  }
+
+  @HttpCode(200)
+  @Post(':id/unarchive')
+  async unarchive(@CurrentUser() user: AuthUser, @Param('id') id: string) {
+    return { document: await this.documents.setArchived(user.id, id, false) };
+  }
+
+  @HttpCode(200)
+  @Post(':id/favorite')
+  favorite(@CurrentUser() user: AuthUser, @Param('id') id: string) {
+    return this.documents.setFavorite(user.id, id, true);
+  }
+
+  @Delete(':id/favorite')
+  unfavorite(@CurrentUser() user: AuthUser, @Param('id') id: string) {
+    return this.documents.setFavorite(user.id, id, false);
   }
 }

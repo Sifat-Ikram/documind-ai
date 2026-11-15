@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CloudinaryModule } from '../cloudinary/cloudinary.module';
+import { TrashModule } from '../trash/trash.module';
 import { ChunkSearchService } from './chunk-search.service';
 import { ChunkService } from './chunk.service';
 import { DocumentsController } from './documents.controller';
@@ -7,7 +8,7 @@ import { DocumentsService } from './documents.service';
 import { ParserService } from './parser.service';
 
 @Module({
-  imports: [CloudinaryModule],
+  imports: [CloudinaryModule, TrashModule],
   controllers: [DocumentsController],
   providers: [
     DocumentsService,
