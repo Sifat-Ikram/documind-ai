@@ -29,6 +29,7 @@ import {
   type UploadSignatureDto,
 } from './documents.schemas';
 import { DocumentsService } from './documents.service';
+import { AccessService } from '../access/access.service';
 
 @Controller('documents')
 export class DocumentsController {
@@ -36,6 +37,7 @@ export class DocumentsController {
     private readonly documents: DocumentsService,
     private readonly chunkSearch: ChunkSearchService,
     private readonly trash: TrashService,
+    private readonly access: AccessService,
   ) {}
 
   @HttpCode(200)
@@ -85,7 +87,7 @@ export class DocumentsController {
     @Param('id') id: string,
     @Query(new ZodValidationPipe(searchQuerySchema)) query: SearchQuery,
   ) {
-    await this.documents.assertOwned(user.id, id);
+    await this.access.require(user.id, id, 'VIEWER');
     const { mode, chunks } = await this.chunkSearch.search(id, query.q, 5);
     return { mode, results: chunks };
   }

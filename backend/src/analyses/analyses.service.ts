@@ -9,6 +9,7 @@ import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import type { AnalyzeDto, ListAnalysesQuery } from './analyses.schemas';
 import { ChunkSearchService } from '../documents/chunk-search.service';
+import { AccessService } from '../access/access.service';
 
 const TRANSLATE_MAX_CHARS = 5000;
 const QA_EXCERPT_CHUNKS = 10;
@@ -34,6 +35,7 @@ export class AnalysesService {
     private readonly detector: TaskDetectorService,
     private readonly workflows: WorkflowsService,
     private readonly search: ChunkSearchService,
+    private readonly access: AccessService,
     config: ConfigService<Env, true>,
   ) {
     this.maxChars = config.get('AI_MAX_DOCUMENT_CHARS', { infer: true });
@@ -135,7 +137,7 @@ export class AnalysesService {
   async list(userId: string, q: ListAnalysesQuery) {
     const where = {
       userId,
-      document: { trashedAt: null },
+      document: this.access.accessibleWhere(userId),
       ...(q.documentId ? { documentId: q.documentId } : {}),
     };
     const [items, total] = await this.prisma.$transaction([
@@ -159,7 +161,7 @@ export class AnalysesService {
 
   async getOne(userId: string, id: string) {
     const analysis = await this.prisma.analysis.findFirst({
-      where: { id, userId, document: { trashedAt: null } },
+      where: { id, userId, document: this.access.accessibleWhere(userId) },
       select: { ...analysisListSelect, result: true },
     });
     if (!analysis) throw new NotFoundException('Analysis not found');

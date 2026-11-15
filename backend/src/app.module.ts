@@ -19,6 +19,8 @@ import { PreferencesModule } from './preferences/preferences.module';
 import { TagsModule } from './tags/tags.module';
 import { CollectionsModule } from './collections/collections.module';
 import { BulkModule } from './bulk/bulk.module';
+import { AccessModule } from './access/access.module';
+import { SharingModule } from './sharing/sharing.module';
 
 @Module({
   imports: [
@@ -39,7 +41,9 @@ import { BulkModule } from './bulk/bulk.module';
     PreferencesModule,
     TagsModule,
     CollectionsModule,
-    BulkModule
+    BulkModule,
+    AccessModule,
+    SharingModule
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

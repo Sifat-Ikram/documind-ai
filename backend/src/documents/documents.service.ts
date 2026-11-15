@@ -23,6 +23,7 @@ import type {
   UploadSignatureDto,
 } from './documents.schemas';
 import { ParserService } from './parser.service';
+import { AccessService } from '../access/access.service';
 
 const PREVIEW_CHARS = 5000;
 
@@ -42,6 +43,7 @@ export class DocumentsService {
     private readonly cloudinary: CloudinaryService,
     private readonly parser: ParserService,
     private readonly chunker: ChunkService,
+    private readonly access: AccessService,
   ) {}
 
   createUploadSignature(userId: string, dto: UploadSignatureDto) {
@@ -138,8 +140,9 @@ export class DocumentsService {
 
   async list(userId: string, q: ListDocumentsQuery) {
     const where: Prisma.DocumentWhereInput = {
-      userId,
-      trashedAt: null,
+      ...(q.collectionId
+        ? this.access.accessibleWhere(userId)
+        : { userId, trashedAt: null }),
       archivedAt: q.status === 'archived' ? { not: null } : null,
       ...(q.type ? { fileType: q.type } : {}),
       ...(q.search
@@ -194,49 +197,80 @@ export class DocumentsService {
     const rows = await this.prisma.documentView.findMany({
       where: {
         userId,
-        document: { userId, trashedAt: null, archivedAt: null },
+        document: {
+          AND: [
+            this.access.accessibleWhere(userId),
+            { OR: [{ userId: { not: userId } }, { archivedAt: null }] },
+          ],
+        },
       },
       orderBy: { lastAccessedAt: 'desc' },
       take: limit,
       select: {
         lastAccessedAt: true,
-        document: { select: summarySelect(userId) },
+        document: {
+          select: {
+            ...summarySelect(userId),
+            userId: true,
+            user: { select: { id: true, name: true } },
+          },
+        },
       },
     });
-    return {
-      items: rows.map((r) => ({
-        ...withUserData(r.document),
+
+    const roles = await this.access.rolesFor(
+      userId,
+      rows
+        .filter((r) => r.document.userId !== userId)
+        .map((r) => r.document.id),
+    );
+    const items = rows.map((r) => {
+      const { user, userId: ownerId, ...doc } = withUserData(r.document);
+      return {
+        ...doc,
+        owner: user,
+        myRole: ownerId === userId ? 'OWNER' : (roles.get(doc.id) ?? 'VIEWER'),
         lastAccessedAt: r.lastAccessedAt,
-      })),
-    };
+      };
+    });
+    return { items };
   }
 
   async getDetail(userId: string, id: string) {
+    const role = await this.access.require(userId, id, 'VIEWER');
     const doc = await this.prisma.document.findFirst({
-      where: { id, userId, trashedAt: null },
+      where: { id, trashedAt: null },
       select: {
         ...summarySelect(userId),
         fileUrl: true,
         extractedText: true,
-        _count: { select: { analyses: true, conversations: true } },
+        user: { select: { id: true, name: true } },
+        _count: {
+          select: {
+            analyses: { where: { userId } },
+            conversations: { where: { userId } },
+          },
+        },
       },
     });
     if (!doc) throw new NotFoundException('Document not found');
 
     await this.touch(userId, id);
-    const { extractedText, ...rest } = withUserData(doc);
+    const { extractedText, user, ...rest } = withUserData(doc);
     return {
       ...rest,
+      owner: user,
+      myRole: role,
       textPreview: extractedText.slice(0, PREVIEW_CHARS),
       textLength: extractedText.length,
       previewTruncated: extractedText.length > PREVIEW_CHARS,
     };
   }
 
-  /** Ownership check + full text. Used by analysis and chat. */
   async getForAnalysis(userId: string, id: string) {
+    await this.access.require(userId, id, 'VIEWER');
     const doc = await this.prisma.document.findFirst({
-      where: { id, userId, trashedAt: null },
+      where: { id, trashedAt: null },
       select: { id: true, originalName: true, extractedText: true },
     });
     if (!doc) throw new NotFoundException('Document not found');
@@ -265,7 +299,7 @@ export class DocumentsService {
   }
 
   async setFavorite(userId: string, id: string, favorite: boolean) {
-    await this.assertOwned(userId, id);
+    await this.access.require(userId, id, 'VIEWER');
     if (favorite) {
       await this.prisma.favorite.upsert({
         where: { userId_documentId: { userId, documentId: id } },
@@ -281,8 +315,9 @@ export class DocumentsService {
   }
 
   async getDownload(userId: string, id: string) {
+    await this.access.require(userId, id, 'VIEWER');
     const doc = await this.prisma.document.findFirst({
-      where: { id, userId, trashedAt: null },
+      where: { id, trashedAt: null },
       select: { originalName: true, fileUrl: true, fileType: true },
     });
     if (!doc) throw new NotFoundException('Document not found');
@@ -294,7 +329,6 @@ export class DocumentsService {
     return { url: doc.fileUrl, fileName };
   }
 
-  /** Remembers that the user opened this document (it feeds the "Recent" list). */
   async touch(userId: string, documentId: string): Promise<void> {
     try {
       await this.prisma.documentView.upsert({
@@ -307,12 +341,7 @@ export class DocumentsService {
     }
   }
 
-  /** Only the owner, and only for documents that are not in the trash. */
   async assertOwned(userId: string, id: string): Promise<void> {
-    const exists = await this.prisma.document.findFirst({
-      where: { id, userId, trashedAt: null },
-      select: { id: true },
-    });
-    if (!exists) throw new NotFoundException('Document not found');
+    await this.access.require(userId, id, 'OWNER');
   }
 }

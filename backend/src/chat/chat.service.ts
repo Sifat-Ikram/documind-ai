@@ -6,6 +6,7 @@ import { ChunkSearchService } from '../documents/chunk-search.service';
 import { DocumentsService } from '../documents/documents.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { ChatEvent, ContextMode, PreparedReply } from './chat.types';
+import { AccessService } from '../access/access.service';
 
 const DEFAULT_TITLE = 'New conversation';
 const HISTORY_MESSAGES = 10;
@@ -36,13 +37,14 @@ export class ChatService {
     private readonly documents: DocumentsService,
     private readonly search: ChunkSearchService,
     private readonly ai: OpenRouterService,
+    private readonly access: AccessService,
     config: ConfigService<Env, true>,
   ) {
     this.contextChars = config.get('CHAT_CONTEXT_CHARS', { infer: true });
   }
 
   async listConversations(userId: string, documentId: string) {
-    await this.documents.assertOwned(userId, documentId);
+    await this.access.require(userId, documentId, 'VIEWER');
     const items = await this.prisma.conversation.findMany({
       where: { userId, documentId },
       orderBy: { updatedAt: 'desc' },
@@ -58,7 +60,7 @@ export class ChatService {
   }
 
   async createConversation(userId: string, documentId: string, title?: string) {
-    await this.documents.assertOwned(userId, documentId);
+    await this.access.require(userId, documentId, 'VIEWER');
     const conversation = await this.prisma.conversation.create({
       data: { userId, documentId, title: title ?? DEFAULT_TITLE },
       select: {
@@ -77,7 +79,9 @@ export class ChatService {
       where: { id: conversationId, userId, document: { trashedAt: null } },
       select: { id: true, documentId: true, title: true },
     });
+
     if (!conversation) throw new NotFoundException('Conversation not found');
+    await this.access.require(userId, conversation.documentId, 'VIEWER');
 
     const messages = await this.prisma.message.findMany({
       where: { conversationId },
@@ -109,7 +113,9 @@ export class ChatService {
         document: { select: { originalName: true, extractedText: true } },
       },
     });
+
     if (!conversation) throw new NotFoundException('Conversation not found');
+    await this.access.require(userId, conversation.documentId, 'VIEWER');
 
     await this.documents.touch(userId, conversation.documentId);
 

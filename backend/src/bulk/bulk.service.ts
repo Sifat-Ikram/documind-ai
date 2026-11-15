@@ -3,10 +3,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { AccessService } from '../access/access.service';
+import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { TagsService } from '../tags/tags.service';
 import { TrashService } from '../trash/trash.service';
 import type { BulkDto } from './bulk.schemas';
+
+const OWNER_ONLY = new Set(['trash', 'archive', 'unarchive', 'set_category']);
 
 @Injectable()
 export class BulkService {
@@ -14,15 +18,21 @@ export class BulkService {
     private readonly prisma: PrismaService,
     private readonly trash: TrashService,
     private readonly tags: TagsService,
+    private readonly access: AccessService,
   ) {}
 
   async run(userId: string, dto: BulkDto) {
     const requested = new Set(dto.documentIds).size;
 
+    const where: Prisma.DocumentWhereInput = OWNER_ONLY.has(dto.action)
+      ? { id: { in: dto.documentIds }, userId, trashedAt: null }
+      : { id: { in: dto.documentIds }, ...this.access.accessibleWhere(userId) };
+
     const docs = await this.prisma.document.findMany({
-      where: { id: { in: dto.documentIds }, userId, trashedAt: null },
+      where,
       select: {
         id: true,
+        userId: true,
         originalName: true,
         fileUrl: true,
         fileType: true,
@@ -86,9 +96,18 @@ export class BulkService {
         if (owned.length !== new Set(wanted).size)
           throw new NotFoundException('Collection not found');
 
+        let moved = ids.length;
         if (dto.collectionId) {
+          const hasMembers =
+            (await this.prisma.collectionMember.count({
+              where: { collectionId: dto.collectionId },
+            })) > 0;
+          const targetIds = hasMembers
+            ? docs.filter((d) => d.userId === userId).map((d) => d.id)
+            : ids;
+          moved = targetIds.length;
           await this.prisma.collectionDocument.createMany({
-            data: ids.map((documentId) => ({
+            data: targetIds.map((documentId) => ({
               collectionId: dto.collectionId as string,
               documentId,
             })),
@@ -103,7 +122,7 @@ export class BulkService {
             },
           });
         }
-        return summary(ids.length);
+        return summary(moved);
       }
 
       case 'add_tags': {

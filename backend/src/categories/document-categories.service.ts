@@ -36,8 +36,8 @@ export class DocumentCategoriesService {
     return { document: withUserData(document) };
   }
 
-  /** Asks the AI which category fits. It only suggests, it never changes the document. */
   async suggest(userId: string, documentId: string) {
+    await this.documents.assertOwned(userId, documentId);
     const doc = await this.documents.getForAnalysis(userId, documentId);
     const categories = await this.prisma.category.findMany({
       orderBy: { sortOrder: 'asc' },

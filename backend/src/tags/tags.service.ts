@@ -3,14 +3,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { DocumentsService } from '../documents/documents.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { AccessService } from '../access/access.service';
 
 @Injectable()
 export class TagsService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly documents: DocumentsService,
+    private readonly access: AccessService,
   ) {}
 
   async list(userId: string) {
@@ -109,9 +109,8 @@ export class TagsService {
     return { message: 'Tag deleted' };
   }
 
-  /** Replaces the current user's tags on a document with exactly this list. */
   async setForDocument(userId: string, documentId: string, names: string[]) {
-    await this.documents.assertOwned(userId, documentId);
+    await this.access.require(userId, documentId, 'VIEWER');
     const tags = await this.ensure(userId, names);
 
     await this.prisma.$transaction([
