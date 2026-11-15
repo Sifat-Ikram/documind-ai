@@ -89,4 +89,23 @@ export class CloudinaryService {
       );
     }
   }
+
+  uploadBuffer(
+    publicId: string,
+    buffer: Buffer,
+    assetFolder: string,
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          resource_type: 'raw',
+          public_id: publicId,
+          asset_folder: assetFolder,
+          overwrite: false,
+        },
+        (error) => (error ? reject(error) : resolve()),
+      );
+      stream.end(buffer);
+    });
+  }
 }

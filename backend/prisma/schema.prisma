@@ -323,6 +323,9 @@ model DocumentNote {
   updatedById String?
   updatedBy   User?    @relation(fields: [updatedById], references: [id], onDelete: SetNull)
   updatedAt   DateTime @updatedAt
+  versionCreatedAt   DateTime?
+  versionCreatedById String?
+  versionNote        String?
 }
 
 model DocumentView {

@@ -21,6 +21,7 @@ import { CollectionsModule } from './collections/collections.module';
 import { BulkModule } from './bulk/bulk.module';
 import { AccessModule } from './access/access.module';
 import { SharingModule } from './sharing/sharing.module';
+import { VersionsModule } from './versions/versions.module';
 
 @Module({
   imports: [
@@ -43,7 +44,8 @@ import { SharingModule } from './sharing/sharing.module';
     CollectionsModule,
     BulkModule,
     AccessModule,
-    SharingModule
+    SharingModule,
+    VersionsModule
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

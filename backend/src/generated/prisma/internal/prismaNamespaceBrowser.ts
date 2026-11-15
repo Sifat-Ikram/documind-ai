@@ -319,7 +319,10 @@ export const DocumentNoteScalarFieldEnum = {
   content: 'content',
   revision: 'revision',
   updatedById: 'updatedById',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  versionCreatedAt: 'versionCreatedAt',
+  versionCreatedById: 'versionCreatedById',
+  versionNote: 'versionNote'
 } as const
 
 export type DocumentNoteScalarFieldEnum = (typeof DocumentNoteScalarFieldEnum)[keyof typeof DocumentNoteScalarFieldEnum]

@@ -40,6 +40,9 @@ export type DocumentNoteMinAggregateOutputType = {
   revision: number | null
   updatedById: string | null
   updatedAt: Date | null
+  versionCreatedAt: Date | null
+  versionCreatedById: string | null
+  versionNote: string | null
 }
 
 export type DocumentNoteMaxAggregateOutputType = {
@@ -48,6 +51,9 @@ export type DocumentNoteMaxAggregateOutputType = {
   revision: number | null
   updatedById: string | null
   updatedAt: Date | null
+  versionCreatedAt: Date | null
+  versionCreatedById: string | null
+  versionNote: string | null
 }
 
 export type DocumentNoteCountAggregateOutputType = {
@@ -56,6 +62,9 @@ export type DocumentNoteCountAggregateOutputType = {
   revision: number
   updatedById: number
   updatedAt: number
+  versionCreatedAt: number
+  versionCreatedById: number
+  versionNote: number
   _all: number
 }
 
@@ -74,6 +83,9 @@ export type DocumentNoteMinAggregateInputType = {
   revision?: true
   updatedById?: true
   updatedAt?: true
+  versionCreatedAt?: true
+  versionCreatedById?: true
+  versionNote?: true
 }
 
 export type DocumentNoteMaxAggregateInputType = {
@@ -82,6 +94,9 @@ export type DocumentNoteMaxAggregateInputType = {
   revision?: true
   updatedById?: true
   updatedAt?: true
+  versionCreatedAt?: true
+  versionCreatedById?: true
+  versionNote?: true
 }
 
 export type DocumentNoteCountAggregateInputType = {
@@ -90,6 +105,9 @@ export type DocumentNoteCountAggregateInputType = {
   revision?: true
   updatedById?: true
   updatedAt?: true
+  versionCreatedAt?: true
+  versionCreatedById?: true
+  versionNote?: true
   _all?: true
 }
 
@@ -185,6 +203,9 @@ export type DocumentNoteGroupByOutputType = {
   revision: number
   updatedById: string | null
   updatedAt: Date
+  versionCreatedAt: Date | null
+  versionCreatedById: string | null
+  versionNote: string | null
   _count: DocumentNoteCountAggregateOutputType | null
   _avg: DocumentNoteAvgAggregateOutputType | null
   _sum: DocumentNoteSumAggregateOutputType | null
@@ -216,6 +237,9 @@ export type DocumentNoteWhereInput = {
   revision?: Prisma.IntFilter<"DocumentNote"> | number
   updatedById?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"DocumentNote"> | Date | string
+  versionCreatedAt?: Prisma.DateTimeNullableFilter<"DocumentNote"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
+  versionNote?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
@@ -226,6 +250,9 @@ export type DocumentNoteOrderByWithRelationInput = {
   revision?: Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   document?: Prisma.DocumentOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
 }
@@ -239,6 +266,9 @@ export type DocumentNoteWhereUniqueInput = Prisma.AtLeast<{
   revision?: Prisma.IntFilter<"DocumentNote"> | number
   updatedById?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"DocumentNote"> | Date | string
+  versionCreatedAt?: Prisma.DateTimeNullableFilter<"DocumentNote"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
+  versionNote?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "documentId">
@@ -249,6 +279,9 @@ export type DocumentNoteOrderByWithAggregationInput = {
   revision?: Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DocumentNoteCountOrderByAggregateInput
   _avg?: Prisma.DocumentNoteAvgOrderByAggregateInput
   _max?: Prisma.DocumentNoteMaxOrderByAggregateInput
@@ -265,12 +298,18 @@ export type DocumentNoteScalarWhereWithAggregatesInput = {
   revision?: Prisma.IntWithAggregatesFilter<"DocumentNote"> | number
   updatedById?: Prisma.StringNullableWithAggregatesFilter<"DocumentNote"> | string | null
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DocumentNote"> | Date | string
+  versionCreatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DocumentNote"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableWithAggregatesFilter<"DocumentNote"> | string | null
+  versionNote?: Prisma.StringNullableWithAggregatesFilter<"DocumentNote"> | string | null
 }
 
 export type DocumentNoteCreateInput = {
   content?: string
   revision?: number
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   document: Prisma.DocumentCreateNestedOneWithoutNoteInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutNotesUpdatedInput
 }
@@ -281,12 +320,18 @@ export type DocumentNoteUncheckedCreateInput = {
   revision?: number
   updatedById?: string | null
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
 }
 
 export type DocumentNoteUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.DocumentUpdateOneRequiredWithoutNoteNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutNotesUpdatedNestedInput
 }
@@ -297,6 +342,9 @@ export type DocumentNoteUncheckedUpdateInput = {
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentNoteCreateManyInput = {
@@ -305,12 +353,18 @@ export type DocumentNoteCreateManyInput = {
   revision?: number
   updatedById?: string | null
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
 }
 
 export type DocumentNoteUpdateManyMutationInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentNoteUncheckedUpdateManyInput = {
@@ -319,6 +373,9 @@ export type DocumentNoteUncheckedUpdateManyInput = {
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentNoteListRelationFilter = {
@@ -342,6 +399,9 @@ export type DocumentNoteCountOrderByAggregateInput = {
   revision?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrder
+  versionNote?: Prisma.SortOrder
 }
 
 export type DocumentNoteAvgOrderByAggregateInput = {
@@ -354,6 +414,9 @@ export type DocumentNoteMaxOrderByAggregateInput = {
   revision?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrder
+  versionNote?: Prisma.SortOrder
 }
 
 export type DocumentNoteMinOrderByAggregateInput = {
@@ -362,6 +425,9 @@ export type DocumentNoteMinOrderByAggregateInput = {
   revision?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrder
+  versionNote?: Prisma.SortOrder
 }
 
 export type DocumentNoteSumOrderByAggregateInput = {
@@ -446,6 +512,9 @@ export type DocumentNoteCreateWithoutUpdatedByInput = {
   content?: string
   revision?: number
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   document: Prisma.DocumentCreateNestedOneWithoutNoteInput
 }
 
@@ -454,6 +523,9 @@ export type DocumentNoteUncheckedCreateWithoutUpdatedByInput = {
   content?: string
   revision?: number
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
 }
 
 export type DocumentNoteCreateOrConnectWithoutUpdatedByInput = {
@@ -491,12 +563,18 @@ export type DocumentNoteScalarWhereInput = {
   revision?: Prisma.IntFilter<"DocumentNote"> | number
   updatedById?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"DocumentNote"> | Date | string
+  versionCreatedAt?: Prisma.DateTimeNullableFilter<"DocumentNote"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
+  versionNote?: Prisma.StringNullableFilter<"DocumentNote"> | string | null
 }
 
 export type DocumentNoteCreateWithoutDocumentInput = {
   content?: string
   revision?: number
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutNotesUpdatedInput
 }
 
@@ -505,6 +583,9 @@ export type DocumentNoteUncheckedCreateWithoutDocumentInput = {
   revision?: number
   updatedById?: string | null
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
 }
 
 export type DocumentNoteCreateOrConnectWithoutDocumentInput = {
@@ -527,6 +608,9 @@ export type DocumentNoteUpdateWithoutDocumentInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutNotesUpdatedNestedInput
 }
 
@@ -535,6 +619,9 @@ export type DocumentNoteUncheckedUpdateWithoutDocumentInput = {
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentNoteCreateManyUpdatedByInput = {
@@ -542,12 +629,18 @@ export type DocumentNoteCreateManyUpdatedByInput = {
   content?: string
   revision?: number
   updatedAt?: Date | string
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
 }
 
 export type DocumentNoteUpdateWithoutUpdatedByInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.DocumentUpdateOneRequiredWithoutNoteNestedInput
 }
 
@@ -556,6 +649,9 @@ export type DocumentNoteUncheckedUpdateWithoutUpdatedByInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentNoteUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -563,6 +659,9 @@ export type DocumentNoteUncheckedUpdateManyWithoutUpdatedByInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   revision?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -573,6 +672,9 @@ export type DocumentNoteSelect<ExtArgs extends runtime.Types.Extensions.Internal
   revision?: boolean
   updatedById?: boolean
   updatedAt?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.DocumentNote$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["documentNote"]>
@@ -583,6 +685,9 @@ export type DocumentNoteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   revision?: boolean
   updatedById?: boolean
   updatedAt?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.DocumentNote$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["documentNote"]>
@@ -593,6 +698,9 @@ export type DocumentNoteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   revision?: boolean
   updatedById?: boolean
   updatedAt?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.DocumentNote$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["documentNote"]>
@@ -603,9 +711,12 @@ export type DocumentNoteSelectScalar = {
   revision?: boolean
   updatedById?: boolean
   updatedAt?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
 }
 
-export type DocumentNoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"documentId" | "content" | "revision" | "updatedById" | "updatedAt", ExtArgs["result"]["documentNote"]>
+export type DocumentNoteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"documentId" | "content" | "revision" | "updatedById" | "updatedAt" | "versionCreatedAt" | "versionCreatedById" | "versionNote", ExtArgs["result"]["documentNote"]>
 export type DocumentNoteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.DocumentNote$updatedByArgs<ExtArgs>
@@ -631,6 +742,9 @@ export type $DocumentNotePayload<ExtArgs extends runtime.Types.Extensions.Intern
     revision: number
     updatedById: string | null
     updatedAt: Date
+    versionCreatedAt: Date | null
+    versionCreatedById: string | null
+    versionNote: string | null
   }, ExtArgs["result"]["documentNote"]>
   composites: {}
 }
@@ -1061,6 +1175,9 @@ export interface DocumentNoteFieldRefs {
   readonly revision: Prisma.FieldRef<"DocumentNote", 'Int'>
   readonly updatedById: Prisma.FieldRef<"DocumentNote", 'String'>
   readonly updatedAt: Prisma.FieldRef<"DocumentNote", 'DateTime'>
+  readonly versionCreatedAt: Prisma.FieldRef<"DocumentNote", 'DateTime'>
+  readonly versionCreatedById: Prisma.FieldRef<"DocumentNote", 'String'>
+  readonly versionNote: Prisma.FieldRef<"DocumentNote", 'String'>
 }
     
 

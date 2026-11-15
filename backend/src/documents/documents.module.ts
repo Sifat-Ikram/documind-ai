@@ -16,6 +16,7 @@ import { ParserService } from './parser.service';
     ChunkService,
     ChunkSearchService,
   ],
-  exports: [DocumentsService, ChunkSearchService],
+
+  exports: [DocumentsService, ChunkSearchService, ChunkService, ParserService],
 })
 export class DocumentsModule {}

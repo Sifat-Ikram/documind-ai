@@ -9,9 +9,9 @@ import type { Env } from './config/env';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useBodyParser('json', { limit: '4mb' });
   const config = app.get(ConfigService<Env, true>);
 
-  // Vercel/proxy এর পেছনে আসল client IP পেতে (rate limit এর জন্য)
   app.set('trust proxy', 1);
 
   app.use(helmet());
