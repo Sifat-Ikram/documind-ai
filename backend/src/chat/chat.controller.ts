@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
@@ -14,6 +15,8 @@ import { CurrentUser } from '../auth/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
 import {
   createConversationSchema,
+  type ListConversationsQuery,
+  listConversationsQuerySchema,
   sendMessageSchema,
   type CreateConversationDto,
   type SendMessageDto,
@@ -40,6 +43,15 @@ export class ChatController {
     body: CreateConversationDto,
   ) {
     return this.chat.createConversation(user.id, documentId, body.title);
+  }
+
+  @Get('conversations')
+  listAll(
+    @CurrentUser() user: AuthUser,
+    @Query(new ZodValidationPipe(listConversationsQuerySchema))
+    query: ListConversationsQuery,
+  ) {
+    return this.chat.listAll(user.id, query);
   }
 
   @Get('conversations/:id/messages')

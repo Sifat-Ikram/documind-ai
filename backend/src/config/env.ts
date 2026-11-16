@@ -24,6 +24,10 @@ const envSchema = z.object({
   OPENROUTER_MODEL: z.string().min(1, 'OPENROUTER_MODEL is required'),
   AI_MAX_DOCUMENT_CHARS: z.coerce.number().int().min(1000).default(40000),
   CHAT_CONTEXT_CHARS: z.coerce.number().int().min(2000).default(12000),
+
+  GENERATE_GUEST_PER_BROWSER: z.coerce.number().int().min(1).default(3),
+  GENERATE_GUEST_POOL: z.coerce.number().int().min(1).default(15),
+  GENERATE_USER_LIMIT: z.coerce.number().int().min(1).default(10),
 });
 
 export type Env = z.infer<typeof envSchema>;

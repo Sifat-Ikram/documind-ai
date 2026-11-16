@@ -10,12 +10,14 @@ import { timingSafeEqual } from 'node:crypto';
 import { Public } from '../auth/public.decorator';
 import type { Env } from '../config/env';
 import { TrashService } from '../trash/trash.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Controller('cron')
 export class CronController {
   constructor(
     private readonly config: ConfigService<Env, true>,
     private readonly trash: TrashService,
+    private readonly prisma: PrismaService,
   ) {}
 
   @Public()
@@ -32,6 +34,11 @@ export class CronController {
     }
 
     const purgedTrash = await this.trash.purgeExpired();
-    return { ok: true, purgedTrash };
+    const logs = await this.prisma.generationLog.deleteMany({
+      where: {
+        createdAt: { lt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
+      },
+    });
+    return { ok: true, purgedTrash, purgedGenerationLogs: logs.count };
   }
 }

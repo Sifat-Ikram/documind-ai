@@ -10,6 +10,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import type { AnalyzeDto, ListAnalysesQuery } from './analyses.schemas';
 import { ChunkSearchService } from '../documents/chunk-search.service';
 import { AccessService } from '../access/access.service';
+import { PreferencesService } from '../preferences/preferences.service';
+import { aiPreferenceRules } from '../preferences/ai-prompt';
 
 const TRANSLATE_MAX_CHARS = 5000;
 const QA_EXCERPT_CHUNKS = 10;
@@ -36,6 +38,7 @@ export class AnalysesService {
     private readonly workflows: WorkflowsService,
     private readonly search: ChunkSearchService,
     private readonly access: AccessService,
+    private readonly preferences: PreferencesService,
     config: ConfigService<Env, true>,
   ) {
     this.maxChars = config.get('AI_MAX_DOCUMENT_CHARS', { infer: true });
@@ -85,6 +88,7 @@ export class AnalysesService {
       );
     }
 
+    const prefs = (await this.preferences.get(userId)).ai;
     const settled = await Promise.allSettled(
       detection.tasks.map(async (task) => {
         const { text, excerptsOnly } = await this.textFor(
@@ -99,6 +103,9 @@ export class AnalysesService {
           text,
           targetLanguage: detection.targetLanguage,
           excerptsOnly,
+          preferences: aiPreferenceRules(prefs, {
+            translation: task === 'TRANSLATE',
+          }),
         });
       }),
     );

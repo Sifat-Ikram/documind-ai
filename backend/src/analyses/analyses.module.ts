@@ -3,9 +3,10 @@ import { AiModule } from '../ai/ai.module';
 import { DocumentsModule } from '../documents/documents.module';
 import { AnalysesController } from './analyses.controller';
 import { AnalysesService } from './analyses.service';
+import { PreferencesModule } from '../preferences/preferences.module';
 
 @Module({
-  imports: [DocumentsModule, AiModule],
+  imports: [DocumentsModule, AiModule, PreferencesModule],
   controllers: [AnalysesController],
   providers: [AnalysesService],
 })

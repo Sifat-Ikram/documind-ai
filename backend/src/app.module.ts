@@ -22,6 +22,7 @@ import { BulkModule } from './bulk/bulk.module';
 import { AccessModule } from './access/access.module';
 import { SharingModule } from './sharing/sharing.module';
 import { VersionsModule } from './versions/versions.module';
+import { GeneratorModule } from './generator/generator.module';
 
 @Module({
   imports: [
@@ -45,7 +46,8 @@ import { VersionsModule } from './versions/versions.module';
     BulkModule,
     AccessModule,
     SharingModule,
-    VersionsModule
+    VersionsModule,
+    GeneratorModule
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

@@ -7,6 +7,10 @@ import { DocumentsService } from '../documents/documents.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { ChatEvent, ContextMode, PreparedReply } from './chat.types';
 import { AccessService } from '../access/access.service';
+import { Prisma } from '../generated/prisma/client';
+import type { ListConversationsQuery } from './chat.schemas';
+import { PreferencesService } from '../preferences/preferences.service';
+import { aiPreferenceRules, PREFERENCE_HEADER } from '../preferences/ai-prompt';
 
 const DEFAULT_TITLE = 'New conversation';
 const HISTORY_MESSAGES = 10;
@@ -38,6 +42,7 @@ export class ChatService {
     private readonly search: ChunkSearchService,
     private readonly ai: OpenRouterService,
     private readonly access: AccessService,
+    private readonly preferences: PreferencesService,
     config: ConfigService<Env, true>,
   ) {
     this.contextChars = config.get('CHAT_CONTEXT_CHARS', { infer: true });
@@ -57,6 +62,68 @@ export class ChatService {
       },
     });
     return { items };
+  }
+
+  /** Every conversation of the user, across all documents they can open. */
+  async listAll(userId: string, q: ListConversationsQuery) {
+    const where: Prisma.ConversationWhereInput = {
+      userId,
+      document: this.access.accessibleWhere(userId),
+      ...(q.search
+        ? {
+            OR: [
+              { title: { contains: q.search, mode: 'insensitive' } },
+              {
+                document: {
+                  originalName: { contains: q.search, mode: 'insensitive' },
+                },
+              },
+            ],
+          }
+        : {}),
+    };
+
+    const [rows, total] = await this.prisma.$transaction([
+      this.prisma.conversation.findMany({
+        where,
+        orderBy: { updatedAt: 'desc' },
+        skip: (q.page - 1) * q.limit,
+        take: q.limit,
+        select: {
+          id: true,
+          title: true,
+          createdAt: true,
+          updatedAt: true,
+          _count: { select: { messages: true } },
+          document: {
+            select: { id: true, originalName: true, fileType: true },
+          },
+          messages: {
+            orderBy: { createdAt: 'desc' },
+            take: 1,
+            select: { role: true, content: true },
+          },
+        },
+      }),
+      this.prisma.conversation.count({ where }),
+    ]);
+
+    return {
+      items: rows.map(({ messages, _count, ...rest }) => ({
+        ...rest,
+        messageCount: _count.messages,
+        lastMessage: messages[0]
+          ? {
+              role: messages[0].role,
+              preview: messages[0].content.replace(/\s+/g, ' ').slice(0, 160),
+            }
+          : null,
+      })),
+      total,
+      page: q.page,
+      limit: q.limit,
+      totalPages: Math.max(1, Math.ceil(total / q.limit)),
+    };
   }
 
   async createConversation(userId: string, documentId: string, title?: string) {
@@ -171,7 +238,9 @@ export class ChatService {
       contextMode === 'full'
         ? 'full text'
         : 'selected excerpts only; the rest of the document is not shown';
-    const system = `${CHAT_RULES}\n\nDocument "${conversation.document.originalName}" (${scope}):\n"""\n${context}\n"""`;
+
+    const rules = aiPreferenceRules((await this.preferences.get(userId)).ai);
+    const system = `${CHAT_RULES}${rules ? `\n\n${PREFERENCE_HEADER}\n${rules}` : ''}\n\nDocument "${conversation.document.originalName}" (${scope}):\n"""\n${context}\n"""`;
 
     const aiMessages: AiMessage[] = [
       { role: 'system', content: system },

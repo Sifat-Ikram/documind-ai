@@ -116,6 +116,7 @@ export interface WorkflowInput {
   text: string;
   targetLanguage: string | null;
   excerptsOnly?: boolean;
+  preferences?: string;
 }
 
 export interface TaskSection {
@@ -157,7 +158,14 @@ export class WorkflowsService {
 
     const data = await this.ai.completeJson(
       [
-        { role: 'system', content: `${COMMON_RULES}\n\n${def.instructions}` },
+        {
+          role: 'system',
+          content: `${COMMON_RULES}\n\n${def.instructions}${
+            input.preferences
+              ? `\n\nUser preferences (follow them unless the instruction says otherwise):\n${input.preferences}`
+              : ''
+          }`,
+        },
         { role: 'user', content: userMessage },
       ],
       def.schema,
