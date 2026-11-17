@@ -24,8 +24,10 @@ export class CloudinaryService {
     });
   }
 
-  createUploadSignature(userId: string, extension: string) {
-    const assetFolder = userFolder(userId);
+  createUploadSignature(userId: string, extension: string, subfolder?: string) {
+    const assetFolder = subfolder
+      ? `${userFolder(userId)}/${subfolder}`
+      : userFolder(userId);
     const publicId = `${assetFolder}/${randomUUID()}.${extension}`;
     const timestamp = Math.floor(Date.now() / 1000);
 

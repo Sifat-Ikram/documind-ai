@@ -9,17 +9,20 @@ import { ConfigService } from '@nestjs/config';
 import { timingSafeEqual } from 'node:crypto';
 import { Public } from '../auth/public.decorator';
 import type { Env } from '../config/env';
-import { TrashService } from '../trash/trash.service';
+import { ConverterService } from '../converter/converter.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { TrashService } from '../trash/trash.service';
 
 @Controller('cron')
 export class CronController {
   constructor(
     private readonly config: ConfigService<Env, true>,
     private readonly trash: TrashService,
+    private readonly converter: ConverterService,
     private readonly prisma: PrismaService,
   ) {}
 
+  // Public for the login guard, protected by the secret instead.
   @Public()
   @Get('purge')
   async purge(@Headers('authorization') authorization?: string) {
@@ -34,11 +37,18 @@ export class CronController {
     }
 
     const purgedTrash = await this.trash.purgeExpired();
+    const purgedConversions = await this.converter.purgeExpired();
     const logs = await this.prisma.generationLog.deleteMany({
       where: {
         createdAt: { lt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
       },
     });
-    return { ok: true, purgedTrash, purgedGenerationLogs: logs.count };
+
+    return {
+      ok: true,
+      purgedTrash,
+      purgedConversions,
+      purgedGenerationLogs: logs.count,
+    };
   }
 }

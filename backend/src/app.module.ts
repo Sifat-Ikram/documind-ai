@@ -24,6 +24,8 @@ import { SharingModule } from './sharing/sharing.module';
 import { VersionsModule } from './versions/versions.module';
 import { GeneratorModule } from './generator/generator.module';
 import { SearchModule } from './search/search.module';
+import { ConverterModule } from './converter/converter.module';
+import { ContactModule } from './contact/contact.module';
 
 @Module({
   imports: [
@@ -49,7 +51,9 @@ import { SearchModule } from './search/search.module';
     SharingModule,
     VersionsModule,
     GeneratorModule,
-    SearchModule
+    SearchModule,
+    ConverterModule,
+    ContactModule
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
