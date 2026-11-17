@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import PDFDocument from 'pdfkit';
 import { runsToText, type Block, type Run } from '../versions/html-model';
+import { EMBEDDED_FONTS } from './embedded-fonts';
 
 const FONT_DIR = join(process.cwd(), 'assets', 'fonts');
 const FILES = {
@@ -12,8 +13,26 @@ const FILES = {
   latinBoldItalic: 'NotoSans-BoldItalic.ttf',
   bn: 'NotoSansBengali-Regular.ttf',
   bnBold: 'NotoSansBengali-Bold.ttf',
-};
-const has = (file: string) => existsSync(join(FONT_DIR, file));
+} as const;
+type FontKey = keyof typeof FILES;
+
+const decoded = new Map<FontKey, Buffer>();
+
+/** A font as bytes (the embedded copy always ships with the build) or, failing that, a file path. */
+function fontSource(key: FontKey): Buffer | string | null {
+  const embedded = EMBEDDED_FONTS[key];
+  if (embedded) {
+    let bytes = decoded.get(key);
+    if (!bytes) {
+      bytes = Buffer.from(embedded, 'base64');
+      decoded.set(key, bytes);
+    }
+    return bytes;
+  }
+  const path = join(FONT_DIR, FILES[key]);
+  return existsSync(path) ? path : null;
+}
+const has = (key: FontKey) => fontSource(key) !== null;
 
 const MARGIN = 56;
 const BASE = 11;
@@ -71,27 +90,25 @@ function registerFonts(doc: PDFKit.PDFDocument): Fonts {
     boldItalic: 'Helvetica-BoldOblique',
   };
   let unicode = false;
-  const reg = (name: string, file: string) => {
-    doc.registerFont(name, join(FONT_DIR, file));
+  const reg = (name: string, key: FontKey) => {
+    doc.registerFont(name, fontSource(key) as Buffer | string);
     return name;
   };
 
-  if (has(FILES.latin)) {
+  if (has('latin')) {
     unicode = true;
-    names.regular = reg('latin', FILES.latin);
-    names.bold = has(FILES.latinBold)
-      ? reg('latin-b', FILES.latinBold)
+    names.regular = reg('latin', 'latin');
+    names.bold = has('latinBold') ? reg('latin-b', 'latinBold') : names.regular;
+    names.italic = has('latinItalic')
+      ? reg('latin-i', 'latinItalic')
       : names.regular;
-    names.italic = has(FILES.latinItalic)
-      ? reg('latin-i', FILES.latinItalic)
-      : names.regular;
-    names.boldItalic = has(FILES.latinBoldItalic)
-      ? reg('latin-bi', FILES.latinBoldItalic)
+    names.boldItalic = has('latinBoldItalic')
+      ? reg('latin-bi', 'latinBoldItalic')
       : names.bold;
   }
 
-  const bn = has(FILES.bn) ? reg('bn', FILES.bn) : null;
-  const bnBold = bn && has(FILES.bnBold) ? reg('bn-b', FILES.bnBold) : bn;
+  const bn = has('bn') ? reg('bn', 'bn') : null;
+  const bnBold = bn && has('bnBold') ? reg('bn-b', 'bnBold') : bn;
 
   return {
     unicode,
@@ -224,7 +241,7 @@ export async function blocksToPdf(
       'PDF export supports English and Bengali only. For other languages use DOCX or TXT, or print the page from your browser.',
     );
   }
-  if (BENGALI.test(all) && !has(FILES.bn)) {
+  if (BENGALI.test(all) && !has('bn')) {
     throw new BadRequestException(
       'PDF export of Bengali text needs the Noto Sans Bengali font on the server. Use "Save as PDF" from your browser, or export DOCX.',
     );
