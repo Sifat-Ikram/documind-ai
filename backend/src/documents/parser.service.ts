@@ -33,7 +33,8 @@ export class ParserService {
   normalize(text: string): string {
     return text
       .replace(/\r\n?/g, '\n')
-      .replace(/\u0000/g, '')
+      .split('\0')
+      .join('')
       .replace(/[ \t]{2,}/g, ' ')
       .replace(/\n{3,}/g, '\n\n')
       .trim();
@@ -47,14 +48,13 @@ export class ParserService {
   }
 
   private async extractPdf(buffer: Buffer): Promise<string> {
-    let parser: InstanceType<typeof import('pdf-parse').PDFParse> | undefined;
+    const { CanvasFactory } = await import('pdf-parse/worker');
+    const { PDFParse, PasswordException } = await import('pdf-parse');
+
+    let parser: InstanceType<typeof PDFParse> | undefined;
 
     try {
-      // Load the worker before loading pdf-parse
-      const { CanvasFactory } = await import('pdf-parse/worker');
-      const { PDFParse } = await import('pdf-parse');
-
-      const parser = new PDFParse({
+      parser = new PDFParse({
         data: new Uint8Array(buffer),
         CanvasFactory,
       });
@@ -63,8 +63,6 @@ export class ParserService {
 
       return result.text.replace(/^-- \d+ of \d+ --$/gm, '');
     } catch (err) {
-      const { PasswordException } = await import('pdf-parse');
-
       if (err instanceof PasswordException) {
         throw new BadRequestException('This PDF is password-protected.');
       }

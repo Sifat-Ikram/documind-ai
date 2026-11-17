@@ -43,12 +43,17 @@ export class CronController {
         createdAt: { lt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
       },
     });
+    // login sessions that ended more than a day ago
+    const tokens = await this.prisma.refreshToken.deleteMany({
+      where: { expiresAt: { lt: new Date(Date.now() - 24 * 60 * 60 * 1000) } },
+    });
 
     return {
       ok: true,
       purgedTrash,
       purgedConversions,
       purgedGenerationLogs: logs.count,
+      purgedRefreshTokens: tokens.count,
     };
   }
 }
