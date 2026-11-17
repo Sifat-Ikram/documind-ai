@@ -8,7 +8,7 @@ export interface FoundChunk {
 }
 export type SearchMode = 'fts' | 'like' | 'start';
 
-const STOP_WORDS = new Set([
+export const STOP_WORDS = new Set([
   'the',
   'and',
   'for',

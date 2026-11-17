@@ -23,6 +23,7 @@ import { AccessModule } from './access/access.module';
 import { SharingModule } from './sharing/sharing.module';
 import { VersionsModule } from './versions/versions.module';
 import { GeneratorModule } from './generator/generator.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -47,7 +48,8 @@ import { GeneratorModule } from './generator/generator.module';
     AccessModule,
     SharingModule,
     VersionsModule,
-    GeneratorModule
+    GeneratorModule,
+    SearchModule
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
