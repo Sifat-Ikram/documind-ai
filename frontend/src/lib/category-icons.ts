@@ -27,3 +27,9 @@ const ICONS: Record<string, IconType> = {
 export function categoryIcon(name: string | null | undefined): IconType {
   return (name && ICONS[name]) || FiFile;
 }
+
+export function getCategoryIconName(
+  name: string | null | undefined,
+): keyof typeof ICONS {
+  return name && name in ICONS ? (name as keyof typeof ICONS) : "FiFile";
+}
