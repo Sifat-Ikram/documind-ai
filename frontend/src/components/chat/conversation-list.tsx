@@ -40,7 +40,7 @@ export function ConversationList({
       {loading && !items ? (
         <div className="space-y-2 p-2" aria-busy="true">
           {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-12 rounded-xl" />
+            <Skeleton key={i} className="h-12 rounded-md" />
           ))}
         </div>
       ) : error && !items ? (
@@ -68,7 +68,7 @@ export function ConversationList({
                 onClick={() => onSelect(item.id)}
                 aria-current={activeId === item.id ? "true" : undefined}
                 className={cn(
-                  "w-full rounded-xl px-3 py-2.5 pr-10 text-left transition-colors hover:bg-surface-muted",
+                  "w-full rounded-md px-3 py-2.5 pr-10 text-left transition-colors hover:bg-surface-muted",
                   activeId === item.id && "bg-primary-soft",
                 )}
               >

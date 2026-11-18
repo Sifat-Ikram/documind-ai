@@ -290,7 +290,7 @@ export function ChatView({ documentId }: { documentId: string }) {
             in it.
           </p>
           {document ? (
-            <div className="mt-4 inline-flex max-w-full items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2">
+            <div className="mt-4 inline-flex max-w-full items-center gap-3 rounded-md border border-border bg-surface px-3 py-2">
               <FileTypeBadge type={document.fileType} className="h-8 w-11" />
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium text-text">
@@ -303,7 +303,7 @@ export function ChatView({ documentId }: { documentId: string }) {
               </div>
             </div>
           ) : (
-            <Skeleton className="mt-4 h-14 w-72 rounded-xl" />
+            <Skeleton className="mt-4 h-14 w-72 rounded-md" />
           )}
         </div>
         <Button

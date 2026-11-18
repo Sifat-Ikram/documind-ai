@@ -158,7 +158,7 @@ export function HistoryView() {
                   setDocumentId(e.target.value);
                   setPage(1);
                 }}
-                className="h-11 max-w-[16rem] rounded-xl border border-border-strong bg-surface px-3.5 text-sm text-text"
+                className="h-11 max-w-[16rem] rounded-md border border-border-strong bg-surface px-3.5 text-sm text-text"
               >
                 <option value="">All documents</option>
                 {docs.data?.items.map((d) => (

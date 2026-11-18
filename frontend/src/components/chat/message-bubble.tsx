@@ -68,7 +68,7 @@ export function MessageBubble({
         )}
 
         {message.status === "error" && (
-          <div className="mt-2 flex flex-wrap items-center gap-3 rounded-xl bg-error-soft px-4 py-3 text-sm text-error-text">
+          <div className="mt-2 flex flex-wrap items-center gap-3 rounded-md bg-error-soft px-4 py-3 text-sm text-error-text">
             <FiAlertCircle className="size-4 shrink-0" aria-hidden="true" />
             <span className="min-w-0 flex-1">
               {message.error ?? "Something went wrong."}

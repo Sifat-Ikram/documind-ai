@@ -203,7 +203,7 @@ export function DocumentDetailsView({ id }: { id: string }) {
           >
             {doc.textPreview ? (
               <>
-                <pre className="max-h-[32rem] overflow-auto whitespace-pre-wrap break-words rounded-xl bg-surface-muted p-4 text-sm leading-relaxed text-text">
+                <pre className="max-h-[32rem] overflow-auto whitespace-pre-wrap break-words rounded-md bg-surface-muted p-4 text-sm leading-relaxed text-text">
                   {doc.textPreview}
                 </pre>
                 {doc.previewTruncated && (
@@ -248,7 +248,7 @@ export function DocumentDetailsView({ id }: { id: string }) {
                   <li key={item.id}>
                     <Link
                       href={`/documents/${doc.id}/analyze?analysis=${item.id}`}
-                      className="block rounded-xl px-2 py-2 hover:bg-surface-muted"
+                      className="block rounded-md px-2 py-2 hover:bg-surface-muted"
                     >
                       <p className="line-clamp-2 text-sm font-medium text-text">
                         {item.originalInstruction}
@@ -284,7 +284,7 @@ export function DocumentDetailsView({ id }: { id: string }) {
                   <li key={chat.id}>
                     <Link
                       href={`/documents/${doc.id}/chat?conversation=${chat.id}`}
-                      className="block rounded-xl px-2 py-2 hover:bg-surface-muted"
+                      className="block rounded-md px-2 py-2 hover:bg-surface-muted"
                     >
                       <p className="line-clamp-1 text-sm font-medium text-text">
                         {chat.title}

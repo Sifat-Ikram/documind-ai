@@ -53,7 +53,7 @@ export function ChatComposer({
           onKeyDown={onKeyDown}
           aria-label="Your message"
           placeholder="Ask a question about this document…"
-          className="max-h-40 min-h-11 flex-1 resize-none rounded-xl border border-border-strong bg-surface px-3.5 py-2.5 text-sm text-text placeholder:text-text-muted"
+          className="max-h-40 min-h-11 flex-1 resize-none rounded-md border border-border-strong bg-surface px-3.5 py-2.5 text-sm text-text placeholder:text-text-muted"
         />
         {streaming ? (
           <Button

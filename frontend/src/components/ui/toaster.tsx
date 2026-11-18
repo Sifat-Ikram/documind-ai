@@ -23,7 +23,7 @@ export function AppToaster() {
         unstyled: true,
         classNames: {
           toast:
-            "flex w-full items-start gap-3 rounded-xl border border-border bg-surface-raised p-4 text-sm text-text shadow-lg",
+            "flex w-full items-start gap-3 rounded-md border border-border bg-surface-raised p-4 text-sm text-text shadow-lg",
           title: "font-medium",
           description: "mt-0.5 text-text-muted",
         },

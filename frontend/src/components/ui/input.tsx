@@ -33,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         aria-invalid={error ? true : undefined}
         aria-describedby={messageId}
         className={cn(
-          "h-11 w-full rounded-xl border bg-surface px-3.5 text-sm text-text placeholder:text-text-muted disabled:opacity-60",
+          "h-11 w-full rounded-md border bg-surface px-3.5 text-sm text-text focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 placeholder:text-text-muted disabled:opacity-60",
           error ? "border-error" : "border-border-strong",
           className,
         )}
@@ -69,7 +69,7 @@ export const PasswordInput = forwardRef<
         type="button"
         onClick={() => setVisible((v) => !v)}
         aria-label={visible ? "Hide password" : "Show password"}
-        className="absolute right-2 top-8 grid size-8 place-items-center rounded-md text-text-muted hover:text-text"
+        className="absolute right-2 top-8 grid size-8 place-items-center focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 rounded-md text-text-muted hover:text-text"
       >
         {visible ? (
           <FiEyeOff className="size-4" />

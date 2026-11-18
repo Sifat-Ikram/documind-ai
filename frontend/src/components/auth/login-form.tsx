@@ -64,7 +64,7 @@ export function LoginForm() {
         {formError && (
           <div
             role="alert"
-            className="rounded-xl bg-error-soft px-4 py-3 text-sm text-error-text"
+            className="rounded-md bg-error-soft px-4 py-3 text-sm text-error-text"
           >
             {formError}
           </div>

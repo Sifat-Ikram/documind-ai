@@ -70,7 +70,7 @@ function StatCard({
             {value}
           </p>
         </div>
-        <span className="grid size-10 place-items-center rounded-xl bg-surface-muted text-text-muted">
+        <span className="grid size-10 place-items-center rounded-md bg-surface-muted text-text-muted">
           <Icon className="size-4.5" aria-hidden="true" />
         </span>
       </div>
@@ -210,7 +210,7 @@ function DocumentRow({ doc }: { doc: DocumentSummary }) {
     <li>
       <Link
         href={`/documents/${doc.id}`}
-        className="flex items-center gap-3 rounded-xl px-2.5 py-2.5 transition-colors hover:bg-surface-muted"
+        className="flex items-center gap-3 rounded-md px-2.5 py-2.5 transition-colors hover:bg-surface-muted"
       >
         <FileTypeBadge type={doc.fileType} />
         <div className="min-w-0 flex-1">
@@ -237,11 +237,11 @@ function ActivityRow({ item }: { item: ActivityItem }) {
     <li>
       <Link
         href={href}
-        className="flex items-start gap-3 rounded-xl px-2.5 py-2.5 transition-colors hover:bg-surface-muted"
+        className="flex items-start gap-3 rounded-md px-2.5 py-2.5 transition-colors hover:bg-surface-muted"
       >
         <span
           className={cn(
-            "mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl",
+            "mt-0.5 grid size-9 shrink-0 place-items-center rounded-md",
             isAnalysis
               ? "bg-ai-soft text-ai"
               : "bg-surface-muted text-text-muted",

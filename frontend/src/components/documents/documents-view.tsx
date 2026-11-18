@@ -103,7 +103,7 @@ export function DocumentsView() {
                 setSearch(e.target.value);
                 setPage(1);
               }}
-              className="h-11 w-full rounded-xl border border-border-strong bg-surface pl-10 pr-3 text-sm text-text placeholder:text-text-muted"
+              className="h-11 w-full rounded-md border border-border-strong bg-surface pl-10 pr-3 text-sm text-text placeholder:text-text-muted"
             />
           </div>
 

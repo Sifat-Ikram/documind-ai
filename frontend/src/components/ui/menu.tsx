@@ -56,7 +56,7 @@ export function Menu({
       {open && (
         <div
           role="menu"
-          className="absolute right-0 z-20 mt-1 w-48 rounded-xl border border-border bg-surface-raised p-1.5 shadow-lg"
+          className="absolute right-0 z-20 mt-1 w-48 rounded-md border border-border bg-surface-raised p-1.5 shadow-lg"
         >
           {items.map(({ label: itemLabel, icon: Icon, onClick, danger }) => (
             <button

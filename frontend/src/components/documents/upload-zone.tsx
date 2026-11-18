@@ -247,7 +247,7 @@ export function UploadZone({ onUploaded }: { onUploaded: () => void }) {
               return (
                 <li
                   key={item.id}
-                  className="rounded-xl border border-border p-3"
+                  className="rounded-md border border-border p-3"
                 >
                   <div className="flex items-center gap-3">
                     {type ? (

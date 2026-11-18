@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FiInfo } from "react-icons/fi";
 import { PasswordChecklist } from "@/components/auth/password-checklist";
 import { Button } from "@/components/ui/button";
 import { Input, PasswordInput } from "@/components/ui/input";
@@ -68,7 +67,7 @@ export function RegisterForm() {
         {formError && (
           <div
             role="alert"
-            className="rounded-xl bg-error-soft px-4 py-3 text-sm text-error-text"
+            className="rounded-md bg-error-soft px-4 py-3 text-sm text-error-text"
           >
             {formError}
           </div>
@@ -106,14 +105,6 @@ export function RegisterForm() {
           Create account
         </Button>
       </form>
-
-      <div className="mt-6 flex gap-3 rounded-xl border border-border bg-surface-muted p-3.5 text-sm text-text-muted">
-        <FiInfo className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-        <p>
-          Uploaded files are stored with a public link. Please do not upload
-          sensitive or private documents.
-        </p>
-      </div>
 
       <p className="mt-8 text-center text-sm text-text-muted">
         Already have an account?{" "}

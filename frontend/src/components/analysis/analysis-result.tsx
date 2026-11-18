@@ -81,7 +81,7 @@ export function AnalysisResult({ analysis }: { analysis: AnalysisDetail }) {
       {notes.map((note) => (
         <div
           key={note}
-          className="flex gap-2.5 rounded-xl border border-border bg-surface-muted px-4 py-3 text-sm text-text-muted"
+          className="flex gap-2.5 rounded-md border border-border bg-surface-muted px-4 py-3 text-sm text-text-muted"
         >
           <FiInfo className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <span>{note}</span>

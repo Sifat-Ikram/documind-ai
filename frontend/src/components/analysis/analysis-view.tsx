@@ -192,7 +192,7 @@ export function AnalysisView({ documentId }: { documentId: string }) {
           runs it on this document, and saves the result to your history.
         </p>
         {document ? (
-          <div className="mt-4 inline-flex max-w-full items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2">
+          <div className="mt-4 inline-flex max-w-full items-center gap-3 rounded-md border border-border bg-surface px-3 py-2">
             <FileTypeBadge type={document.fileType} className="h-8 w-11" />
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-text">
@@ -205,7 +205,7 @@ export function AnalysisView({ documentId }: { documentId: string }) {
             </div>
           </div>
         ) : (
-          <Skeleton className="mt-4 h-14 w-72 rounded-xl" />
+          <Skeleton className="mt-4 h-14 w-72 rounded-md" />
         )}
       </header>
 
@@ -236,7 +236,7 @@ export function AnalysisView({ documentId }: { documentId: string }) {
                 }
               }}
               placeholder="For example: Give me a short summary and list all important dates."
-              className="mt-3 w-full resize-y rounded-xl border border-border-strong bg-surface px-3.5 py-3 text-sm text-text placeholder:text-text-muted disabled:opacity-60"
+              className="mt-3 w-full resize-y rounded-md border border-border-strong bg-surface px-3.5 py-3 text-sm text-text placeholder:text-text-muted disabled:opacity-60"
             />
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
               <p className="text-xs text-text-muted">
@@ -355,7 +355,7 @@ export function AnalysisView({ documentId }: { documentId: string }) {
                       onClick={() => openSaved(item.id)}
                       aria-current={activeId === item.id ? "true" : undefined}
                       className={cn(
-                        "w-full rounded-xl px-2 py-2.5 text-left transition-colors hover:bg-surface-muted",
+                        "w-full rounded-md px-2 py-2.5 text-left transition-colors hover:bg-surface-muted",
                         activeId === item.id && "bg-primary-soft",
                       )}
                     >

@@ -49,7 +49,7 @@ function SummaryBody({ data }: { data: SummaryData }) {
         </div>
       )}
       {data.highlights?.length > 0 && (
-        <div className="rounded-xl bg-ai-soft p-4">
+        <div className="rounded-md bg-ai-soft p-4">
           <p className="text-xs font-semibold uppercase tracking-wider text-ai">
             Highlights
           </p>
@@ -86,7 +86,7 @@ function QaBody({ data }: { data: QaData }) {
   return (
     <div className="space-y-3">
       {!data.found && (
-        <div className="flex gap-2.5 rounded-xl bg-warning-soft px-4 py-3 text-sm text-warning">
+        <div className="flex gap-2.5 rounded-md bg-warning-soft px-4 py-3 text-sm text-warning">
           <FiAlertTriangle
             className="mt-0.5 size-4 shrink-0"
             aria-hidden="true"
@@ -110,7 +110,7 @@ function PairTable({
   return (
     <div>
       <Label>{title}</Label>
-      <div className="mt-2 overflow-x-auto rounded-xl border border-border">
+      <div className="mt-2 overflow-x-auto rounded-md border border-border">
         <table className="w-full text-left text-sm">
           <thead className="bg-surface-muted text-text-muted">
             <tr>
@@ -189,7 +189,7 @@ function SimplifyBody({ data }: { data: SimplifyData }) {
       {data.glossary?.length > 0 && (
         <div>
           <Label>Glossary</Label>
-          <dl className="mt-2 divide-y divide-border rounded-xl border border-border">
+          <dl className="mt-2 divide-y divide-border rounded-md border border-border">
             {data.glossary.map((g, i) => (
               <div
                 key={`${g.term}-${i}`}
@@ -233,7 +233,7 @@ function ActionItemsBody({ data }: { data: ActionItemsData }) {
       {data.items.map((item, i) => (
         <li
           key={`${item.task}-${i}`}
-          className="rounded-xl border border-border p-4"
+          className="rounded-md border border-border p-4"
         >
           <p className="text-sm font-medium text-text">{item.task}</p>
           <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-text-muted">
@@ -260,7 +260,7 @@ function ActionItemsBody({ data }: { data: ActionItemsData }) {
 export function SectionBody({ section }: { section: TaskSection }) {
   if (section.error) {
     return (
-      <div className="rounded-xl bg-error-soft px-4 py-3 text-sm text-error-text">
+      <div className="rounded-md bg-error-soft px-4 py-3 text-sm text-error-text">
         {section.error}
       </div>
     );
