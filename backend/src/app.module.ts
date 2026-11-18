@@ -26,6 +26,7 @@ import { GeneratorModule } from './generator/generator.module';
 import { SearchModule } from './search/search.module';
 import { ConverterModule } from './converter/converter.module';
 import { ContactModule } from './contact/contact.module';
+import { UserDataModule } from './user-data/user-data.module';
 
 @Module({
   imports: [
@@ -53,7 +54,8 @@ import { ContactModule } from './contact/contact.module';
     GeneratorModule,
     SearchModule,
     ConverterModule,
-    ContactModule
+    ContactModule,
+    UserDataModule
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

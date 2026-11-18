@@ -3,6 +3,8 @@ import { Inter, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import { AppToaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/context/auth-context";
+import { PreferencesProvider } from "@/context/preferences-context";
+import { themeInitScript } from "@/lib/preferences";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,9 +29,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${bengali.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${bengali.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body suppressHydrationWarning>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <PreferencesProvider>{children}</PreferencesProvider>
+        </AuthProvider>
         <AppToaster />
       </body>
     </html>

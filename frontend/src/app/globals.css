@@ -49,8 +49,8 @@
   --file-txt-soft: #f4f4f5;
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  :root {
+@media screen {
+  :root[data-theme="dark"] {
     color-scheme: dark;
 
     --bg: #0b0b0d;
@@ -191,4 +191,25 @@
   body {
     background: #fff;
   }
+}
+
+/* Appearance settings (Settings -> Appearance). The app sets these attributes on <html>. */
+html[data-text-size="large"] {
+  font-size: 112.5%;
+}
+
+/* Tailwind builds every padding, margin, gap and size from --spacing,
+   so one smaller value makes the whole app more compact. */
+html[data-density="compact"] {
+  --spacing: 0.21rem;
+}
+
+/* "Reduce motion". Loading spinners keep turning so a wait is still visible. */
+html[data-motion="reduce"] *:not(.animate-spin) {
+  transition-duration: 0.01ms !important;
+}
+html[data-motion="reduce"] *:not(.animate-spin):not(.animate-pulse) {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
 }

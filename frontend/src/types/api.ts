@@ -41,6 +41,8 @@ export interface DashboardResponse {
     analyses: number;
     conversations: number;
     storageBytes: number;
+    archived: number;
+    trashed: number;
   };
   recentDocuments: DocumentSummary[];
   recentActivity: ActivityItem[];
@@ -158,4 +160,39 @@ export interface ChatMessageDto {
 export interface ConversationMessages {
   conversation: { id: string; documentId: string; title: string };
   messages: ChatMessageDto[];
+}
+
+export interface Category {
+  id: string;
+  slug: string;
+  name: string;
+  icon: string;
+}
+
+export interface TagRef {
+  id: string;
+  name: string;
+}
+
+export interface CollectionRef {
+  id: string;
+  name: string;
+}
+
+export type DocRole = "OWNER" | "EDITOR" | "VIEWER";
+
+export interface PersonRef {
+  id: string;
+  name: string;
+}
+
+export interface DocumentListItem extends DocumentSummary {
+  updatedAt: string;
+  archivedAt: string | null;
+  currentVersion: number;
+  source: "UPLOAD" | "GENERATED";
+  category: Category | null;
+  isFavorite: boolean;
+  tags: TagRef[];
+  collections: CollectionRef[];
 }
