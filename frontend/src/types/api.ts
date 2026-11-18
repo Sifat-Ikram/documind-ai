@@ -46,10 +46,16 @@ export interface DashboardResponse {
   };
   recentDocuments: DocumentSummary[];
   recentActivity: ActivityItem[];
+  byCategory: {
+    slug: string;
+    name: string;
+    icon: string | null;
+    count: number;
+  }[];
 }
 
 export interface DocumentsListResponse {
-  items: DocumentSummary[];
+  items: DocumentListItem[];
   total: number;
   page: number;
   limit: number;
@@ -195,4 +201,55 @@ export interface DocumentListItem extends DocumentSummary {
   isFavorite: boolean;
   tags: TagRef[];
   collections: CollectionRef[];
+}
+
+export interface TagItem {
+  id: string;
+  name: string;
+  documentCount: number;
+}
+
+export interface CollectionItem {
+  id: string;
+  name: string;
+  description: string | null;
+  createdAt: string;
+  updatedAt: string;
+  documentCount: number;
+  memberCount: number;
+  isOwner: boolean;
+  myRole: DocRole;
+  owner: PersonRef;
+}
+
+export interface TrashedDocument {
+  id: string;
+  originalName: string;
+  fileType: FileType;
+  fileSize: number;
+  wordCount: number;
+  currentVersion: number;
+  createdAt: string;
+  trashedAt: string;
+  purgeAt: string;
+  daysLeft: number;
+}
+
+export interface RecentDocument extends DocumentListItem {
+  lastAccessedAt: string;
+  owner: PersonRef;
+  myRole: DocRole;
+}
+
+export interface CollectionDocument extends DocumentListItem {
+  owner: PersonRef;
+  myRole: DocRole;
+}
+
+export interface BulkResult {
+  action: string;
+  requested: number;
+  processed: number;
+  skipped: number;
+  files?: { id: string; fileName: string; url: string; fileSize: number }[];
 }

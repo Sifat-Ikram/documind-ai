@@ -26,6 +26,8 @@ export function AppToaster() {
             "flex w-full items-start gap-3 rounded-md border border-border bg-surface-raised p-4 text-sm text-text shadow-lg",
           title: "font-medium",
           description: "mt-0.5 text-text-muted",
+          actionButton:
+            "ml-auto shrink-0 rounded-lg border border-border-strong px-3 py-1 text-sm font-medium text-text hover:bg-surface-muted",
         },
       }}
     />

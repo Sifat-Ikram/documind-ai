@@ -55,3 +55,13 @@ export const changePasswordSchema = z
     message: "The new password must be different from the current one",
     path: ["newPassword"],
   });
+
+export const tagNameSchema = z
+  .string()
+  .trim()
+  .min(1, "Tag cannot be empty")
+  .max(30, "Tag must be at most 30 characters")
+  .regex(
+    /^[\p{L}\p{N}][\p{L}\p{N} _-]*$/u,
+    "Tags can contain letters, numbers, spaces, - and _",
+  );

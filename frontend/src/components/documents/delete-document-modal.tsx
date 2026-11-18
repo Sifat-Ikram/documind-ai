@@ -15,18 +15,18 @@ export function DeleteDocumentModal({
   onClose: () => void;
   onDeleted: () => void;
 }) {
-  const [deleting, setDeleting] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   async function confirm() {
-    setDeleting(true);
+    setBusy(true);
     try {
       await api(`/documents/${document.id}`, { method: "DELETE" });
-      toast.success("Document deleted");
+      toast.success("Moved to Trash");
       onDeleted();
       onClose();
     } catch (err) {
       toast.error(errorMessage(err));
-      setDeleting(false);
+      setBusy(false);
     }
   }
 
@@ -34,15 +34,15 @@ export function DeleteDocumentModal({
     <Modal
       open
       onClose={onClose}
-      title="Delete this document?"
-      description={`"${document.originalName}" will be removed permanently, together with all its analyses and chats. This cannot be undone.`}
+      title="Move this document to Trash?"
+      description={`"${document.originalName}" stays in Trash for 30 days. You can restore it from the Trash page before then.`}
       footer={
         <>
-          <Button variant="secondary" onClick={onClose} disabled={deleting}>
+          <Button variant="secondary" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={confirm} loading={deleting}>
-            Delete
+          <Button variant="danger" onClick={confirm} loading={busy}>
+            Move to Trash
           </Button>
         </>
       }

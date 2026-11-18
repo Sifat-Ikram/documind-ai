@@ -35,6 +35,7 @@ import type {
   DocumentSummary,
   TaskType,
 } from "@/types/api";
+import { categoryIcon } from "@/lib/category-icons";
 
 type Stats = DashboardResponse["stats"];
 
@@ -272,6 +273,38 @@ function ActivityRow({ item }: { item: ActivityItem }) {
   );
 }
 
+function CategoriesCard({ items }: { items: DashboardResponse["byCategory"] }) {
+  if (items.length === 0) return null;
+  return (
+    <Panel
+      title="Documents by category"
+      description="Open a category to see its documents."
+    >
+      <ul className="space-y-1">
+        {items.map((c) => {
+          const Icon = categoryIcon(c.icon);
+          return (
+            <li key={c.slug}>
+              <Link
+                href={`/documents?category=${c.slug}`}
+                className="flex items-center gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-surface-muted"
+              >
+                <span className="grid size-8 place-items-center rounded-lg bg-surface-muted text-text-muted">
+                  <Icon className="size-4" aria-hidden="true" />
+                </span>
+                <span className="flex-1 text-sm text-text">{c.name}</span>
+                <span className="text-sm font-medium tabular-nums text-text">
+                  {c.count}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </Panel>
+  );
+}
+
 function ExamplesCard() {
   return (
     <Panel
@@ -494,6 +527,7 @@ export function DashboardView() {
             </div>
 
             <div className="space-y-6">
+              <CategoriesCard items={data.byCategory} />
               <ExamplesCard />
               <SupportedFilesCard />
             </div>

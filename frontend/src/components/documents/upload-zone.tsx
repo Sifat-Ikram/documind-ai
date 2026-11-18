@@ -25,6 +25,7 @@ import { cn } from "@/lib/cn";
 import { ACCEPT, fileTypeOf, validateFile } from "@/lib/files";
 import { uploadDocument } from "@/lib/upload";
 import { formatBytes } from "@/lib/utils";
+import { DocumentSummary } from "@/types/api";
 
 type Status =
   | "queued"
@@ -54,11 +55,15 @@ const STATUS_TEXT: Record<Status, string> = {
   error: "Failed",
 };
 
-export function UploadZone({ onUploaded }: { onUploaded: () => void }) {
+export function UploadZone({
+  onUploaded,
+}: {
+  onUploaded: (document: DocumentSummary, info: { single: boolean }) => void;
+}) {
   const [items, setItems] = useState<QueueItem[]>([]);
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const jobs = useRef<{ id: string; file: File }[]>([]);
+  const jobs = useRef<{ id: string; file: File; single: boolean }[]>([]);
   const running = useRef(false);
   const controller = useRef<AbortController | null>(null);
   const onUploadedRef = useRef(onUploaded);
@@ -101,7 +106,7 @@ export function UploadZone({ onUploaded }: { onUploaded: () => void }) {
           warnings: result.warnings,
         });
         result.warnings.forEach((w) => toast.warning(`${job.file.name}: ${w}`));
-        onUploadedRef.current();
+        onUploadedRef.current(result.document, { single: job.single });
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") break;
         patch(job.id, { status: "error", error: errorMessage(err) });
@@ -114,6 +119,7 @@ export function UploadZone({ onUploaded }: { onUploaded: () => void }) {
   const addFiles = useCallback(
     (files: File[]) => {
       if (files.length === 0) return;
+      const validCount = files.filter((f) => validateFile(f) === null).length;
       const added = files.map((file): QueueItem => {
         const id = crypto.randomUUID();
         const problem = validateFile(file);
@@ -127,7 +133,7 @@ export function UploadZone({ onUploaded }: { onUploaded: () => void }) {
             error: problem,
           };
         }
-        jobs.current.push({ id, file });
+        jobs.current.push({ id, file, single: validCount === 1 });
         return {
           id,
           name: file.name,

@@ -76,6 +76,39 @@ export class DashboardService {
       }),
     ]);
 
+    const grouped = await this.prisma.document.groupBy({
+      by: ['categoryId'],
+      where: { userId, trashedAt: null, archivedAt: null },
+      _count: { _all: true },
+    });
+    const categories = await this.prisma.category.findMany({
+      orderBy: { sortOrder: 'asc' },
+      select: { id: true, slug: true, name: true, icon: true },
+    });
+    const counts = new Map<string | null, number>(
+      grouped.map((g) => [g.categoryId, g._count._all]),
+    );
+    const byCategory = [
+      ...categories
+        .map((c) => ({
+          slug: c.slug as string,
+          name: c.name,
+          icon: c.icon as string | null,
+          count: counts.get(c.id) ?? 0,
+        }))
+        .filter((c) => c.count > 0),
+      ...((counts.get(null) ?? 0) > 0
+        ? [
+            {
+              slug: 'none',
+              name: 'Uncategorized',
+              icon: null as string | null,
+              count: counts.get(null) ?? 0,
+            },
+          ]
+        : []),
+    ];
+
     const recentActivity = [
       ...recentAnalyses.map((a) => ({
         type: 'analysis' as const,
@@ -110,6 +143,7 @@ export class DashboardService {
       },
       recentDocuments,
       recentActivity,
+      byCategory
     };
   }
 }

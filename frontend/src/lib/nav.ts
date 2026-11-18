@@ -36,20 +36,19 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/dashboard", label: "Dashboard", icon: FiGrid },
       { href: "/documents", label: "My Documents", icon: FiFileText },
-      { href: "/recent", label: "Recent", icon: FiClock, soon: true },
+      { href: "/recent", label: "Recent", icon: FiClock },
       {
         href: "/collections",
         label: "Collections",
         icon: FiFolder,
-        soon: true,
       },
     ],
   },
   {
     label: "Document Management",
     items: [
-      { href: "/archive", label: "Archive", icon: FiArchive, soon: true },
-      { href: "/trash", label: "Trash", icon: FiTrash2, soon: true },
+      { href: "/archive", label: "Archive", icon: FiArchive },
+      { href: "/trash", label: "Trash", icon: FiTrash2 },
       { href: "/shared", label: "Shared with Me", icon: FiShare2, soon: true },
     ],
   },
