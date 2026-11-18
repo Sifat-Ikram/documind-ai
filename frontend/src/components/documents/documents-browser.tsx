@@ -454,7 +454,7 @@ export function DocumentsBrowser({
 
       <section aria-label={archived ? "Archived documents" : "Your documents"}>
         <div className="flex flex-wrap items-center gap-3">
-          <div className="relative w-full min-w-[12rem] sm:max-w-xs sm:flex-1">
+          <div className="relative w-full min-w-48 sm:max-w-xs sm:flex-1">
             <FiSearch
               className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-text-muted"
               aria-hidden="true"
