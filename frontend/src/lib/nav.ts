@@ -49,7 +49,7 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/archive", label: "Archive", icon: FiArchive },
       { href: "/trash", label: "Trash", icon: FiTrash2 },
-      { href: "/shared", label: "Shared with Me", icon: FiShare2, soon: true },
+      { href: "/shared", label: "Shared with Me", icon: FiShare2 },
     ],
   },
   {

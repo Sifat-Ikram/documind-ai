@@ -31,7 +31,7 @@ export function AnalysisResult({ analysis }: { analysis: AnalysisDetail }) {
             <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
               Result
             </p>
-            <p className="mt-1 break-words text-base font-semibold text-text">
+            <p className="mt-1 wrap-break-word text-base font-semibold text-text">
               &ldquo;{analysis.originalInstruction}&rdquo;
             </p>
           </div>

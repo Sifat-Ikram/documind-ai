@@ -9,9 +9,11 @@ import {
   FiEdit2,
   FiFileText,
   FiFolder,
+  FiLogOut,
   FiMessageSquare,
   FiPlus,
   FiSearch,
+  FiShare2,
   FiTrash2,
   FiX,
   FiZap,
@@ -37,6 +39,8 @@ import type {
   CollectionItem,
   DocumentsListResponse,
 } from "@/types/api";
+import { useAuth } from "@/context/auth-context";
+import { CollectionMembersModal } from "../sharing/collection-members-modal";
 
 const ROLE_TEXT = {
   OWNER: "Owner",
@@ -50,6 +54,10 @@ type CollectionDocs = Omit<DocumentsListResponse, "items"> & {
 
 export function CollectionDetailsView({ id }: { id: string }) {
   const router = useRouter();
+  const { user } = useAuth();
+  const [members, setMembers] = useState(false);
+  const [leavingCollection, setLeavingCollection] = useState(false);
+
   const { preferences } = usePreferences();
   const view = preferences.view;
 
@@ -173,7 +181,7 @@ export function CollectionDetailsView({ id }: { id: string }) {
                 <FiFolder className="size-6" aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <h1 className="wrap-break-words text-2xl font-semibold tracking-tight text-text">
+                <h1 className="wrap-break-word text-2xl font-semibold tracking-tight text-text">
                   {collection.name}
                 </h1>
                 {collection.description && (
@@ -192,6 +200,14 @@ export function CollectionDetailsView({ id }: { id: string }) {
             </div>
             {owner && (
               <div className="flex items-center gap-2">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  onClick={() => setMembers(true)}
+                >
+                  <FiShare2 className="size-4" aria-hidden="true" />
+                  Share
+                </Button>
                 <Button size="lg" onClick={() => setAdding(true)}>
                   <FiPlus className="size-4" aria-hidden="true" />
                   Add documents
@@ -213,6 +229,16 @@ export function CollectionDetailsView({ id }: { id: string }) {
                   ]}
                 />
               </div>
+            )}
+            {!owner && collection && (
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => setLeavingCollection(true)}
+              >
+                <FiLogOut className="size-4" aria-hidden="true" />
+                Leave
+              </Button>
             )}
           </div>
         ) : (
@@ -303,6 +329,29 @@ export function CollectionDetailsView({ id }: { id: string }) {
           />
         </>
       ) : null}
+
+      {members && collection && (
+        <CollectionMembersModal
+          collection={collection}
+          onClose={() => setMembers(false)}
+          onChanged={info.reload}
+        />
+      )}
+      {leavingCollection && collection && user && (
+        <ConfirmModal
+          title="Leave this collection?"
+          description={`You will no longer see "${collection.name}" or its documents. ${collection.owner.name} can add you again.`}
+          confirmLabel="Leave"
+          successMessage="You left the collection"
+          onConfirm={async () => {
+            await api(`/collections/${id}/members/${user.id}`, {
+              method: "DELETE",
+            });
+            router.replace("/collections");
+          }}
+          onClose={() => setLeavingCollection(false)}
+        />
+      )}
 
       {adding && (
         <AddDocumentsModal

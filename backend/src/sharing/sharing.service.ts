@@ -129,6 +129,7 @@ export class SharingService {
         select: {
           ...summarySelect(userId),
           user: { select: { id: true, name: true } },
+          shares: { where: { userId }, select: { id: true } },
         },
         orderBy,
         skip: (q.page - 1) * q.limit,
@@ -141,9 +142,15 @@ export class SharingService {
       userId,
       rows.map((r) => r.id),
     );
+
     const items = rows.map((r) => {
-      const { user, ...doc } = withUserData(r);
-      return { ...doc, owner: user, myRole: roles.get(r.id) ?? 'VIEWER' };
+      const { user, shares, ...doc } = withUserData(r);
+      return {
+        ...doc,
+        owner: user,
+        myRole: roles.get(r.id) ?? 'VIEWER',
+        shareId: shares[0]?.id ?? null,
+      };
     });
 
     return {

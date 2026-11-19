@@ -47,7 +47,7 @@ function HistoryCard({
           {/* the link covers the whole card, the menu and document link stay clickable above it */}
           <Link
             href={href}
-            className="line-clamp-2 break-words after:absolute after:inset-0 after:content-['']"
+            className="line-clamp-2 wrap-break-word after:absolute after:inset-0 after:content-['']"
           >
             {item.originalInstruction}
           </Link>

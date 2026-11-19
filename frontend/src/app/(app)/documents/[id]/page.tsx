@@ -5,9 +5,12 @@ export const metadata: Metadata = { title: "Document" };
 
 export default async function DocumentPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const { id } = await params;
-  return <DocumentDetailsView id={id} />;
+  const { tab } = await searchParams;
+  return <DocumentDetailsView id={id} initialTab={tab} />;
 }

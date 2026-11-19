@@ -245,6 +245,7 @@ export class DocumentsService {
         fileUrl: true,
         extractedText: true,
         user: { select: { id: true, name: true } },
+        shares: { where: { userId }, select: { id: true } },
         _count: {
           select: {
             analyses: { where: { userId } },
@@ -256,11 +257,12 @@ export class DocumentsService {
     if (!doc) throw new NotFoundException('Document not found');
 
     await this.touch(userId, id);
-    const { extractedText, user, ...rest } = withUserData(doc);
+    const { extractedText, user, shares, ...rest } = withUserData(doc);
     return {
       ...rest,
       owner: user,
       myRole: role,
+      myShareId: shares[0]?.id ?? null,
       textPreview: extractedText.slice(0, PREVIEW_CHARS),
       textLength: extractedText.length,
       previewTruncated: extractedText.length > PREVIEW_CHARS,

@@ -62,15 +62,6 @@ export interface DocumentsListResponse {
   totalPages: number;
 }
 
-export interface DocumentDetail extends DocumentSummary {
-  updatedAt: string;
-  fileUrl: string;
-  _count: { analyses: number; conversations: number };
-  textPreview: string;
-  textLength: number;
-  previewTruncated: boolean;
-}
-
 export interface ConversationListItem {
   id: string;
   title: string;
@@ -252,4 +243,91 @@ export interface BulkResult {
   processed: number;
   skipped: number;
   files?: { id: string; fileName: string; url: string; fileSize: number }[];
+}
+
+export interface DocumentDetail extends DocumentListItem {
+  fileUrl: string;
+  owner: PersonRef;
+  myRole: DocRole;
+  myShareId: string | null;
+  textPreview: string;
+  textLength: number;
+  previewTruncated: boolean;
+  _count: { analyses: number; conversations: number };
+}
+
+export interface VersionItem {
+  version: number;
+  title: string;
+  createdAt: string;
+  createdBy: PersonRef | null;
+  fileSize: number;
+  wordCount: number;
+  fileType: FileType;
+  note: string | null;
+  isCurrent: boolean;
+}
+
+export interface VersionDetail {
+  version: number;
+  isCurrent: boolean;
+  title: string;
+  fileType: FileType;
+  fileUrl: string;
+  fileSize: number;
+  wordCount: number;
+  createdAt: string;
+  note: string | null;
+  text: string;
+  textLength: number;
+  truncated: boolean;
+}
+
+export interface VersionCompare {
+  from: { version: number; title: string; createdAt: string };
+  to: { version: number; title: string; createdAt: string };
+  stats: { addedLines: number; removedLines: number };
+  changes: { type: "added" | "removed" | "equal"; text: string }[];
+}
+
+export interface ShareEntry {
+  id: string;
+  role: "VIEWER" | "EDITOR";
+  createdAt: string;
+  user: { id: string; name: string; email: string };
+}
+
+export interface ShareList {
+  owner: { id: string; name: string; email: string } | null;
+  shares: ShareEntry[];
+}
+
+export interface CollectionMemberItem {
+  role: "VIEWER" | "EDITOR";
+  createdAt: string;
+  user: { id: string; name: string; email: string };
+}
+
+export interface CommentItem {
+  id: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  edited: boolean;
+  author: PersonRef;
+  canEdit: boolean;
+  canDelete: boolean;
+}
+
+export interface NoteData {
+  content: string;
+  revision: number;
+  updatedAt: string | null;
+  updatedBy: PersonRef | null;
+}
+
+export interface SharedDocument extends DocumentListItem {
+  owner: PersonRef;
+  myRole: DocRole;
+  shareId: string | null;
 }

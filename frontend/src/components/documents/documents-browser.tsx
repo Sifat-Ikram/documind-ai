@@ -14,6 +14,7 @@ import {
   FiList,
   FiRotateCcw,
   FiSearch,
+  FiShare2,
   FiStar,
   FiTag,
   FiTrash2,
@@ -52,6 +53,7 @@ import type {
   FileType,
   TagItem,
 } from "@/types/api";
+import { ShareModal } from "../sharing/share-modal";
 
 type TypeFilter = "ALL" | FileType;
 
@@ -128,6 +130,7 @@ export function DocumentsBrowser({
   const [page, setPage] = useState(1);
 
   const [renaming, setRenaming] = useState<DocumentListItem | null>(null);
+  const [sharingDoc, setSharingDoc] = useState<DocumentListItem | null>(null);
   const [categoryFor, setCategoryFor] = useState<DocumentListItem | null>(null);
   const [tagsFor, setTagsFor] = useState<DocumentListItem | null>(null);
   const [collectionFor, setCollectionFor] = useState<{
@@ -395,6 +398,7 @@ export function DocumentsBrowser({
         onClick: () => router.push(`/documents/${doc.id}`),
       },
       { label: "Rename", icon: FiEdit2, onClick: () => setRenaming(doc) },
+      { label: "Share", icon: FiShare2, onClick: () => setSharingDoc(doc) },
       {
         label: doc.isFavorite ? "Remove from favorites" : "Add to favorites",
         icon: FiStar,
@@ -912,6 +916,9 @@ export function DocumentsBrowser({
             refreshAll();
           }}
         />
+      )}
+      {sharingDoc && (
+        <ShareModal doc={sharingDoc} onClose={() => setSharingDoc(null)} />
       )}
       {trashing && (
         <ConfirmModal

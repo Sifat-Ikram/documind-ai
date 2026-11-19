@@ -213,7 +213,7 @@ function TranslateBody({ data }: { data: TranslateData }) {
         <FiGlobe className="size-3.5" aria-hidden="true" />
         {data.language}
       </span>
-      <p className="whitespace-pre-wrap break-words text-sm leading-relaxed text-text">
+      <p className="whitespace-pre-wrap wrap-break-word text-sm leading-relaxed text-text">
         {data.translation}
       </p>
     </div>

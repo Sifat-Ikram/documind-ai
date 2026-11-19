@@ -36,7 +36,7 @@ export function DocumentCard({
       <div className="flex items-start gap-3">
         <FileTypeBadge type={doc.fileType} className="h-11 w-14" />
         <div className="min-w-0 flex-1">
-          <h3 className="line-clamp-2 break-words text-sm font-semibold text-text">
+          <h3 className="line-clamp-2 wrap-break-word text-sm font-semibold text-text">
             {/* the link covers the whole card, buttons above it stay clickable */}
             <Link
               href={`/documents/${doc.id}`}

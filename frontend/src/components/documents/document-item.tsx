@@ -160,7 +160,7 @@ export function DocumentItem({
         )}
         <FileTypeBadge type={doc.fileType} className="h-11 w-14" />
         <div className="min-w-0 flex-1">
-          <h3 className="line-clamp-2 wrap-break-words text-sm font-semibold text-text">
+          <h3 className="line-clamp-2 wrap-break-word text-sm font-semibold text-text">
             {link}
           </h3>
           <p className="mt-1 text-xs text-text-muted">{meta}</p>
