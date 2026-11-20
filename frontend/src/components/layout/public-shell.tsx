@@ -114,7 +114,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col bg-bg">
       <header className="sticky top-0 z-30 border-b border-border bg-bg/80 backdrop-blur print:hidden">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center gap-2 px-4 sm:px-6 lg:gap-6 lg:px-8">
+        <div className="flex h-16 mx-auto w-11/12 items-center gap-2 lg:gap-6">
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -199,12 +199,12 @@ export function PublicShell({ children }: { children: ReactNode }) {
         </AnimatePresence>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+      <main className="mx-auto w-11/12">
         {children}
       </main>
 
       <footer className="border-t border-border bg-surface print:hidden">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto w-11/12 py-12">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
             <div>
               <Link href="/" aria-label="DocuMind AI home">

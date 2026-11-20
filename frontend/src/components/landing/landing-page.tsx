@@ -14,7 +14,6 @@ import {
   FiMessageSquare,
   FiSearch,
   FiShare2,
-  FiShield,
   FiUsers,
   FiZap,
 } from "react-icons/fi";
@@ -161,9 +160,9 @@ export function LandingPage() {
   const getStartedHref = status === "authenticated" ? "/dashboard" : "/register";
 
   return (
-    <div className="space-y-20 pb-6 sm:space-y-24">
+    <div className="space-y-20 pb-28 sm:space-y-24">
       {/* 1. Hero */}
-      <section className="relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-16 sm:px-10 sm:py-20 lg:py-24">
+      <section className="relative overflow-hidden px-6 py-16 sm:px-10 sm:py-20 lg:py-24">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-ai-decor/20 blur-3xl"
@@ -177,12 +176,12 @@ export function LandingPage() {
           className="bg-grid pointer-events-none absolute inset-0 opacity-50"
         />
 
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto w-full text-center">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-bg px-3 py-1 text-xs font-medium text-text-muted"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs font-medium text-text-muted"
           >
             <span className="size-1.5 rounded-full bg-ai" aria-hidden="true" />
             AI document workspace
@@ -250,7 +249,7 @@ export function LandingPage() {
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {WHY.map(({ icon: Icon, title, body }, i) => (
             <Reveal key={title} delay={i * 0.06}>
-              <article className="h-full rounded-2xl border border-border bg-surface p-6">
+              <article className="h-full border border-border rounded-2xl px-5 py-3">
                 <span className="grid size-10 place-items-center rounded-xl bg-ai-soft text-ai">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
@@ -268,7 +267,7 @@ export function LandingPage() {
       <Reveal>
         <section
           aria-labelledby="writer-title"
-          className="relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-12 sm:px-10 sm:py-14"
+          className="relative overflow-hidden"
         >
           <div
             aria-hidden="true"
@@ -316,8 +315,8 @@ export function LandingPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(({ icon: Icon, title, body }, i) => (
             <Reveal key={title} delay={(i % 3) * 0.06}>
-              <article className="group h-full rounded-2xl border border-border bg-surface p-6 transition-shadow hover:shadow-md">
-                <span className="grid size-10 place-items-center rounded-xl bg-surface-muted text-ai transition-colors group-hover:bg-ai-soft">
+              <article className="group p-5 h-full rounded-2xl border border-border transition-shadow hover:shadow-md">
+                <span className="grid size-10 place-items-center rounded-xl-muted text-ai transition-colors group-hover:bg-ai-soft">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 <h3 className="mt-4 text-base font-semibold text-text">{title}</h3>
@@ -341,7 +340,7 @@ export function LandingPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {AUDIENCE.map(({ icon: Icon, title, body }, i) => (
             <Reveal key={title} delay={i * 0.05}>
-              <article className="h-full rounded-2xl border border-border bg-surface p-6">
+              <article className="h-full border border-border rounded-2xl p-5">
                 <Icon className="size-5 text-ai" aria-hidden="true" />
                 <h3 className="mt-3 text-base font-semibold text-text">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
@@ -357,7 +356,7 @@ export function LandingPage() {
       <Reveal>
         <section
           aria-labelledby="benefits-title"
-          className="grid gap-10 rounded-3xl border border-border bg-surface p-6 sm:p-10 lg:grid-cols-2 lg:items-center"
+          className="grid gap-10 lg:grid-cols-2 lg:items-center"
         >
           <div>
             <SectionHeading
@@ -387,14 +386,6 @@ export function LandingPage() {
             ))}
           </ul>
         </section>
-      </Reveal>
-
-      <Reveal>
-        <p className="flex items-center justify-center gap-2 text-center text-xs text-text-muted">
-          <FiShield className="size-3.5" aria-hidden="true" />
-          Your files stay private. Analyses and chats are only visible to you and
-          the people you share them with.
-        </p>
       </Reveal>
     </div>
   );
