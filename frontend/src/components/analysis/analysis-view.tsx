@@ -212,63 +212,63 @@ export function AnalysisView({ documentId }: { documentId: string }) {
       <div className="grid gap-6 xl:grid-cols-3 print:block">
         <div className="space-y-6 xl:col-span-2">
           <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6 print:hidden">
-            <label
-              htmlFor="instruction"
-              className="text-[15px] font-semibold text-text"
-            >
-              What do you want to do with this document?
-            </label>
-            <p className="mt-1 text-sm text-text-muted">
-              Write it in your own words. You can ask for more than one thing at
-              once.
+            <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
+              Try an example
             </p>
-            <textarea
-              id="instruction"
-              rows={3}
-              maxLength={1000}
-              disabled={busy}
-              value={instruction}
-              onChange={(e) => setInstruction(e.target.value)}
-              onKeyDown={(e) => {
-                if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
-                  e.preventDefault();
-                  void run();
-                }
-              }}
-              placeholder="For example: Give me a short summary and list all important dates."
-              className="mt-3 w-full resize-y rounded-md border border-border-strong bg-surface px-3.5 py-3 text-sm text-text placeholder:text-text-muted disabled:opacity-60"
-            />
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-              <p className="text-xs text-text-muted">
-                {instruction.length}/1000 · Ctrl or ⌘ + Enter to run
-              </p>
-              <Button
-                size="lg"
-                loading={busy}
-                disabled={instruction.trim().length < 3}
-                onClick={() => void run()}
-              >
-                <FiZap className="size-4" aria-hidden="true" />
-                Analyze
-              </Button>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {EXAMPLE_INSTRUCTIONS.map((example) => (
+                <button
+                  key={example}
+                  type="button"
+                  disabled={busy}
+                  onClick={() => setInstruction(example)}
+                  className="rounded-full border border-border px-3 py-1.5 text-left text-sm text-text-muted transition-colors hover:bg-surface-muted hover:text-text disabled:opacity-60"
+                >
+                  {example}
+                </button>
+              ))}
             </div>
 
-            <div className="mt-5 border-t border-border pt-4">
-              <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
-                Try an example
+            <div className="mt-5 border-t border-border pt-5">
+              <label
+                htmlFor="instruction"
+                className="text-[15px] font-semibold text-text"
+              >
+                What do you want to do with this document?
+              </label>
+              <p className="mt-1 text-sm text-text-muted">
+                Write it in your own words. You can ask for more than one thing
+                at once.
               </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {EXAMPLE_INSTRUCTIONS.map((example) => (
-                  <button
-                    key={example}
-                    type="button"
-                    disabled={busy}
-                    onClick={() => setInstruction(example)}
-                    className="rounded-full border border-border px-3 py-1.5 text-left text-sm text-text-muted transition-colors hover:bg-surface-muted hover:text-text disabled:opacity-60"
-                  >
-                    {example}
-                  </button>
-                ))}
+              <textarea
+                id="instruction"
+                rows={3}
+                maxLength={1000}
+                disabled={busy}
+                value={instruction}
+                onChange={(e) => setInstruction(e.target.value)}
+                onKeyDown={(e) => {
+                  if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+                    e.preventDefault();
+                    void run();
+                  }
+                }}
+                placeholder="For example: Give me a short summary and list all important dates."
+                className="mt-3 w-full resize-y rounded-md border border-border-strong bg-surface px-3.5 py-3 text-sm text-text placeholder:text-text-muted disabled:opacity-60"
+              />
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                <p className="text-xs text-text-muted">
+                  {instruction.length}/1000 · Ctrl or ⌘ + Enter to run
+                </p>
+                <Button
+                  size="lg"
+                  loading={busy}
+                  disabled={instruction.trim().length < 3}
+                  onClick={() => void run()}
+                >
+                  <FiZap className="size-4" aria-hidden="true" />
+                  Analyze
+                </Button>
               </div>
             </div>
           </section>

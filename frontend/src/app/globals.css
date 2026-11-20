@@ -158,6 +158,19 @@
   }
 }
 
+/* Inputs never show a focus border, ring or outline. Their normal border stays as it is. */
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,

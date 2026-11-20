@@ -6,10 +6,8 @@ import {
   FiFolder,
   FiGrid,
   FiHome,
-  FiMessageSquare,
   FiRepeat,
   FiRotateCcw,
-  FiSearch,
   FiSettings,
   FiShare2,
   FiTrash2,
@@ -55,17 +53,10 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     label: "AI Workspace",
     items: [
-      { href: "/search", label: "AI Search", icon: FiSearch, soon: true },
       {
         href: "/converter",
         label: "Document Converter",
         icon: FiRepeat,
-        soon: true,
-      },
-      {
-        href: "/conversations",
-        label: "AI Conversations",
-        icon: FiMessageSquare,
         soon: true,
       },
     ],

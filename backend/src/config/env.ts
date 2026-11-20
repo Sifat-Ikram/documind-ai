@@ -22,6 +22,8 @@ const envSchema = z.object({
 
   OPENROUTER_API_KEY: z.string().min(1, 'OPENROUTER_API_KEY is required'),
   OPENROUTER_MODEL: z.string().min(1, 'OPENROUTER_MODEL is required'),
+  /** Comma separated models tried when the primary one is rate limited or gone. */
+  OPENROUTER_FALLBACK_MODELS: z.string().default('openrouter/free'),
   AI_MAX_DOCUMENT_CHARS: z.coerce.number().int().min(1000).default(40000),
   CHAT_CONTEXT_CHARS: z.coerce.number().int().min(2000).default(12000),
 

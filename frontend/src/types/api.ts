@@ -331,3 +331,86 @@ export interface SharedDocument extends DocumentListItem {
   myRole: DocRole;
   shareId: string | null;
 }
+
+export type SearchScope = "all" | "mine" | "shared";
+export type SearchMode = "fts" | "like" | "name" | "none";
+
+export interface SearchSnippet {
+  chunkIndex: number;
+  text: string;
+  matchedTerms: string[];
+}
+
+export interface SearchResultItem {
+  document: DocumentListItem & { owner: PersonRef; myRole: DocRole };
+  score: number;
+  nameMatch: boolean;
+  snippets: SearchSnippet[];
+}
+
+export interface SearchResponse {
+  query: string;
+  terms: string[];
+  understanding: "ai" | "reused" | "plain";
+  aiNote: string | null;
+  searchedDocuments: number;
+  truncated: boolean;
+  mode: SearchMode;
+  totalMatched: number;
+  items: SearchResultItem[];
+}
+
+export interface SearchAnswer {
+  found: boolean;
+  answer: string;
+  sources: {
+    label: string;
+    documentId: string;
+    documentName: string;
+    chunkIndex: number;
+  }[];
+}
+
+export interface ConversationOverview {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  messageCount: number;
+  document: { id: string; originalName: string; fileType: FileType };
+  lastMessage: { role: "USER" | "ASSISTANT"; preview: string } | null;
+}
+
+export interface ConversationsResponse {
+  items: ConversationOverview[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export type GenerationLength = "SHORT" | "MEDIUM" | "LONG";
+export type GenerationTone = "neutral" | "formal" | "friendly";
+
+export interface GenerationStatus {
+  actor: "user" | "guest";
+  limit: number;
+  used: number;
+  remaining: number;
+  blockedBy: "personal" | "pool" | null;
+  resetsInSeconds: number | null;
+  allowedLengths: GenerationLength[];
+}
+
+export type GenerationEvent =
+  | { type: "outline"; title: string; sections: string[] }
+  | { type: "section"; index: number; total: number; heading: string }
+  | { type: "token"; text: string }
+  | {
+      type: "done";
+      title: string;
+      id: string | null;
+      truncated: boolean;
+      words: number;
+    }
+  | { type: "error"; message: string };

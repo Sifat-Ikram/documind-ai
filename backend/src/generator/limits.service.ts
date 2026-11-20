@@ -4,6 +4,9 @@ import type { Env } from '../config/env';
 import { PrismaService } from '../prisma/prisma.service';
 import { WINDOW_MS, type Length } from './generator.constants';
 
+/** A reservation that is never written to the database (logged-in users). */
+const NOT_COUNTED = 'not-counted';
+
 export interface Actor {
   kind: 'USER' | 'GUEST';
   userId: string | null;
@@ -27,10 +30,9 @@ export class GenerationLimitsService {
     this.userLimit = config.get('GENERATE_USER_LIMIT', { infer: true });
   }
 
-  allowedLengths(actor: Actor): Length[] {
-    return actor.kind === 'USER'
-      ? ['SHORT', 'MEDIUM', 'LONG']
-      : ['SHORT', 'MEDIUM'];
+  /** Guests and logged-in users can use every length in the public AI Writer. */
+  allowedLengths(_actor: Actor): Length[] {
+    return ['SHORT', 'MEDIUM', 'LONG'];
   }
 
   /** Rolling 24 hours. Guests: a limit per browser plus a limit shared by all guests. */
@@ -98,8 +100,14 @@ export class GenerationLimitsService {
     };
   }
 
-  /** Counts one generation. Throws 429 when the limit is reached. */
+  /**
+   * Counts one generation. Throws 429 when the limit is reached.
+   * The public AI Writer never counts against a logged-in user's account limits,
+   * so their drafts are not logged and nothing is checked for them.
+   */
   async reserve(actor: Actor): Promise<string> {
+    if (actor.kind === 'USER') return NOT_COUNTED;
+
     const s = await this.status(actor);
     if (s.remaining <= 0) {
       const message =
@@ -126,6 +134,7 @@ export class GenerationLimitsService {
   }
 
   async refund(id: string): Promise<void> {
+    if (id === NOT_COUNTED) return;
     await this.prisma.generationLog.deleteMany({ where: { id } });
   }
 }

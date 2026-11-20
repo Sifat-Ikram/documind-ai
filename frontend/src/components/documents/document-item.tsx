@@ -109,8 +109,8 @@ export function DocumentItem({
     return (
       <article
         className={cn(
-          "relative flex items-center gap-3 rounded-xl border bg-surface px-3 py-2.5 transition-colors hover:bg-surface-muted/50",
-          selected ? "border-primary" : "border-border",
+          "relative flex items-center gap-3 rounded-xl border border-border px-3 py-2.5 transition-colors",
+          selected ? "bg-gray-300" : "bg-surface hover:bg-surface-muted/50",
         )}
       >
         {onSelect && (
@@ -145,8 +145,8 @@ export function DocumentItem({
   return (
     <article
       className={cn(
-        "relative flex flex-col rounded-2xl border bg-surface p-5 transition-shadow hover:shadow-md",
-        selected ? "border-primary ring-1 ring-primary" : "border-border",
+        "relative flex flex-col rounded-2xl border border-border p-5 transition-shadow hover:shadow-md",
+        selected ? "bg-gray-300" : "bg-surface",
       )}
     >
       <div className="flex items-start gap-3">

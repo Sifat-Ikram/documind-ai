@@ -41,7 +41,6 @@ import { useDebounce } from "@/hooks/use-debounce";
 import { api, errorMessage } from "@/lib/api";
 import { cn } from "@/lib/cn";
 import { downloadDocument, downloadMany } from "@/lib/download";
-import type { ViewPreferences } from "@/lib/preferences";
 import { plural } from "@/lib/utils";
 import type {
   BulkResult,
@@ -63,18 +62,6 @@ const TYPES: { value: TypeFilter; label: string }[] = [
   { value: "DOCX", label: "DOCX" },
   { value: "TXT", label: "TXT" },
 ];
-
-const SORTS = [
-  { value: "createdAt:desc", label: "Newest first" },
-  { value: "createdAt:asc", label: "Oldest first" },
-  { value: "updatedAt:desc", label: "Recently changed" },
-  { value: "name:asc", label: "Name A to Z" },
-  { value: "name:desc", label: "Name Z to A" },
-  { value: "size:desc", label: "Largest first" },
-  { value: "size:asc", label: "Smallest first" },
-];
-
-const PER_PAGE: ViewPreferences["perPage"][] = [12, 24, 48];
 
 function BarButton({
   icon: Icon,
@@ -476,47 +463,7 @@ export function DocumentsBrowser({
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 sm:ml-auto">
-            <Select
-              aria-label="Sort"
-              className="h-11 min-w-0"
-              value={`${view.sort}:${view.order}`}
-              onChange={(e) => {
-                const [sort, order] = e.target.value.split(":") as [
-                  ViewPreferences["sort"],
-                  ViewPreferences["order"],
-                ];
-                setPage(1);
-                void update({ view: { sort, order } }).catch(() => undefined);
-              }}
-            >
-              {SORTS.map((s) => (
-                <option key={s.value} value={s.value}>
-                  {s.label}
-                </option>
-              ))}
-            </Select>
-            <Select
-              aria-label="Items per page"
-              className="h-11 min-w-0"
-              value={view.perPage}
-              onChange={(e) => {
-                setPage(1);
-                void update({
-                  view: {
-                    perPage: Number(
-                      e.target.value,
-                    ) as ViewPreferences["perPage"],
-                  },
-                }).catch(() => undefined);
-              }}
-            >
-              {PER_PAGE.map((n) => (
-                <option key={n} value={n}>
-                  {n} per page
-                </option>
-              ))}
-            </Select>
+          <div className="ml-auto flex shrink-0 items-center gap-2">
             <div
               role="group"
               aria-label="View"
@@ -780,9 +727,6 @@ export function DocumentsBrowser({
             aria-label="Actions for selected documents"
             className="flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl border border-border bg-surface-raised p-2 shadow-xl"
           >
-            <span className="shrink-0 whitespace-nowrap px-3 text-sm font-medium text-text">
-              {selectedIds.length} selected
-            </span>
             <BarButton
               icon={FiStar}
               label="Favorite"
