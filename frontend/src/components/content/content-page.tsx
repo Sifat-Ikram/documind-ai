@@ -14,7 +14,7 @@ export function ContentPage({
   children: ReactNode;
 }) {
   return (
-    <div className="mx-auto max-w-3xl space-y-8">
+    <div className="w-full mx-auto space-y-8 min-h-screen">
       <header>
         <p className="text-xs font-semibold uppercase tracking-wider text-ai">
           {eyebrow}

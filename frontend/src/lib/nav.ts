@@ -17,57 +17,26 @@ export interface NavItem {
   href: string;
   label: string;
   icon: IconType;
-  /** The page is not built yet. It shows as "Soon" and cannot be opened. Remove this line when it is ready. */
   soon?: boolean;
 }
 
-export interface NavGroup {
-  label: string;
-  items: NavItem[];
-}
+export const HOME_ITEM: NavItem = {
+  href: "/",
+  label: "Home",
+  icon: FiHome,
+};
 
-export const HOME_ITEM: NavItem = { href: "/", label: "Home", icon: FiHome };
-
-export const NAV_GROUPS: NavGroup[] = [
-  {
-    label: "Main",
-    items: [
-      { href: "/dashboard", label: "Dashboard", icon: FiGrid },
-      { href: "/documents", label: "My Documents", icon: FiFileText },
-      { href: "/recent", label: "Recent", icon: FiClock },
-      {
-        href: "/collections",
-        label: "Collections",
-        icon: FiFolder,
-      },
-    ],
-  },
-  {
-    label: "Document Management",
-    items: [
-      { href: "/archive", label: "Archive", icon: FiArchive },
-      { href: "/trash", label: "Trash", icon: FiTrash2 },
-      { href: "/shared", label: "Shared with Me", icon: FiShare2 },
-    ],
-  },
-  {
-    label: "AI Workspace",
-    items: [
-      {
-        href: "/converter",
-        label: "Document Converter",
-        icon: FiRepeat,
-        soon: true,
-      },
-    ],
-  },
-  {
-    label: "Other",
-    items: [
-      { href: "/history", label: "Analysis History", icon: FiRotateCcw },
-      { href: "/settings", label: "Settings", icon: FiSettings },
-    ],
-  },
+export const NAV_ITEMS: NavItem[] = [
+  { href: "/dashboard", label: "Dashboard", icon: FiGrid },
+  { href: "/documents", label: "My Documents", icon: FiFileText },
+  { href: "/collections", label: "Collections", icon: FiFolder },
+  { href: "/converter", label: "Document Converter", icon: FiRepeat },
+  { href: "/archive", label: "Archive", icon: FiArchive },
+  { href: "/shared", label: "Shared with Me", icon: FiShare2 },
+  { href: "/recent", label: "Recent", icon: FiClock },
+  { href: "/history", label: "Analysis History", icon: FiRotateCcw },
+  { href: "/trash", label: "Trash", icon: FiTrash2 },
+  { href: "/settings", label: "Settings", icon: FiSettings },
 ];
 
 export const isActive = (pathname: string, href: string) =>

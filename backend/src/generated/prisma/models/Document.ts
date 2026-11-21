@@ -51,6 +51,9 @@ export type DocumentMinAggregateOutputType = {
   categoryId: string | null
   source: $Enums.DocumentSource | null
   currentVersion: number | null
+  versionCreatedAt: Date | null
+  versionCreatedById: string | null
+  versionNote: string | null
   archivedAt: Date | null
   trashedAt: Date | null
   createdAt: Date | null
@@ -70,6 +73,9 @@ export type DocumentMaxAggregateOutputType = {
   categoryId: string | null
   source: $Enums.DocumentSource | null
   currentVersion: number | null
+  versionCreatedAt: Date | null
+  versionCreatedById: string | null
+  versionNote: string | null
   archivedAt: Date | null
   trashedAt: Date | null
   createdAt: Date | null
@@ -89,6 +95,9 @@ export type DocumentCountAggregateOutputType = {
   categoryId: number
   source: number
   currentVersion: number
+  versionCreatedAt: number
+  versionCreatedById: number
+  versionNote: number
   archivedAt: number
   trashedAt: number
   createdAt: number
@@ -122,6 +131,9 @@ export type DocumentMinAggregateInputType = {
   categoryId?: true
   source?: true
   currentVersion?: true
+  versionCreatedAt?: true
+  versionCreatedById?: true
+  versionNote?: true
   archivedAt?: true
   trashedAt?: true
   createdAt?: true
@@ -141,6 +153,9 @@ export type DocumentMaxAggregateInputType = {
   categoryId?: true
   source?: true
   currentVersion?: true
+  versionCreatedAt?: true
+  versionCreatedById?: true
+  versionNote?: true
   archivedAt?: true
   trashedAt?: true
   createdAt?: true
@@ -160,6 +175,9 @@ export type DocumentCountAggregateInputType = {
   categoryId?: true
   source?: true
   currentVersion?: true
+  versionCreatedAt?: true
+  versionCreatedById?: true
+  versionNote?: true
   archivedAt?: true
   trashedAt?: true
   createdAt?: true
@@ -266,6 +284,9 @@ export type DocumentGroupByOutputType = {
   categoryId: string | null
   source: $Enums.DocumentSource
   currentVersion: number
+  versionCreatedAt: Date | null
+  versionCreatedById: string | null
+  versionNote: string | null
   archivedAt: Date | null
   trashedAt: Date | null
   createdAt: Date
@@ -308,6 +329,9 @@ export type DocumentWhereInput = {
   categoryId?: Prisma.StringNullableFilter<"Document"> | string | null
   source?: Prisma.EnumDocumentSourceFilter<"Document"> | $Enums.DocumentSource
   currentVersion?: Prisma.IntFilter<"Document"> | number
+  versionCreatedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableFilter<"Document"> | string | null
+  versionNote?: Prisma.StringNullableFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
@@ -342,6 +366,9 @@ export type DocumentOrderByWithRelationInput = {
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   currentVersion?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   trashedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -379,6 +406,9 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   categoryId?: Prisma.StringNullableFilter<"Document"> | string | null
   source?: Prisma.EnumDocumentSourceFilter<"Document"> | $Enums.DocumentSource
   currentVersion?: Prisma.IntFilter<"Document"> | number
+  versionCreatedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableFilter<"Document"> | string | null
+  versionNote?: Prisma.StringNullableFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
@@ -413,6 +443,9 @@ export type DocumentOrderByWithAggregationInput = {
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   source?: Prisma.SortOrder
   currentVersion?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  versionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   trashedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -440,6 +473,9 @@ export type DocumentScalarWhereWithAggregatesInput = {
   categoryId?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   source?: Prisma.EnumDocumentSourceWithAggregatesFilter<"Document"> | $Enums.DocumentSource
   currentVersion?: Prisma.IntWithAggregatesFilter<"Document"> | number
+  versionCreatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
+  versionNote?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
@@ -457,6 +493,9 @@ export type DocumentCreateInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -491,6 +530,9 @@ export type DocumentUncheckedCreateInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -521,6 +563,9 @@ export type DocumentUpdateInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -555,6 +600,9 @@ export type DocumentUncheckedUpdateInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -587,6 +635,9 @@ export type DocumentCreateManyInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -604,6 +655,9 @@ export type DocumentUpdateManyMutationInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -623,6 +677,9 @@ export type DocumentUncheckedUpdateManyInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -652,6 +709,9 @@ export type DocumentCountOrderByAggregateInput = {
   categoryId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   currentVersion?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrder
+  versionNote?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   trashedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -677,6 +737,9 @@ export type DocumentMaxOrderByAggregateInput = {
   categoryId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   currentVersion?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrder
+  versionNote?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   trashedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -696,6 +759,9 @@ export type DocumentMinOrderByAggregateInput = {
   categoryId?: Prisma.SortOrder
   source?: Prisma.SortOrder
   currentVersion?: Prisma.SortOrder
+  versionCreatedAt?: Prisma.SortOrder
+  versionCreatedById?: Prisma.SortOrder
+  versionNote?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   trashedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1021,6 +1087,9 @@ export type DocumentCreateWithoutUserInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1053,6 +1122,9 @@ export type DocumentUncheckedCreateWithoutUserInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1114,6 +1186,9 @@ export type DocumentScalarWhereInput = {
   categoryId?: Prisma.StringNullableFilter<"Document"> | string | null
   source?: Prisma.EnumDocumentSourceFilter<"Document"> | $Enums.DocumentSource
   currentVersion?: Prisma.IntFilter<"Document"> | number
+  versionCreatedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  versionCreatedById?: Prisma.StringNullableFilter<"Document"> | string | null
+  versionNote?: Prisma.StringNullableFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
@@ -1131,6 +1206,9 @@ export type DocumentCreateWithoutChunksInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1164,6 +1242,9 @@ export type DocumentUncheckedCreateWithoutChunksInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1209,6 +1290,9 @@ export type DocumentUpdateWithoutChunksInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1242,6 +1326,9 @@ export type DocumentUncheckedUpdateWithoutChunksInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1271,6 +1358,9 @@ export type DocumentCreateWithoutConversationsInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1304,6 +1394,9 @@ export type DocumentUncheckedCreateWithoutConversationsInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1349,6 +1442,9 @@ export type DocumentUpdateWithoutConversationsInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1382,6 +1478,9 @@ export type DocumentUncheckedUpdateWithoutConversationsInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1411,6 +1510,9 @@ export type DocumentCreateWithoutAnalysesInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1444,6 +1546,9 @@ export type DocumentUncheckedCreateWithoutAnalysesInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1489,6 +1594,9 @@ export type DocumentUpdateWithoutAnalysesInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1522,6 +1630,9 @@ export type DocumentUncheckedUpdateWithoutAnalysesInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1551,6 +1662,9 @@ export type DocumentCreateWithoutCategoryInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1583,6 +1697,9 @@ export type DocumentUncheckedCreateWithoutCategoryInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1639,6 +1756,9 @@ export type DocumentCreateWithoutTrashItemInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1672,6 +1792,9 @@ export type DocumentUncheckedCreateWithoutTrashItemInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1717,6 +1840,9 @@ export type DocumentUpdateWithoutTrashItemInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1750,6 +1876,9 @@ export type DocumentUncheckedUpdateWithoutTrashItemInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1779,6 +1908,9 @@ export type DocumentCreateWithoutVersionsInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1812,6 +1944,9 @@ export type DocumentUncheckedCreateWithoutVersionsInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1857,6 +1992,9 @@ export type DocumentUpdateWithoutVersionsInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1890,6 +2028,9 @@ export type DocumentUncheckedUpdateWithoutVersionsInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1919,6 +2060,9 @@ export type DocumentCreateWithoutTagsInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1952,6 +2096,9 @@ export type DocumentUncheckedCreateWithoutTagsInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -1997,6 +2144,9 @@ export type DocumentUpdateWithoutTagsInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2030,6 +2180,9 @@ export type DocumentUncheckedUpdateWithoutTagsInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2059,6 +2212,9 @@ export type DocumentCreateWithoutFavoritesInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2092,6 +2248,9 @@ export type DocumentUncheckedCreateWithoutFavoritesInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2137,6 +2296,9 @@ export type DocumentUpdateWithoutFavoritesInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2170,6 +2332,9 @@ export type DocumentUncheckedUpdateWithoutFavoritesInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2199,6 +2364,9 @@ export type DocumentCreateWithoutCollectionsInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2232,6 +2400,9 @@ export type DocumentUncheckedCreateWithoutCollectionsInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2277,6 +2448,9 @@ export type DocumentUpdateWithoutCollectionsInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2310,6 +2484,9 @@ export type DocumentUncheckedUpdateWithoutCollectionsInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2339,6 +2516,9 @@ export type DocumentCreateWithoutSharesInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2372,6 +2552,9 @@ export type DocumentUncheckedCreateWithoutSharesInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2417,6 +2600,9 @@ export type DocumentUpdateWithoutSharesInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2450,6 +2636,9 @@ export type DocumentUncheckedUpdateWithoutSharesInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2479,6 +2668,9 @@ export type DocumentCreateWithoutCommentsInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2512,6 +2704,9 @@ export type DocumentUncheckedCreateWithoutCommentsInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2557,6 +2752,9 @@ export type DocumentUpdateWithoutCommentsInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2590,6 +2788,9 @@ export type DocumentUncheckedUpdateWithoutCommentsInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2619,6 +2820,9 @@ export type DocumentCreateWithoutNoteInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2652,6 +2856,9 @@ export type DocumentUncheckedCreateWithoutNoteInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2697,6 +2904,9 @@ export type DocumentUpdateWithoutNoteInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2730,6 +2940,9 @@ export type DocumentUncheckedUpdateWithoutNoteInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2759,6 +2972,9 @@ export type DocumentCreateWithoutViewsInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2792,6 +3008,9 @@ export type DocumentUncheckedCreateWithoutViewsInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2837,6 +3056,9 @@ export type DocumentUpdateWithoutViewsInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2870,6 +3092,9 @@ export type DocumentUncheckedUpdateWithoutViewsInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2899,6 +3124,9 @@ export type DocumentCreateWithoutGeneratedFromInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2932,6 +3160,9 @@ export type DocumentUncheckedCreateWithoutGeneratedFromInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -2977,6 +3208,9 @@ export type DocumentUpdateWithoutGeneratedFromInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3010,6 +3244,9 @@ export type DocumentUncheckedUpdateWithoutGeneratedFromInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3040,6 +3277,9 @@ export type DocumentCreateManyUserInput = {
   categoryId?: string | null
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -3057,6 +3297,9 @@ export type DocumentUpdateWithoutUserInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3089,6 +3332,9 @@ export type DocumentUncheckedUpdateWithoutUserInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3120,6 +3366,9 @@ export type DocumentUncheckedUpdateManyWithoutUserInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3138,6 +3387,9 @@ export type DocumentCreateManyCategoryInput = {
   wordCount?: number
   source?: $Enums.DocumentSource
   currentVersion?: number
+  versionCreatedAt?: Date | string | null
+  versionCreatedById?: string | null
+  versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
   createdAt?: Date | string
@@ -3155,6 +3407,9 @@ export type DocumentUpdateWithoutCategoryInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3187,6 +3442,9 @@ export type DocumentUncheckedUpdateWithoutCategoryInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3218,6 +3476,9 @@ export type DocumentUncheckedUpdateManyWithoutCategoryInput = {
   wordCount?: Prisma.IntFieldUpdateOperationsInput | number
   source?: Prisma.EnumDocumentSourceFieldUpdateOperationsInput | $Enums.DocumentSource
   currentVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  versionCreatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  versionCreatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3358,6 +3619,9 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   categoryId?: boolean
   source?: boolean
   currentVersion?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
   createdAt?: boolean
@@ -3393,6 +3657,9 @@ export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   categoryId?: boolean
   source?: boolean
   currentVersion?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
   createdAt?: boolean
@@ -3414,6 +3681,9 @@ export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   categoryId?: boolean
   source?: boolean
   currentVersion?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
   createdAt?: boolean
@@ -3435,13 +3705,16 @@ export type DocumentSelectScalar = {
   categoryId?: boolean
   source?: boolean
   currentVersion?: boolean
+  versionCreatedAt?: boolean
+  versionCreatedById?: boolean
+  versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "originalName" | "fileUrl" | "publicId" | "fileType" | "fileSize" | "extractedText" | "wordCount" | "categoryId" | "source" | "currentVersion" | "archivedAt" | "trashedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "originalName" | "fileUrl" | "publicId" | "fileType" | "fileSize" | "extractedText" | "wordCount" | "categoryId" | "source" | "currentVersion" | "versionCreatedAt" | "versionCreatedById" | "versionNote" | "archivedAt" | "trashedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chunks?: boolean | Prisma.Document$chunksArgs<ExtArgs>
@@ -3501,6 +3774,9 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     categoryId: string | null
     source: $Enums.DocumentSource
     currentVersion: number
+    versionCreatedAt: Date | null
+    versionCreatedById: string | null
+    versionNote: string | null
     archivedAt: Date | null
     trashedAt: Date | null
     createdAt: Date
@@ -3955,6 +4231,9 @@ export interface DocumentFieldRefs {
   readonly categoryId: Prisma.FieldRef<"Document", 'String'>
   readonly source: Prisma.FieldRef<"Document", 'DocumentSource'>
   readonly currentVersion: Prisma.FieldRef<"Document", 'Int'>
+  readonly versionCreatedAt: Prisma.FieldRef<"Document", 'DateTime'>
+  readonly versionCreatedById: Prisma.FieldRef<"Document", 'String'>
+  readonly versionNote: Prisma.FieldRef<"Document", 'String'>
   readonly archivedAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly trashedAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Document", 'DateTime'>

@@ -84,6 +84,9 @@ model Document {
   category       Category?            @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   source         DocumentSource       @default(UPLOAD)
   currentVersion Int                  @default(1)
+  versionCreatedAt   DateTime?
+  versionCreatedById String?
+  versionNote        String?
   archivedAt     DateTime?
   trashedAt      DateTime?
   versions       DocumentVersion[]

@@ -43,10 +43,11 @@ function getOptions(children: ReactNode): OptionItem[] {
 
 export const Select = forwardRef<
   HTMLSelectElement,
-  SelectHTMLAttributes<HTMLSelectElement>
+  SelectHTMLAttributes<HTMLSelectElement> & { containerClassName?: string }
 >(function Select(
   {
     className,
+    containerClassName,
     children,
     value,
     defaultValue,
@@ -210,7 +211,10 @@ export const Select = forwardRef<
   }
 
   return (
-    <div ref={containerRef} className="relative inline-block w-full min-w-48">
+    <div
+      ref={containerRef}
+      className={cn("relative inline-block w-full min-w-48", containerClassName)}
+    >
       <select
         ref={selectRef}
         id={id}

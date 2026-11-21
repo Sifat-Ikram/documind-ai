@@ -157,7 +157,8 @@ const BENEFITS = [
 
 export function LandingPage() {
   const { status } = useAuth();
-  const getStartedHref = status === "authenticated" ? "/dashboard" : "/register";
+  const getStartedHref =
+    status === "authenticated" ? "/dashboard" : "/register";
 
   return (
     <div className="space-y-20 pb-28 sm:space-y-24">
@@ -165,11 +166,7 @@ export function LandingPage() {
       <section className="relative overflow-hidden px-6 py-16 sm:px-10 sm:py-20 lg:py-24">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-ai-decor/20 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-24 size-80 rounded-full bg-primary/10 blur-3xl"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-[min(90%,42rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-r from-primary/5 via-ai-decor/10 to-primary/5 blur-3xl"
         />
         <div
           aria-hidden="true"
@@ -215,7 +212,10 @@ export function LandingPage() {
           >
             <Link
               href={getStartedHref}
-              className={buttonVariants({ size: "lg", className: "w-full sm:w-auto" })}
+              className={buttonVariants({
+                size: "lg",
+                className: "w-full sm:w-auto",
+              })}
             >
               Get Started
               <FiArrowRight className="size-4" aria-hidden="true" />
@@ -253,7 +253,9 @@ export function LandingPage() {
                 <span className="grid size-10 place-items-center rounded-xl bg-ai-soft text-ai">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <h3 className="mt-4 text-base font-semibold text-text">{title}</h3>
+                <h3 className="mt-4 text-base font-semibold text-text">
+                  {title}
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {body}
                 </p>
@@ -304,7 +306,11 @@ export function LandingPage() {
       </Reveal>
 
       {/* 4. Core features */}
-      <section id="features" aria-labelledby="features-title" className="scroll-mt-24">
+      <section
+        id="features"
+        aria-labelledby="features-title"
+        className="scroll-mt-24"
+      >
         <Reveal>
           <SectionHeading
             eyebrow="Core features"
@@ -319,7 +325,9 @@ export function LandingPage() {
                 <span className="grid size-10 place-items-center rounded-xl-muted text-ai transition-colors group-hover:bg-ai-soft">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
-                <h3 className="mt-4 text-base font-semibold text-text">{title}</h3>
+                <h3 className="mt-4 text-base font-semibold text-text">
+                  {title}
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {body}
                 </p>
@@ -342,7 +350,9 @@ export function LandingPage() {
             <Reveal key={title} delay={i * 0.05}>
               <article className="h-full border border-border rounded-2xl p-5">
                 <Icon className="size-5 text-ai" aria-hidden="true" />
-                <h3 className="mt-3 text-base font-semibold text-text">{title}</h3>
+                <h3 className="mt-3 text-base font-semibold text-text">
+                  {title}
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {body}
                 </p>
@@ -377,7 +387,10 @@ export function LandingPage() {
           </div>
           <ul className="space-y-3">
             {BENEFITS.map((benefit) => (
-              <li key={benefit} className="flex items-start gap-3 text-sm text-text">
+              <li
+                key={benefit}
+                className="flex items-start gap-3 text-sm text-text"
+              >
                 <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success">
                   <FiCheck className="size-3" aria-hidden="true" />
                 </span>

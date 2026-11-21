@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { FiX } from "react-icons/fi";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/cn";
-import { HOME_ITEM, NAV_GROUPS, isActive, type NavItem } from "@/lib/nav";
+import { HOME_ITEM, NAV_ITEMS, isActive, type NavItem } from "@/lib/nav";
 
 function NavEntry({
   item,
@@ -90,24 +90,17 @@ export function SidebarContent({
           onNavigate={onNavigate}
         />
 
-        {NAV_GROUPS.map((group) => (
-          <div key={group.label} className="mt-6">
-            <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
-              {group.label}
-            </p>
-            <ul className="space-y-1">
-              {group.items.map((item) => (
-                <li key={item.href}>
-                  <NavEntry
-                    item={item}
-                    pathname={pathname}
-                    onNavigate={onNavigate}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <ul className="space-y-1 mt-6">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.href}>
+              <NavEntry
+                item={item}
+                pathname={pathname}
+                onNavigate={onNavigate}
+              />
+            </li>
+          ))}
+        </ul>
       </nav>
     </div>
   );

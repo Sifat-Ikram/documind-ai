@@ -1,7 +1,7 @@
 import { api } from "@/lib/api";
 import type { DocumentSummary } from "@/types/api";
 
-interface SignatureResponse {
+export interface SignatureResponse {
   uploadUrl: string;
   apiKey: string;
   timestamp: number;
@@ -17,7 +17,7 @@ export interface ConfirmResponse {
 
 export type UploadStage = "preparing" | "uploading" | "processing";
 
-function sendToCloudinary(
+export function uploadWithSignature(
   sig: SignatureResponse,
   file: File,
   onProgress: (percent: number) => void,
@@ -84,7 +84,7 @@ export async function uploadDocument(
   });
 
   handlers.onStage("uploading");
-  await sendToCloudinary(sig, file, handlers.onProgress, handlers.signal);
+      await uploadWithSignature(sig, file, handlers.onProgress, handlers.signal);
 
   handlers.onStage("processing");
   return api<ConfirmResponse>("/documents/confirm", {

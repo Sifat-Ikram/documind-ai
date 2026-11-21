@@ -14,7 +14,6 @@ import {
   FiZap,
 } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
 import { Markdown } from "@/components/ui/markdown";
 import { SegmentedControl } from "@/components/ui/segmented-control";
@@ -64,10 +63,9 @@ const LENGTH_HINT: Record<GenerationLength, string> = {
 };
 
 const EXAMPLES = [
-  "A short report about our website redesign, the goals and what we measured.",
-  "A cover letter for a junior frontend developer job, friendly and confident.",
-  "Meeting minutes for a project kickoff with decisions and action items.",
-  "A blog post about why small teams should write things down.",
+  "A short report",
+  "A cover letter",
+  "A blog postt",
 ];
 
 const STORE_KEY = "documind-writer-v1";
@@ -494,7 +492,7 @@ export function GeneratorView() {
     .join(" · ");
 
   return (
-    <div className="flex min-h-[calc(100dvh-20rem)] flex-col">
+    <div className="flex min-h-screen flex-col">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
         <div>
           <p className="text-xs font-medium uppercase tracking-wider text-ai">
@@ -518,12 +516,7 @@ export function GeneratorView() {
       <div className="flex-1 space-y-6 py-6">
         {messages.length === 0 ? (
           <div className="mx-auto max-w-2xl pt-4">
-            <EmptyState
-              icon={FiZap}
-              title="Describe the document you need"
-              description="Choose a type and length below, then write what it should be about. The text appears as it is written, and you can keep the draft, copy it or export it at any time."
-            />
-            <div className="mt-6">
+            <div>
               <p className="text-center text-xs font-medium uppercase tracking-wider text-text-muted">
                 Try an example
               </p>

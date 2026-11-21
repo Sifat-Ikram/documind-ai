@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { FiCheckCircle, FiMail, FiSend } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,7 +59,7 @@ export function ContactView() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 min-h-screen">
       <header>
         <p className="text-xs font-medium uppercase tracking-wider text-ai">
           Contact
@@ -68,13 +67,9 @@ export function ContactView() {
         <h1 className="mt-1 text-3xl font-semibold tracking-tight text-text">
           Tell us what you think
         </h1>
-        <p className="mt-1.5 max-w-2xl text-sm text-text-muted">
-          A problem with a document, a feature you are missing, or just a
-          question — write to us and we will read it.
-        </p>
       </header>
 
-      <div className="grid gap-6 xl:grid-cols-3">
+      <div className="flex flex-col-reverse lg:flex-row gap-6 lg:justify-evenly lg:items-start">
         <section className="xl:col-span-2">
           {sent ? (
             <div className="rounded-2xl border border-border bg-surface px-6 py-10 text-center">
@@ -209,22 +204,6 @@ export function ContactView() {
                 Do not send passwords or full documents you do not want stored.
               </li>
             </ul>
-          </section>
-
-          <section className="rounded-2xl border border-border bg-surface p-5">
-            <h2 className="text-[15px] font-semibold text-text">
-              Just want to try it?
-            </h2>
-            <p className="mt-1 text-sm text-text-muted">
-              The AI Writer works without an account, so you can make a draft
-              first and write to us only if something is missing.
-            </p>
-            <Link
-              href="/generate"
-              className="mt-3 inline-flex text-sm font-medium text-link hover:underline"
-            >
-              Open the AI Writer
-            </Link>
           </section>
         </aside>
       </div>

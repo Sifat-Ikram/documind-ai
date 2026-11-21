@@ -77,6 +77,8 @@ export function AnalysisView({ documentId }: { documentId: string }) {
   const savedAnalysis = saved.loading ? null : (saved.data?.analysis ?? null);
   const result = fresh ?? savedAnalysis;
   const activeId = fresh?.id ?? savedId;
+  // Examples belong to the empty view only: once a result is here, they go away.
+  const showExamples = !result && !busy && !saved.loading;
 
   useEffect(() => {
     if (fresh)
@@ -175,7 +177,7 @@ export function AnalysisView({ documentId }: { documentId: string }) {
         <span aria-hidden="true">/</span>
         <Link
           href={`/documents/${documentId}`}
-          className="max-w-[14rem] truncate hover:text-text"
+          className="max-w-56 truncate hover:text-text"
         >
           {document?.originalName ?? "…"}
         </Link>
@@ -212,24 +214,32 @@ export function AnalysisView({ documentId }: { documentId: string }) {
       <div className="grid gap-6 xl:grid-cols-3 print:block">
         <div className="space-y-6 xl:col-span-2">
           <section className="rounded-2xl border border-border bg-surface p-5 sm:p-6 print:hidden">
-            <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
-              Try an example
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {EXAMPLE_INSTRUCTIONS.map((example) => (
-                <button
-                  key={example}
-                  type="button"
-                  disabled={busy}
-                  onClick={() => setInstruction(example)}
-                  className="rounded-full border border-border px-3 py-1.5 text-left text-sm text-text-muted transition-colors hover:bg-surface-muted hover:text-text disabled:opacity-60"
-                >
-                  {example}
-                </button>
-              ))}
-            </div>
+            {showExamples && (
+              <>
+                <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
+                  Try an example
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {EXAMPLE_INSTRUCTIONS.map((example) => (
+                    <button
+                      key={example}
+                      type="button"
+                      disabled={busy}
+                      onClick={() => setInstruction(example)}
+                      className="rounded-full border border-border px-3 py-1.5 text-left text-sm text-text-muted transition-colors hover:bg-surface-muted hover:text-text disabled:opacity-60"
+                    >
+                      {example}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
 
-            <div className="mt-5 border-t border-border pt-5">
+            <div
+              className={
+                showExamples ? "mt-5 border-t border-border pt-5" : ""
+              }
+            >
               <label
                 htmlFor="instruction"
                 className="text-[15px] font-semibold text-text"

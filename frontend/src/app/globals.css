@@ -17,18 +17,18 @@
   --text: #18181b;
   --text-muted: #52525b;
 
-  /* PRIMARY: TEMPORARY values, to be decided */
-  --primary: #2749f5;
-  --primary-hover: #1f3bd1;
+  /* PRIMARY */
+  --primary: #2646a3;
+  --primary-hover: #1e3a8a;
   --primary-foreground: #ffffff;
-  --primary-soft: #e8edff;
-  --link: #2749f5;
+  --primary-soft: #eef2ff;
+  --link: #2646a3;
 
   /* AI accent */
-  --ai: #6d28d9; /* text and icons */
-  --ai-soft: #f5f3ff;
-  --ai-decor: #8b5cf6; /* glow / decoration only, never text */
-  --focus: #7c3aed;
+  --ai: #7055d8; /* text and icons */
+  --ai-soft: #f3f0ff;
+  --ai-decor: #a995f5; /* glow / decoration only, never text */
+  --focus: #7055d8;
 
   /* status */
   --success: #15803d;
@@ -62,17 +62,17 @@
     --text: #e4e4e7;
     --text-muted: #a1a1aa;
 
-    /* PRIMARY: TEMPORARY values, to be decided */
-    --primary: #2749f5;
-    --primary-hover: #3a5bff;
+    /* PRIMARY */
+    --primary: #5275d1;
+    --primary-hover: #6b8ce0;
     --primary-foreground: #ffffff;
-    --primary-soft: color-mix(in srgb, #2749f5 15%, transparent);
-    --link: #8fa3ff;
+    --primary-soft: color-mix(in srgb, #5275d1 18%, transparent);
+    --link: #9bb5ff;
 
-    --ai: #a78bfa;
-    --ai-soft: color-mix(in srgb, #a78bfa 14%, transparent);
-    --ai-decor: #8b5cf6;
-    --focus: #a78bfa;
+    --ai: #b39afb;
+    --ai-soft: color-mix(in srgb, #b39afb 14%, transparent);
+    --ai-decor: #b39afb;
+    --focus: #b39afb;
 
     --success: #4ade80;
     --success-soft: color-mix(in srgb, #4ade80 14%, transparent);
@@ -146,6 +146,17 @@
     color: var(--text);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Anything that can be clicked shows a pointer cursor. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  select:not(:disabled),
+  label[for],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
   }
 
   :focus-visible {

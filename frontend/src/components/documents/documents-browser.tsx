@@ -542,6 +542,7 @@ export function DocumentsBrowser({
             <Select
               aria-label="Category"
               className="h-9 min-w-0 rounded-full"
+              containerClassName="w-auto min-w-40 flex-1 sm:flex-none"
               value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
@@ -561,6 +562,7 @@ export function DocumentsBrowser({
             <Select
               aria-label="Collection"
               className="h-9 min-w-0 rounded-full"
+              containerClassName="w-auto min-w-40 flex-1 sm:flex-none"
               value={collectionId}
               onChange={(e) => {
                 setCollectionId(e.target.value);
