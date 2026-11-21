@@ -56,6 +56,7 @@ export type DocumentMinAggregateOutputType = {
   versionNote: string | null
   archivedAt: Date | null
   trashedAt: Date | null
+  processingStatus: $Enums.DocumentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -78,6 +79,7 @@ export type DocumentMaxAggregateOutputType = {
   versionNote: string | null
   archivedAt: Date | null
   trashedAt: Date | null
+  processingStatus: $Enums.DocumentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -100,6 +102,7 @@ export type DocumentCountAggregateOutputType = {
   versionNote: number
   archivedAt: number
   trashedAt: number
+  processingStatus: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -136,6 +139,7 @@ export type DocumentMinAggregateInputType = {
   versionNote?: true
   archivedAt?: true
   trashedAt?: true
+  processingStatus?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -158,6 +162,7 @@ export type DocumentMaxAggregateInputType = {
   versionNote?: true
   archivedAt?: true
   trashedAt?: true
+  processingStatus?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -180,6 +185,7 @@ export type DocumentCountAggregateInputType = {
   versionNote?: true
   archivedAt?: true
   trashedAt?: true
+  processingStatus?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -289,6 +295,7 @@ export type DocumentGroupByOutputType = {
   versionNote: string | null
   archivedAt: Date | null
   trashedAt: Date | null
+  processingStatus: $Enums.DocumentStatus
   createdAt: Date
   updatedAt: Date
   _count: DocumentCountAggregateOutputType | null
@@ -334,6 +341,7 @@ export type DocumentWhereInput = {
   versionNote?: Prisma.StringNullableFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFilter<"Document"> | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -371,6 +379,7 @@ export type DocumentOrderByWithRelationInput = {
   versionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   trashedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -411,6 +420,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   versionNote?: Prisma.StringNullableFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFilter<"Document"> | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -448,6 +458,7 @@ export type DocumentOrderByWithAggregationInput = {
   versionNote?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   trashedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DocumentCountOrderByAggregateInput
@@ -478,6 +489,7 @@ export type DocumentScalarWhereWithAggregatesInput = {
   versionNote?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Document"> | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusWithAggregatesFilter<"Document"> | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
 }
@@ -498,6 +510,7 @@ export type DocumentCreateInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -535,6 +548,7 @@ export type DocumentUncheckedCreateInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -568,6 +582,7 @@ export type DocumentUpdateInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -605,6 +620,7 @@ export type DocumentUncheckedUpdateInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -640,6 +656,7 @@ export type DocumentCreateManyInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -660,6 +677,7 @@ export type DocumentUpdateManyMutationInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -682,6 +700,7 @@ export type DocumentUncheckedUpdateManyInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -714,6 +733,7 @@ export type DocumentCountOrderByAggregateInput = {
   versionNote?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   trashedAt?: Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -742,6 +762,7 @@ export type DocumentMaxOrderByAggregateInput = {
   versionNote?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   trashedAt?: Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -764,6 +785,7 @@ export type DocumentMinOrderByAggregateInput = {
   versionNote?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   trashedAt?: Prisma.SortOrder
+  processingStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -842,12 +864,12 @@ export type EnumDocumentSourceFieldUpdateOperationsInput = {
   set?: $Enums.DocumentSource
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type EnumDocumentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.DocumentStatus
 }
 
 export type DocumentCreateNestedOneWithoutChunksInput = {
@@ -1092,6 +1114,7 @@ export type DocumentCreateWithoutUserInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkCreateNestedManyWithoutDocumentInput
@@ -1127,6 +1150,7 @@ export type DocumentUncheckedCreateWithoutUserInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -1191,6 +1215,7 @@ export type DocumentScalarWhereInput = {
   versionNote?: Prisma.StringNullableFilter<"Document"> | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
   trashedAt?: Prisma.DateTimeNullableFilter<"Document"> | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFilter<"Document"> | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
 }
@@ -1211,6 +1236,7 @@ export type DocumentCreateWithoutChunksInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -1247,6 +1273,7 @@ export type DocumentUncheckedCreateWithoutChunksInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutDocumentInput
@@ -1295,6 +1322,7 @@ export type DocumentUpdateWithoutChunksInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -1331,6 +1359,7 @@ export type DocumentUncheckedUpdateWithoutChunksInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutDocumentNestedInput
@@ -1363,6 +1392,7 @@ export type DocumentCreateWithoutConversationsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -1399,6 +1429,7 @@ export type DocumentUncheckedCreateWithoutConversationsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -1447,6 +1478,7 @@ export type DocumentUpdateWithoutConversationsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -1483,6 +1515,7 @@ export type DocumentUncheckedUpdateWithoutConversationsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -1515,6 +1548,7 @@ export type DocumentCreateWithoutAnalysesInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -1551,6 +1585,7 @@ export type DocumentUncheckedCreateWithoutAnalysesInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -1599,6 +1634,7 @@ export type DocumentUpdateWithoutAnalysesInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -1635,6 +1671,7 @@ export type DocumentUncheckedUpdateWithoutAnalysesInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -1667,6 +1704,7 @@ export type DocumentCreateWithoutCategoryInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -1702,6 +1740,7 @@ export type DocumentUncheckedCreateWithoutCategoryInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -1761,6 +1800,7 @@ export type DocumentCreateWithoutTrashItemInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -1797,6 +1837,7 @@ export type DocumentUncheckedCreateWithoutTrashItemInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -1845,6 +1886,7 @@ export type DocumentUpdateWithoutTrashItemInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -1881,6 +1923,7 @@ export type DocumentUncheckedUpdateWithoutTrashItemInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -1913,6 +1956,7 @@ export type DocumentCreateWithoutVersionsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -1949,6 +1993,7 @@ export type DocumentUncheckedCreateWithoutVersionsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -1997,6 +2042,7 @@ export type DocumentUpdateWithoutVersionsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -2033,6 +2079,7 @@ export type DocumentUncheckedUpdateWithoutVersionsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2065,6 +2112,7 @@ export type DocumentCreateWithoutTagsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -2101,6 +2149,7 @@ export type DocumentUncheckedCreateWithoutTagsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -2149,6 +2198,7 @@ export type DocumentUpdateWithoutTagsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -2185,6 +2235,7 @@ export type DocumentUncheckedUpdateWithoutTagsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2217,6 +2268,7 @@ export type DocumentCreateWithoutFavoritesInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -2253,6 +2305,7 @@ export type DocumentUncheckedCreateWithoutFavoritesInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -2301,6 +2354,7 @@ export type DocumentUpdateWithoutFavoritesInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -2337,6 +2391,7 @@ export type DocumentUncheckedUpdateWithoutFavoritesInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2369,6 +2424,7 @@ export type DocumentCreateWithoutCollectionsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -2405,6 +2461,7 @@ export type DocumentUncheckedCreateWithoutCollectionsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -2453,6 +2510,7 @@ export type DocumentUpdateWithoutCollectionsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -2489,6 +2547,7 @@ export type DocumentUncheckedUpdateWithoutCollectionsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2521,6 +2580,7 @@ export type DocumentCreateWithoutSharesInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -2557,6 +2617,7 @@ export type DocumentUncheckedCreateWithoutSharesInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -2605,6 +2666,7 @@ export type DocumentUpdateWithoutSharesInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -2641,6 +2703,7 @@ export type DocumentUncheckedUpdateWithoutSharesInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2673,6 +2736,7 @@ export type DocumentCreateWithoutCommentsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -2709,6 +2773,7 @@ export type DocumentUncheckedCreateWithoutCommentsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -2757,6 +2822,7 @@ export type DocumentUpdateWithoutCommentsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -2793,6 +2859,7 @@ export type DocumentUncheckedUpdateWithoutCommentsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2825,6 +2892,7 @@ export type DocumentCreateWithoutNoteInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -2861,6 +2929,7 @@ export type DocumentUncheckedCreateWithoutNoteInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -2909,6 +2978,7 @@ export type DocumentUpdateWithoutNoteInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -2945,6 +3015,7 @@ export type DocumentUncheckedUpdateWithoutNoteInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2977,6 +3048,7 @@ export type DocumentCreateWithoutViewsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -3013,6 +3085,7 @@ export type DocumentUncheckedCreateWithoutViewsInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -3061,6 +3134,7 @@ export type DocumentUpdateWithoutViewsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -3097,6 +3171,7 @@ export type DocumentUncheckedUpdateWithoutViewsInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3129,6 +3204,7 @@ export type DocumentCreateWithoutGeneratedFromInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDocumentsInput
@@ -3165,6 +3241,7 @@ export type DocumentUncheckedCreateWithoutGeneratedFromInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   chunks?: Prisma.DocumentChunkUncheckedCreateNestedManyWithoutDocumentInput
@@ -3213,6 +3290,7 @@ export type DocumentUpdateWithoutGeneratedFromInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -3249,6 +3327,7 @@ export type DocumentUncheckedUpdateWithoutGeneratedFromInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3282,6 +3361,7 @@ export type DocumentCreateManyUserInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -3302,6 +3382,7 @@ export type DocumentUpdateWithoutUserInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUpdateManyWithoutDocumentNestedInput
@@ -3337,6 +3418,7 @@ export type DocumentUncheckedUpdateWithoutUserInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3371,6 +3453,7 @@ export type DocumentUncheckedUpdateManyWithoutUserInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -3392,6 +3475,7 @@ export type DocumentCreateManyCategoryInput = {
   versionNote?: string | null
   archivedAt?: Date | string | null
   trashedAt?: Date | string | null
+  processingStatus?: $Enums.DocumentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -3412,6 +3496,7 @@ export type DocumentUpdateWithoutCategoryInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDocumentsNestedInput
@@ -3447,6 +3532,7 @@ export type DocumentUncheckedUpdateWithoutCategoryInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chunks?: Prisma.DocumentChunkUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3481,6 +3567,7 @@ export type DocumentUncheckedUpdateManyWithoutCategoryInput = {
   versionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   trashedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingStatus?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -3624,6 +3711,7 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
+  processingStatus?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -3662,6 +3750,7 @@ export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
+  processingStatus?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -3686,6 +3775,7 @@ export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
+  processingStatus?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -3710,11 +3800,12 @@ export type DocumentSelectScalar = {
   versionNote?: boolean
   archivedAt?: boolean
   trashedAt?: boolean
+  processingStatus?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "originalName" | "fileUrl" | "publicId" | "fileType" | "fileSize" | "extractedText" | "wordCount" | "categoryId" | "source" | "currentVersion" | "versionCreatedAt" | "versionCreatedById" | "versionNote" | "archivedAt" | "trashedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "originalName" | "fileUrl" | "publicId" | "fileType" | "fileSize" | "extractedText" | "wordCount" | "categoryId" | "source" | "currentVersion" | "versionCreatedAt" | "versionCreatedById" | "versionNote" | "archivedAt" | "trashedAt" | "processingStatus" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chunks?: boolean | Prisma.Document$chunksArgs<ExtArgs>
@@ -3779,6 +3870,7 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     versionNote: string | null
     archivedAt: Date | null
     trashedAt: Date | null
+    processingStatus: $Enums.DocumentStatus
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["document"]>
@@ -4236,6 +4328,7 @@ export interface DocumentFieldRefs {
   readonly versionNote: Prisma.FieldRef<"Document", 'String'>
   readonly archivedAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly trashedAt: Prisma.FieldRef<"Document", 'DateTime'>
+  readonly processingStatus: Prisma.FieldRef<"Document", 'DocumentStatus'>
   readonly createdAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Document", 'DateTime'>
 }

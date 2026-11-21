@@ -134,7 +134,30 @@ export class DocumentsService {
       return { document: withUserData(document), warnings };
     } catch (err) {
       await this.cloudinary.delete(dto.publicId);
+      await this.recordProcessingFailure(userId, dto, err);
       throw err;
+    }
+  }
+
+  /** Kept for the admin "failed document processing" log. Never blocks the error. */
+  private async recordProcessingFailure(
+    userId: string,
+    dto: ConfirmUploadDto,
+    err: unknown,
+  ): Promise<void> {
+    try {
+      const reason =
+        err instanceof Error ? err.message.slice(0, 500) : 'Upload failed';
+      await this.prisma.failedProcessingLog.create({
+        data: {
+          userId,
+          fileName: dto.originalName.slice(0, 200),
+          fileType: resolveFileType(dto.publicId) ?? null,
+          reason,
+        },
+      });
+    } catch (logErr) {
+      this.logger.warn(`Could not record processing failure: ${String(logErr)}`);
     }
   }
 

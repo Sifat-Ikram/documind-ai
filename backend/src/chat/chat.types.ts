@@ -10,6 +10,7 @@ export interface ChatMessageDto {
 }
 
 export interface PreparedReply {
+  userId: string;
   conversationId: string;
   title: string;
   userMessage: ChatMessageDto;

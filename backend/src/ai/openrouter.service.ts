@@ -9,16 +9,33 @@ import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
 import type { ZodType } from 'zod';
 import type { Env } from '../config/env';
+import { UsageService, type AiFeatureName } from '../usage/usage.service';
 
 export type AiMessage = OpenAI.Chat.ChatCompletionMessageParam;
+
+interface TokenUsage {
+  prompt_tokens?: number;
+  completion_tokens?: number;
+  total_tokens?: number;
+}
+
+export interface AiUsageContext {
+  userId?: string | null;
+  feature: AiFeatureName;
+}
 
 interface CompleteOptions {
   temperature?: number;
   maxTokens?: number;
+  /** Where the request came from; used for the admin usage analytics. */
+  usage?: AiUsageContext;
 }
 
 /** Provider errors where another model may still answer. */
 const RETRYABLE_STATUS = new Set([402, 404, 408, 429, 500, 502, 503, 504]);
+
+/** Fallback estimate for providers that do not report token usage. */
+const estimateTokens = (chars: number) => Math.max(0, Math.ceil(chars / 4));
 
 function parseJsonLoose(raw: string): unknown {
   const text = raw
@@ -38,7 +55,10 @@ export class OpenRouterService {
   /** Primary model first, then the configured fallbacks. */
   private readonly models: string[];
 
-  constructor(config: ConfigService<Env, true>) {
+  constructor(
+    config: ConfigService<Env, true>,
+    private readonly usage: UsageService,
+  ) {
     const primary = config.get('OPENROUTER_MODEL', { infer: true });
     const fallbacks = (config.get('OPENROUTER_FALLBACK_MODELS', { infer: true }) ?? '')
       .split(',')
@@ -62,8 +82,11 @@ export class OpenRouterService {
     options: CompleteOptions = {},
   ): Promise<string> {
     let lastError: unknown;
+    const startedAt = Date.now();
+    let lastModel = this.models[0];
 
     for (const [index, model] of this.models.entries()) {
+      lastModel = model;
       try {
         const res = await this.client.chat.completions.create({
           model,
@@ -74,20 +97,35 @@ export class OpenRouterService {
         const text = res.choices[0]?.message?.content;
         if (text) {
           if (index > 0) this.logger.log(`Answered with fallback model ${model}`);
+          await this.recordSuccess(
+            options.usage,
+            model,
+            startedAt,
+            res.usage,
+            JSON.stringify(messages).length,
+            text.length,
+          );
           return text;
         }
         lastError = new BadGatewayException(
           'The AI returned an empty response.',
         );
-        if (!this.canFallback(null, index)) throw this.toHttpError(lastError);
+        if (!this.canFallback(null, index)) {
+          await this.recordFailure(options.usage, model, startedAt, lastError);
+          throw this.toHttpError(lastError);
+        }
         this.logger.warn(`Model ${model} returned nothing; trying next model`);
       } catch (err) {
         lastError = err;
-        if (!this.canFallback(err, index)) throw this.toHttpError(err);
+        if (!this.canFallback(err, index)) {
+          await this.recordFailure(options.usage, model, startedAt, err);
+          throw this.toHttpError(err);
+        }
         this.logFallback(model, index, err);
       }
     }
 
+    await this.recordFailure(options.usage, lastModel, startedAt, lastError);
     throw this.toHttpError(lastError);
   }
 
@@ -128,8 +166,13 @@ export class OpenRouterService {
     options: CompleteOptions = {},
     signal?: AbortSignal,
   ): AsyncGenerator<string> {
+    const startedAt = Date.now();
+    const promptChars = JSON.stringify(messages).length;
+
     for (const [index, model] of this.models.entries()) {
       let started = false;
+      let chars = 0;
+      let reported: TokenUsage | undefined;
 
       try {
         const stream = await this.client.chat.completions.create(
@@ -139,34 +182,111 @@ export class OpenRouterService {
             temperature: options.temperature ?? 0.3,
             max_tokens: options.maxTokens ?? 2000,
             stream: true,
+            stream_options: { include_usage: true },
           },
           { signal },
         );
         for await (const chunk of stream) {
+          if (chunk.usage) reported = chunk.usage;
           const delta = chunk.choices[0]?.delta?.content;
           if (delta) {
             started = true;
+            chars += delta.length;
             yield delta;
           }
         }
       } catch (err) {
-        if (signal?.aborted) return;
+        if (signal?.aborted) {
+          if (started) {
+            await this.recordSuccess(
+              options.usage,
+              model,
+              startedAt,
+              reported,
+              promptChars,
+              chars,
+            );
+          }
+          return;
+        }
         // Once text has been sent the caller already shows it, so a retry
         // would duplicate the answer instead of repairing it.
-        if (started || !this.canFallback(err, index)) throw this.toHttpError(err);
+        if (started || !this.canFallback(err, index)) {
+          await this.recordFailure(options.usage, model, startedAt, err);
+          throw this.toHttpError(err);
+        }
         this.logFallback(model, index, err);
         continue;
       }
 
-      if (started) return;
+      if (started) {
+        await this.recordSuccess(
+          options.usage,
+          model,
+          startedAt,
+          reported,
+          promptChars,
+          chars,
+        );
+        return;
+      }
       // An empty stream is a failure, not a finished document.
       if (!this.canFallback(null, index)) {
-        throw new BadGatewayException(
+        const error = new BadGatewayException(
           'The AI returned an empty response. Please try again.',
         );
+        await this.recordFailure(options.usage, model, startedAt, error);
+        throw error;
       }
       this.logger.warn(`Model ${model} streamed nothing; trying next model`);
     }
+  }
+
+  private async recordSuccess(
+    context: AiUsageContext | undefined,
+    model: string,
+    startedAt: number,
+    reported: TokenUsage | undefined,
+    promptChars: number,
+    completionChars: number,
+  ): Promise<void> {
+    if (!context) return;
+    const promptTokens = reported?.prompt_tokens ?? estimateTokens(promptChars);
+    const completionTokens =
+      reported?.completion_tokens ?? estimateTokens(completionChars);
+    await this.usage.recordAiUsage({
+      userId: context.userId ?? null,
+      feature: context.feature,
+      model,
+      promptTokens,
+      completionTokens,
+      totalTokens: reported?.total_tokens ?? promptTokens + completionTokens,
+      latencyMs: Date.now() - startedAt,
+      success: true,
+    });
+  }
+
+  private async recordFailure(
+    context: AiUsageContext | undefined,
+    model: string,
+    startedAt: number,
+    err: unknown,
+  ): Promise<void> {
+    if (!context) return;
+    const message =
+      err instanceof HttpException
+        ? err.message
+        : err instanceof Error
+          ? err.message
+          : 'AI request failed';
+    await this.usage.recordAiUsage({
+      userId: context.userId ?? null,
+      feature: context.feature,
+      model,
+      latencyMs: Date.now() - startedAt,
+      success: false,
+      error: message,
+    });
   }
 
   /** Another model is queued, so this failure is worth retrying. */

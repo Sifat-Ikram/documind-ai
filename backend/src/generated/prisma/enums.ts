@@ -53,3 +53,47 @@ export const DocumentSource = {
 } as const
 
 export type DocumentSource = (typeof DocumentSource)[keyof typeof DocumentSource]
+
+
+export const Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const DocumentStatus = {
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]
+
+
+export const AiFeature = {
+  WRITER: 'WRITER',
+  ANALYSIS: 'ANALYSIS',
+  CHAT: 'CHAT',
+  SEARCH: 'SEARCH'
+} as const
+
+export type AiFeature = (typeof AiFeature)[keyof typeof AiFeature]
+
+
+export const FeedbackType = {
+  FEEDBACK: 'FEEDBACK',
+  BUG_REPORT: 'BUG_REPORT'
+} as const
+
+export type FeedbackType = (typeof FeedbackType)[keyof typeof FeedbackType]
+
+
+export const FeedbackStatus = {
+  OPEN: 'OPEN',
+  IN_REVIEW: 'IN_REVIEW',
+  RESOLVED: 'RESOLVED'
+} as const
+
+export type FeedbackStatus = (typeof FeedbackStatus)[keyof typeof FeedbackStatus]

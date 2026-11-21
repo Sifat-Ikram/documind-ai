@@ -52,7 +52,7 @@ export class SearchService {
       understanding = 'reused';
     } else if (dto.useAi) {
       try {
-        extra = await this.understanding.terms(dto.query);
+        extra = await this.understanding.terms(dto.query, userId);
         understanding = 'ai';
       } catch (err) {
         aiNote =
@@ -246,7 +246,11 @@ Rules:
           content: `Question: ${dto.query}\n\nExcerpts:\n${context}`,
         },
       ],
-      { temperature: 0.2, maxTokens: 3000 },
+      {
+        temperature: 0.2,
+        maxTokens: 3000,
+        usage: { userId, feature: 'SEARCH' },
+      },
     );
 
     return { found: true, answer, sources };

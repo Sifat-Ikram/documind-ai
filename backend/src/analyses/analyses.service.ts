@@ -46,7 +46,7 @@ export class AnalysesService {
 
   async detectTask(userId: string, documentId: string, instruction: string) {
     await this.documents.getForAnalysis(userId, documentId);
-    return this.detector.detect(instruction);
+    return this.detector.detect(instruction, userId);
   }
 
   async analyze(userId: string, documentId: string, dto: AnalyzeDto) {
@@ -59,7 +59,7 @@ export class AnalysesService {
           confidence: 1,
           usedFallback: dto.usedFallback ?? false,
         }
-      : await this.detector.detect(dto.instruction);
+      : await this.detector.detect(dto.instruction, userId);
 
     const notes: string[] = [];
     if (detection.usedFallback) {
@@ -103,6 +103,7 @@ export class AnalysesService {
           text,
           targetLanguage: detection.targetLanguage,
           excerptsOnly,
+          userId,
           preferences: aiPreferenceRules(prefs, {
             translation: task === 'TRANSLATE',
           }),

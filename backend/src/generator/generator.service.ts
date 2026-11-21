@@ -115,7 +115,11 @@ Structure to follow: ${TYPE_HINTS[dto.docType as DocType]}`,
             },
           ],
           outlineSchema,
-          { temperature: 0.4, maxTokens: 3000 },
+          {
+            temperature: 0.4,
+            maxTokens: 3000,
+            usage: { userId: actor.userId, feature: 'WRITER' },
+          },
         );
 
         const title = dto.title ?? plan.title;
@@ -164,7 +168,11 @@ ${writerRules({ language, tone })}
           let sectionText = '';
           for await (const token of this.ai.streamText(
             messages,
-            { temperature: 0.7, maxTokens: LENGTH_SPEC.LONG.maxTokens },
+            {
+              temperature: 0.7,
+              maxTokens: LENGTH_SPEC.LONG.maxTokens,
+              usage: { userId: actor.userId, feature: 'WRITER' },
+            },
             signal,
           )) {
             sectionText += token;
@@ -189,7 +197,11 @@ ${writerRules({ language, tone })}
         ];
         for await (const token of this.ai.streamText(
           messages,
-          { temperature: 0.7, maxTokens: spec.maxTokens },
+          {
+            temperature: 0.7,
+            maxTokens: spec.maxTokens,
+            usage: { userId: actor.userId, feature: 'WRITER' },
+          },
           signal,
         )) {
           yield emit(token);
@@ -264,7 +276,11 @@ ${dto.docType ? `- The document is a ${dto.docType}.` : ''}`,
     try {
       for await (const token of this.ai.streamText(
         messages,
-        { temperature: 0.7, maxTokens: 3500 },
+        {
+          temperature: 0.7,
+          maxTokens: 3500,
+          usage: { userId: actor.userId, feature: 'WRITER' },
+        },
         signal,
       )) {
         added += token;

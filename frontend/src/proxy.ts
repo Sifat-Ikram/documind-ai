@@ -18,6 +18,7 @@ const PROTECTED = [
   "/history",
   "/settings",
   "/profile",
+  "/admin",
 ];
 const AUTH_PAGES = ["/login", "/register"];
 
@@ -61,5 +62,6 @@ export const config = {
     "/history/:path*",
     "/settings/:path*",
     "/profile/:path*",
+    "/admin/:path*",
   ],
 };

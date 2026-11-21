@@ -29,6 +29,11 @@ export type UserMinAggregateOutputType = {
   name: string | null
   email: string | null
   password: string | null
+  role: $Enums.Role | null
+  isBlocked: boolean | null
+  blockedAt: Date | null
+  lastLoginAt: Date | null
+  lastActiveAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -38,6 +43,11 @@ export type UserMaxAggregateOutputType = {
   name: string | null
   email: string | null
   password: string | null
+  role: $Enums.Role | null
+  isBlocked: boolean | null
+  blockedAt: Date | null
+  lastLoginAt: Date | null
+  lastActiveAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -47,6 +57,11 @@ export type UserCountAggregateOutputType = {
   name: number
   email: number
   password: number
+  role: number
+  isBlocked: number
+  blockedAt: number
+  lastLoginAt: number
+  lastActiveAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -58,6 +73,11 @@ export type UserMinAggregateInputType = {
   name?: true
   email?: true
   password?: true
+  role?: true
+  isBlocked?: true
+  blockedAt?: true
+  lastLoginAt?: true
+  lastActiveAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -67,6 +87,11 @@ export type UserMaxAggregateInputType = {
   name?: true
   email?: true
   password?: true
+  role?: true
+  isBlocked?: true
+  blockedAt?: true
+  lastLoginAt?: true
+  lastActiveAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -76,6 +101,11 @@ export type UserCountAggregateInputType = {
   name?: true
   email?: true
   password?: true
+  role?: true
+  isBlocked?: true
+  blockedAt?: true
+  lastLoginAt?: true
+  lastActiveAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -158,6 +188,11 @@ export type UserGroupByOutputType = {
   name: string
   email: string
   password: string
+  role: $Enums.Role
+  isBlocked: boolean
+  blockedAt: Date | null
+  lastLoginAt: Date | null
+  lastActiveAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -188,6 +223,11 @@ export type UserWhereInput = {
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  isBlocked?: Prisma.BoolFilter<"User"> | boolean
+  blockedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastActiveAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   documents?: Prisma.DocumentListRelationFilter
@@ -208,6 +248,9 @@ export type UserWhereInput = {
   versionsCreated?: Prisma.DocumentVersionListRelationFilter
   trashItems?: Prisma.TrashItemListRelationFilter
   notesUpdated?: Prisma.DocumentNoteListRelationFilter
+  aiUsage?: Prisma.AiUsageListRelationFilter
+  failedProcessing?: Prisma.FailedProcessingLogListRelationFilter
+  feedback?: Prisma.FeedbackListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -215,6 +258,11 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  isBlocked?: Prisma.SortOrder
+  blockedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   documents?: Prisma.DocumentOrderByRelationAggregateInput
@@ -235,6 +283,9 @@ export type UserOrderByWithRelationInput = {
   versionsCreated?: Prisma.DocumentVersionOrderByRelationAggregateInput
   trashItems?: Prisma.TrashItemOrderByRelationAggregateInput
   notesUpdated?: Prisma.DocumentNoteOrderByRelationAggregateInput
+  aiUsage?: Prisma.AiUsageOrderByRelationAggregateInput
+  failedProcessing?: Prisma.FailedProcessingLogOrderByRelationAggregateInput
+  feedback?: Prisma.FeedbackOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +296,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  isBlocked?: Prisma.BoolFilter<"User"> | boolean
+  blockedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastActiveAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   documents?: Prisma.DocumentListRelationFilter
@@ -265,6 +321,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   versionsCreated?: Prisma.DocumentVersionListRelationFilter
   trashItems?: Prisma.TrashItemListRelationFilter
   notesUpdated?: Prisma.DocumentNoteListRelationFilter
+  aiUsage?: Prisma.AiUsageListRelationFilter
+  failedProcessing?: Prisma.FailedProcessingLogListRelationFilter
+  feedback?: Prisma.FeedbackListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -272,6 +331,11 @@ export type UserOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  isBlocked?: Prisma.SortOrder
+  blockedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -287,6 +351,11 @@ export type UserScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+  isBlocked?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  blockedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  lastLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  lastActiveAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -296,6 +365,11 @@ export type UserCreateInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -316,6 +390,9 @@ export type UserCreateInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -323,6 +400,11 @@ export type UserUncheckedCreateInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -343,6 +425,9 @@ export type UserUncheckedCreateInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -350,6 +435,11 @@ export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -370,6 +460,9 @@ export type UserUpdateInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -377,6 +470,11 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -397,6 +495,9 @@ export type UserUncheckedUpdateInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -404,6 +505,11 @@ export type UserCreateManyInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -413,6 +519,11 @@ export type UserUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -422,6 +533,11 @@ export type UserUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -431,6 +547,11 @@ export type UserCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  isBlocked?: Prisma.SortOrder
+  blockedAt?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -440,6 +561,11 @@ export type UserMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  isBlocked?: Prisma.SortOrder
+  blockedAt?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -449,6 +575,11 @@ export type UserMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  isBlocked?: Prisma.SortOrder
+  blockedAt?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -465,6 +596,18 @@ export type UserNullableScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -727,11 +870,64 @@ export type UserUpdateOneRequiredWithoutPreferencesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPreferencesInput, Prisma.UserUpdateWithoutPreferencesInput>, Prisma.UserUncheckedUpdateWithoutPreferencesInput>
 }
 
+export type UserCreateNestedOneWithoutAiUsageInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAiUsageInput, Prisma.UserUncheckedCreateWithoutAiUsageInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAiUsageInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutAiUsageNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAiUsageInput, Prisma.UserUncheckedCreateWithoutAiUsageInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAiUsageInput
+  upsert?: Prisma.UserUpsertWithoutAiUsageInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAiUsageInput, Prisma.UserUpdateWithoutAiUsageInput>, Prisma.UserUncheckedUpdateWithoutAiUsageInput>
+}
+
+export type UserCreateNestedOneWithoutFailedProcessingInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFailedProcessingInput, Prisma.UserUncheckedCreateWithoutFailedProcessingInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFailedProcessingInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutFailedProcessingNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFailedProcessingInput, Prisma.UserUncheckedCreateWithoutFailedProcessingInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFailedProcessingInput
+  upsert?: Prisma.UserUpsertWithoutFailedProcessingInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFailedProcessingInput, Prisma.UserUpdateWithoutFailedProcessingInput>, Prisma.UserUncheckedUpdateWithoutFailedProcessingInput>
+}
+
+export type UserCreateNestedOneWithoutFeedbackInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackInput, Prisma.UserUncheckedCreateWithoutFeedbackInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutFeedbackNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackInput, Prisma.UserUncheckedCreateWithoutFeedbackInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackInput
+  upsert?: Prisma.UserUpsertWithoutFeedbackInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFeedbackInput, Prisma.UserUpdateWithoutFeedbackInput>, Prisma.UserUncheckedUpdateWithoutFeedbackInput>
+}
+
 export type UserCreateWithoutDocumentsInput = {
   id?: string
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
@@ -751,6 +947,9 @@ export type UserCreateWithoutDocumentsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDocumentsInput = {
@@ -758,6 +957,11 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
@@ -777,6 +981,9 @@ export type UserUncheckedCreateWithoutDocumentsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDocumentsInput = {
@@ -800,6 +1007,11 @@ export type UserUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
@@ -819,6 +1031,9 @@ export type UserUpdateWithoutDocumentsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentsInput = {
@@ -826,6 +1041,11 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
@@ -845,6 +1065,9 @@ export type UserUncheckedUpdateWithoutDocumentsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationsInput = {
@@ -852,6 +1075,11 @@ export type UserCreateWithoutConversationsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -871,6 +1099,9 @@ export type UserCreateWithoutConversationsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationsInput = {
@@ -878,6 +1109,11 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -897,6 +1133,9 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationsInput = {
@@ -920,6 +1159,11 @@ export type UserUpdateWithoutConversationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -939,6 +1183,9 @@ export type UserUpdateWithoutConversationsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -946,6 +1193,11 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -965,6 +1217,9 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAnalysesInput = {
@@ -972,6 +1227,11 @@ export type UserCreateWithoutAnalysesInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -991,6 +1251,9 @@ export type UserCreateWithoutAnalysesInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnalysesInput = {
@@ -998,6 +1261,11 @@ export type UserUncheckedCreateWithoutAnalysesInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1017,6 +1285,9 @@ export type UserUncheckedCreateWithoutAnalysesInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnalysesInput = {
@@ -1040,6 +1311,11 @@ export type UserUpdateWithoutAnalysesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1059,6 +1335,9 @@ export type UserUpdateWithoutAnalysesInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnalysesInput = {
@@ -1066,6 +1345,11 @@ export type UserUncheckedUpdateWithoutAnalysesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1085,6 +1369,9 @@ export type UserUncheckedUpdateWithoutAnalysesInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -1092,6 +1379,11 @@ export type UserCreateWithoutRefreshTokensInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1111,6 +1403,9 @@ export type UserCreateWithoutRefreshTokensInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -1118,6 +1413,11 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1137,6 +1437,9 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -1160,6 +1463,11 @@ export type UserUpdateWithoutRefreshTokensInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1179,6 +1487,9 @@ export type UserUpdateWithoutRefreshTokensInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -1186,6 +1497,11 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1205,6 +1521,9 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTrashItemsInput = {
@@ -1212,6 +1531,11 @@ export type UserCreateWithoutTrashItemsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1231,6 +1555,9 @@ export type UserCreateWithoutTrashItemsInput = {
   preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTrashItemsInput = {
@@ -1238,6 +1565,11 @@ export type UserUncheckedCreateWithoutTrashItemsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1257,6 +1589,9 @@ export type UserUncheckedCreateWithoutTrashItemsInput = {
   preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTrashItemsInput = {
@@ -1280,6 +1615,11 @@ export type UserUpdateWithoutTrashItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1299,6 +1639,9 @@ export type UserUpdateWithoutTrashItemsInput = {
   preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTrashItemsInput = {
@@ -1306,6 +1649,11 @@ export type UserUncheckedUpdateWithoutTrashItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1325,6 +1673,9 @@ export type UserUncheckedUpdateWithoutTrashItemsInput = {
   preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutVersionsCreatedInput = {
@@ -1332,6 +1683,11 @@ export type UserCreateWithoutVersionsCreatedInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1351,6 +1707,9 @@ export type UserCreateWithoutVersionsCreatedInput = {
   preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutVersionsCreatedInput = {
@@ -1358,6 +1717,11 @@ export type UserUncheckedCreateWithoutVersionsCreatedInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1377,6 +1741,9 @@ export type UserUncheckedCreateWithoutVersionsCreatedInput = {
   preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutVersionsCreatedInput = {
@@ -1400,6 +1767,11 @@ export type UserUpdateWithoutVersionsCreatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1419,6 +1791,9 @@ export type UserUpdateWithoutVersionsCreatedInput = {
   preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVersionsCreatedInput = {
@@ -1426,6 +1801,11 @@ export type UserUncheckedUpdateWithoutVersionsCreatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1445,6 +1825,9 @@ export type UserUncheckedUpdateWithoutVersionsCreatedInput = {
   preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTagsInput = {
@@ -1452,6 +1835,11 @@ export type UserCreateWithoutTagsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1471,6 +1859,9 @@ export type UserCreateWithoutTagsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTagsInput = {
@@ -1478,6 +1869,11 @@ export type UserUncheckedCreateWithoutTagsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1497,6 +1893,9 @@ export type UserUncheckedCreateWithoutTagsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTagsInput = {
@@ -1520,6 +1919,11 @@ export type UserUpdateWithoutTagsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1539,6 +1943,9 @@ export type UserUpdateWithoutTagsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTagsInput = {
@@ -1546,6 +1953,11 @@ export type UserUncheckedUpdateWithoutTagsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1565,6 +1977,9 @@ export type UserUncheckedUpdateWithoutTagsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -1572,6 +1987,11 @@ export type UserCreateWithoutFavoritesInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1591,6 +2011,9 @@ export type UserCreateWithoutFavoritesInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -1598,6 +2021,11 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1617,6 +2045,9 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -1640,6 +2071,11 @@ export type UserUpdateWithoutFavoritesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1659,6 +2095,9 @@ export type UserUpdateWithoutFavoritesInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -1666,6 +2105,11 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1685,6 +2129,9 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCollectionsInput = {
@@ -1692,6 +2139,11 @@ export type UserCreateWithoutCollectionsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1711,6 +2163,9 @@ export type UserCreateWithoutCollectionsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCollectionsInput = {
@@ -1718,6 +2173,11 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1737,6 +2197,9 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCollectionsInput = {
@@ -1760,6 +2223,11 @@ export type UserUpdateWithoutCollectionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1779,6 +2247,9 @@ export type UserUpdateWithoutCollectionsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCollectionsInput = {
@@ -1786,6 +2257,11 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1805,6 +2281,9 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCollectionMembershipsInput = {
@@ -1812,6 +2291,11 @@ export type UserCreateWithoutCollectionMembershipsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1831,6 +2315,9 @@ export type UserCreateWithoutCollectionMembershipsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCollectionMembershipsInput = {
@@ -1838,6 +2325,11 @@ export type UserUncheckedCreateWithoutCollectionMembershipsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1857,6 +2349,9 @@ export type UserUncheckedCreateWithoutCollectionMembershipsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCollectionMembershipsInput = {
@@ -1880,6 +2375,11 @@ export type UserUpdateWithoutCollectionMembershipsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -1899,6 +2399,9 @@ export type UserUpdateWithoutCollectionMembershipsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCollectionMembershipsInput = {
@@ -1906,6 +2409,11 @@ export type UserUncheckedUpdateWithoutCollectionMembershipsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -1925,6 +2433,9 @@ export type UserUncheckedUpdateWithoutCollectionMembershipsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSharesReceivedInput = {
@@ -1932,6 +2443,11 @@ export type UserCreateWithoutSharesReceivedInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -1951,6 +2467,9 @@ export type UserCreateWithoutSharesReceivedInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSharesReceivedInput = {
@@ -1958,6 +2477,11 @@ export type UserUncheckedCreateWithoutSharesReceivedInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -1977,6 +2501,9 @@ export type UserUncheckedCreateWithoutSharesReceivedInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSharesReceivedInput = {
@@ -1989,6 +2516,11 @@ export type UserCreateWithoutSharesGivenInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -2008,6 +2540,9 @@ export type UserCreateWithoutSharesGivenInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSharesGivenInput = {
@@ -2015,6 +2550,11 @@ export type UserUncheckedCreateWithoutSharesGivenInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -2034,6 +2574,9 @@ export type UserUncheckedCreateWithoutSharesGivenInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSharesGivenInput = {
@@ -2057,6 +2600,11 @@ export type UserUpdateWithoutSharesReceivedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2076,6 +2624,9 @@ export type UserUpdateWithoutSharesReceivedInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSharesReceivedInput = {
@@ -2083,6 +2634,11 @@ export type UserUncheckedUpdateWithoutSharesReceivedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2102,6 +2658,9 @@ export type UserUncheckedUpdateWithoutSharesReceivedInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutSharesGivenInput = {
@@ -2120,6 +2679,11 @@ export type UserUpdateWithoutSharesGivenInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2139,6 +2703,9 @@ export type UserUpdateWithoutSharesGivenInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSharesGivenInput = {
@@ -2146,6 +2713,11 @@ export type UserUncheckedUpdateWithoutSharesGivenInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2165,6 +2737,9 @@ export type UserUncheckedUpdateWithoutSharesGivenInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -2172,6 +2747,11 @@ export type UserCreateWithoutCommentsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -2191,6 +2771,9 @@ export type UserCreateWithoutCommentsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -2198,6 +2781,11 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -2217,6 +2805,9 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -2240,6 +2831,11 @@ export type UserUpdateWithoutCommentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2259,6 +2855,9 @@ export type UserUpdateWithoutCommentsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -2266,6 +2865,11 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2285,6 +2889,9 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotesUpdatedInput = {
@@ -2292,6 +2899,11 @@ export type UserCreateWithoutNotesUpdatedInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -2311,6 +2923,9 @@ export type UserCreateWithoutNotesUpdatedInput = {
   preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotesUpdatedInput = {
@@ -2318,6 +2933,11 @@ export type UserUncheckedCreateWithoutNotesUpdatedInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -2337,6 +2957,9 @@ export type UserUncheckedCreateWithoutNotesUpdatedInput = {
   preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotesUpdatedInput = {
@@ -2360,6 +2983,11 @@ export type UserUpdateWithoutNotesUpdatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2379,6 +3007,9 @@ export type UserUpdateWithoutNotesUpdatedInput = {
   preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesUpdatedInput = {
@@ -2386,6 +3017,11 @@ export type UserUncheckedUpdateWithoutNotesUpdatedInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2405,6 +3041,9 @@ export type UserUncheckedUpdateWithoutNotesUpdatedInput = {
   preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutViewsInput = {
@@ -2412,6 +3051,11 @@ export type UserCreateWithoutViewsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -2431,6 +3075,9 @@ export type UserCreateWithoutViewsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutViewsInput = {
@@ -2438,6 +3085,11 @@ export type UserUncheckedCreateWithoutViewsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -2457,6 +3109,9 @@ export type UserUncheckedCreateWithoutViewsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutViewsInput = {
@@ -2480,6 +3135,11 @@ export type UserUpdateWithoutViewsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2499,6 +3159,9 @@ export type UserUpdateWithoutViewsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutViewsInput = {
@@ -2506,6 +3169,11 @@ export type UserUncheckedUpdateWithoutViewsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2525,6 +3193,9 @@ export type UserUncheckedUpdateWithoutViewsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGenerationsInput = {
@@ -2532,6 +3203,11 @@ export type UserCreateWithoutGenerationsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -2551,6 +3227,9 @@ export type UserCreateWithoutGenerationsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGenerationsInput = {
@@ -2558,6 +3237,11 @@ export type UserUncheckedCreateWithoutGenerationsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -2577,6 +3261,9 @@ export type UserUncheckedCreateWithoutGenerationsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGenerationsInput = {
@@ -2600,6 +3287,11 @@ export type UserUpdateWithoutGenerationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2619,6 +3311,9 @@ export type UserUpdateWithoutGenerationsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGenerationsInput = {
@@ -2626,6 +3321,11 @@ export type UserUncheckedUpdateWithoutGenerationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2645,6 +3345,9 @@ export type UserUncheckedUpdateWithoutGenerationsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversionsInput = {
@@ -2652,6 +3355,11 @@ export type UserCreateWithoutConversionsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -2671,6 +3379,9 @@ export type UserCreateWithoutConversionsInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversionsInput = {
@@ -2678,6 +3389,11 @@ export type UserUncheckedCreateWithoutConversionsInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -2697,6 +3413,9 @@ export type UserUncheckedCreateWithoutConversionsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversionsInput = {
@@ -2720,6 +3439,11 @@ export type UserUpdateWithoutConversionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2739,6 +3463,9 @@ export type UserUpdateWithoutConversionsInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversionsInput = {
@@ -2746,6 +3473,11 @@ export type UserUncheckedUpdateWithoutConversionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2765,6 +3497,9 @@ export type UserUncheckedUpdateWithoutConversionsInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPreferencesInput = {
@@ -2772,6 +3507,11 @@ export type UserCreateWithoutPreferencesInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
@@ -2791,6 +3531,9 @@ export type UserCreateWithoutPreferencesInput = {
   versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPreferencesInput = {
@@ -2798,6 +3541,11 @@ export type UserUncheckedCreateWithoutPreferencesInput = {
   name: string
   email: string
   password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
@@ -2817,6 +3565,9 @@ export type UserUncheckedCreateWithoutPreferencesInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
   trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
   notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPreferencesInput = {
@@ -2840,6 +3591,11 @@ export type UserUpdateWithoutPreferencesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
@@ -2859,6 +3615,9 @@ export type UserUpdateWithoutPreferencesInput = {
   versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPreferencesInput = {
@@ -2866,6 +3625,11 @@ export type UserUncheckedUpdateWithoutPreferencesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
@@ -2885,6 +3649,465 @@ export type UserUncheckedUpdateWithoutPreferencesInput = {
   versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
   trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
   notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAiUsageInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAiUsageInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAiUsageInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAiUsageInput, Prisma.UserUncheckedCreateWithoutAiUsageInput>
+}
+
+export type UserUpsertWithoutAiUsageInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAiUsageInput, Prisma.UserUncheckedUpdateWithoutAiUsageInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAiUsageInput, Prisma.UserUncheckedCreateWithoutAiUsageInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAiUsageInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAiUsageInput, Prisma.UserUncheckedUpdateWithoutAiUsageInput>
+}
+
+export type UserUpdateWithoutAiUsageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAiUsageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFailedProcessingInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFailedProcessingInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  feedback?: Prisma.FeedbackUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFailedProcessingInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFailedProcessingInput, Prisma.UserUncheckedCreateWithoutFailedProcessingInput>
+}
+
+export type UserUpsertWithoutFailedProcessingInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFailedProcessingInput, Prisma.UserUncheckedUpdateWithoutFailedProcessingInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFailedProcessingInput, Prisma.UserUncheckedCreateWithoutFailedProcessingInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFailedProcessingInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFailedProcessingInput, Prisma.UserUncheckedUpdateWithoutFailedProcessingInput>
+}
+
+export type UserUpdateWithoutFailedProcessingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFailedProcessingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  feedback?: Prisma.FeedbackUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutFeedbackInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutFeedbackInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  isBlocked?: boolean
+  blockedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  lastActiveAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  documents?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  analyses?: Prisma.AnalysisUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutOwnerInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedCreateNestedManyWithoutUserInput
+  sharesReceived?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutUserInput
+  sharesGiven?: Prisma.DocumentShareUncheckedCreateNestedManyWithoutSharedByInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  views?: Prisma.DocumentViewUncheckedCreateNestedManyWithoutUserInput
+  generations?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  conversions?: Prisma.ConversionJobUncheckedCreateNestedManyWithoutUserInput
+  preferences?: Prisma.UserPreferenceUncheckedCreateNestedOneWithoutUserInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedCreateNestedManyWithoutCreatedByInput
+  trashItems?: Prisma.TrashItemUncheckedCreateNestedManyWithoutTrashedByInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedCreateNestedManyWithoutUpdatedByInput
+  aiUsage?: Prisma.AiUsageUncheckedCreateNestedManyWithoutUserInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutFeedbackInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackInput, Prisma.UserUncheckedCreateWithoutFeedbackInput>
+}
+
+export type UserUpsertWithoutFeedbackInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackInput, Prisma.UserUncheckedUpdateWithoutFeedbackInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackInput, Prisma.UserUncheckedCreateWithoutFeedbackInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFeedbackInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackInput, Prisma.UserUncheckedUpdateWithoutFeedbackInput>
+}
+
+export type UserUpdateWithoutFeedbackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFeedbackInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isBlocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  analyses?: Prisma.AnalysisUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutOwnerNestedInput
+  collectionMemberships?: Prisma.CollectionMemberUncheckedUpdateManyWithoutUserNestedInput
+  sharesReceived?: Prisma.DocumentShareUncheckedUpdateManyWithoutUserNestedInput
+  sharesGiven?: Prisma.DocumentShareUncheckedUpdateManyWithoutSharedByNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  views?: Prisma.DocumentViewUncheckedUpdateManyWithoutUserNestedInput
+  generations?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  conversions?: Prisma.ConversionJobUncheckedUpdateManyWithoutUserNestedInput
+  preferences?: Prisma.UserPreferenceUncheckedUpdateOneWithoutUserNestedInput
+  versionsCreated?: Prisma.DocumentVersionUncheckedUpdateManyWithoutCreatedByNestedInput
+  trashItems?: Prisma.TrashItemUncheckedUpdateManyWithoutTrashedByNestedInput
+  notesUpdated?: Prisma.DocumentNoteUncheckedUpdateManyWithoutUpdatedByNestedInput
+  aiUsage?: Prisma.AiUsageUncheckedUpdateManyWithoutUserNestedInput
+  failedProcessing?: Prisma.FailedProcessingLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2910,6 +4133,9 @@ export type UserCountOutputType = {
   versionsCreated: number
   trashItems: number
   notesUpdated: number
+  aiUsage: number
+  failedProcessing: number
+  feedback: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2930,6 +4156,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   versionsCreated?: boolean | UserCountOutputTypeCountVersionsCreatedArgs
   trashItems?: boolean | UserCountOutputTypeCountTrashItemsArgs
   notesUpdated?: boolean | UserCountOutputTypeCountNotesUpdatedArgs
+  aiUsage?: boolean | UserCountOutputTypeCountAiUsageArgs
+  failedProcessing?: boolean | UserCountOutputTypeCountFailedProcessingArgs
+  feedback?: boolean | UserCountOutputTypeCountFeedbackArgs
 }
 
 /**
@@ -3061,12 +4290,38 @@ export type UserCountOutputTypeCountNotesUpdatedArgs<ExtArgs extends runtime.Typ
   where?: Prisma.DocumentNoteWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAiUsageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AiUsageWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFailedProcessingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FailedProcessingLogWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFeedbackArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedbackWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
+  isBlocked?: boolean
+  blockedAt?: boolean
+  lastLoginAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   documents?: boolean | Prisma.User$documentsArgs<ExtArgs>
@@ -3087,6 +4342,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   versionsCreated?: boolean | Prisma.User$versionsCreatedArgs<ExtArgs>
   trashItems?: boolean | Prisma.User$trashItemsArgs<ExtArgs>
   notesUpdated?: boolean | Prisma.User$notesUpdatedArgs<ExtArgs>
+  aiUsage?: boolean | Prisma.User$aiUsageArgs<ExtArgs>
+  failedProcessing?: boolean | Prisma.User$failedProcessingArgs<ExtArgs>
+  feedback?: boolean | Prisma.User$feedbackArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3095,6 +4353,11 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
+  isBlocked?: boolean
+  blockedAt?: boolean
+  lastLoginAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -3104,6 +4367,11 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
+  isBlocked?: boolean
+  blockedAt?: boolean
+  lastLoginAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -3113,11 +4381,16 @@ export type UserSelectScalar = {
   name?: boolean
   email?: boolean
   password?: boolean
+  role?: boolean
+  isBlocked?: boolean
+  blockedAt?: boolean
+  lastLoginAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "isBlocked" | "blockedAt" | "lastLoginAt" | "lastActiveAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | Prisma.User$documentsArgs<ExtArgs>
   conversations?: boolean | Prisma.User$conversationsArgs<ExtArgs>
@@ -3137,6 +4410,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   versionsCreated?: boolean | Prisma.User$versionsCreatedArgs<ExtArgs>
   trashItems?: boolean | Prisma.User$trashItemsArgs<ExtArgs>
   notesUpdated?: boolean | Prisma.User$notesUpdatedArgs<ExtArgs>
+  aiUsage?: boolean | Prisma.User$aiUsageArgs<ExtArgs>
+  failedProcessing?: boolean | Prisma.User$failedProcessingArgs<ExtArgs>
+  feedback?: boolean | Prisma.User$feedbackArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3163,12 +4439,20 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     versionsCreated: Prisma.$DocumentVersionPayload<ExtArgs>[]
     trashItems: Prisma.$TrashItemPayload<ExtArgs>[]
     notesUpdated: Prisma.$DocumentNotePayload<ExtArgs>[]
+    aiUsage: Prisma.$AiUsagePayload<ExtArgs>[]
+    failedProcessing: Prisma.$FailedProcessingLogPayload<ExtArgs>[]
+    feedback: Prisma.$FeedbackPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     email: string
     password: string
+    role: $Enums.Role
+    isBlocked: boolean
+    blockedAt: Date | null
+    lastLoginAt: Date | null
+    lastActiveAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -3583,6 +4867,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   versionsCreated<T extends Prisma.User$versionsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$versionsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   trashItems<T extends Prisma.User$trashItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trashItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrashItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notesUpdated<T extends Prisma.User$notesUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notesUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  aiUsage<T extends Prisma.User$aiUsageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$aiUsageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  failedProcessing<T extends Prisma.User$failedProcessingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$failedProcessingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FailedProcessingLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  feedback<T extends Prisma.User$feedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3616,6 +4903,11 @@ export interface UserFieldRefs {
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'Role'>
+  readonly isBlocked: Prisma.FieldRef<"User", 'Boolean'>
+  readonly blockedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly lastLoginAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly lastActiveAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -4435,6 +5727,78 @@ export type User$notesUpdatedArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.DocumentNoteScalarFieldEnum | Prisma.DocumentNoteScalarFieldEnum[]
+}
+
+/**
+ * User.aiUsage
+ */
+export type User$aiUsageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AiUsage
+   */
+  select?: Prisma.AiUsageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AiUsage
+   */
+  omit?: Prisma.AiUsageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AiUsageInclude<ExtArgs> | null
+  where?: Prisma.AiUsageWhereInput
+  orderBy?: Prisma.AiUsageOrderByWithRelationInput | Prisma.AiUsageOrderByWithRelationInput[]
+  cursor?: Prisma.AiUsageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AiUsageScalarFieldEnum | Prisma.AiUsageScalarFieldEnum[]
+}
+
+/**
+ * User.failedProcessing
+ */
+export type User$failedProcessingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FailedProcessingLog
+   */
+  select?: Prisma.FailedProcessingLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FailedProcessingLog
+   */
+  omit?: Prisma.FailedProcessingLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FailedProcessingLogInclude<ExtArgs> | null
+  where?: Prisma.FailedProcessingLogWhereInput
+  orderBy?: Prisma.FailedProcessingLogOrderByWithRelationInput | Prisma.FailedProcessingLogOrderByWithRelationInput[]
+  cursor?: Prisma.FailedProcessingLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FailedProcessingLogScalarFieldEnum | Prisma.FailedProcessingLogScalarFieldEnum[]
+}
+
+/**
+ * User.feedback
+ */
+export type User$feedbackArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Feedback
+   */
+  select?: Prisma.FeedbackSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Feedback
+   */
+  omit?: Prisma.FeedbackOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeedbackInclude<ExtArgs> | null
+  where?: Prisma.FeedbackWhereInput
+  orderBy?: Prisma.FeedbackOrderByWithRelationInput | Prisma.FeedbackOrderByWithRelationInput[]
+  cursor?: Prisma.FeedbackWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeedbackScalarFieldEnum | Prisma.FeedbackScalarFieldEnum[]
 }
 
 /**

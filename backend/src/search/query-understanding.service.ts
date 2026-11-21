@@ -10,7 +10,7 @@ export class QueryUnderstandingService {
   constructor(private readonly ai: OpenRouterService) {}
 
   /** 1 AI request: a natural-language request becomes search words (with close synonyms). */
-  async terms(query: string): Promise<string[]> {
+  async terms(query: string, userId?: string): Promise<string[]> {
     const result = await this.ai.completeJson(
       [
         {
@@ -29,7 +29,7 @@ Rules:
         { role: 'user', content: `Search request:\n"""\n${query}\n"""` },
       ],
       termsSchema,
-      { temperature: 0, maxTokens: 1500 },
+      { temperature: 0, maxTokens: 1500, usage: { userId, feature: 'SEARCH' } },
     );
     return cleanTerms(result.terms);
   }

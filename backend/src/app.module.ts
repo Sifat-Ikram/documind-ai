@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { validateEnv } from './config/env';
 import { PrismaModule } from './prisma/prisma.module';
@@ -27,6 +27,10 @@ import { SearchModule } from './search/search.module';
 import { ConverterModule } from './converter/converter.module';
 import { ContactModule } from './contact/contact.module';
 import { UserDataModule } from './user-data/user-data.module';
+import { AdminModule } from './admin/admin.module';
+import { FeedbackModule } from './feedback/feedback.module';
+import { UsageModule } from './usage/usage.module';
+import { ApiMetricsInterceptor } from './usage/api-metrics.interceptor';
 
 @Module({
   imports: [
@@ -55,8 +59,14 @@ import { UserDataModule } from './user-data/user-data.module';
     SearchModule,
     ConverterModule,
     ContactModule,
-    UserDataModule
+    UserDataModule,
+    UsageModule,
+    AdminModule,
+    FeedbackModule
   ],
-  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
+  providers: [
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
+    { provide: APP_INTERCEPTOR, useClass: ApiMetricsInterceptor },
+  ],
 })
 export class AppModule {}

@@ -39,6 +39,35 @@ enum DocumentSource {
   GENERATED
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+enum DocumentStatus {
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum AiFeature {
+  WRITER
+  ANALYSIS
+  CHAT
+  SEARCH
+}
+
+enum FeedbackType {
+  FEEDBACK
+  BUG_REPORT
+}
+
+enum FeedbackStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+}
+
 model User {
   id            String         @id @default(cuid())
   name          String
@@ -62,6 +91,14 @@ model User {
   versionsCreated       DocumentVersion[]
   trashItems            TrashItem[]
   notesUpdated          DocumentNote[]
+  role                  Role                  @default(USER)
+  isBlocked             Boolean               @default(false)
+  blockedAt             DateTime?
+  lastLoginAt           DateTime?
+  lastActiveAt          DateTime?
+  aiUsage               AiUsage[]
+  failedProcessing      FailedProcessingLog[]
+  feedback              Feedback[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -99,6 +136,7 @@ model Document {
   views          DocumentView[]
   note           DocumentNote?
   generatedFrom  GeneratedDocument[]
+  processingStatus DocumentStatus    @default(COMPLETED)
 
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
@@ -393,6 +431,68 @@ model UserPreference {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   data      Json     @default("{}")
   updatedAt DateTime @updatedAt
+}
+
+model AiUsage {
+  id               String    @id @default(cuid())
+  userId           String?
+  user             User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  feature          AiFeature
+  model            String?
+  promptTokens     Int       @default(0)
+  completionTokens Int       @default(0)
+  totalTokens      Int       @default(0)
+  latencyMs        Int       @default(0)
+  success          Boolean   @default(true)
+  error            String?
+  createdAt        DateTime  @default(now())
+
+  @@index([createdAt])
+  @@index([feature, createdAt])
+  @@index([userId, createdAt])
+}
+
+model ApiRequestLog {
+  id         String   @id @default(cuid())
+  method     String
+  path       String
+  status     Int
+  durationMs Int
+  userId     String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([status, createdAt])
+}
+
+// An upload that never became a Document (bad signature, unreadable text, ...).
+model FailedProcessingLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  fileName  String
+  fileType  String?
+  reason    String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model Feedback {
+  id        String         @id @default(cuid())
+  userId    String?
+  user      User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  type      FeedbackType   @default(FEEDBACK)
+  subject   String
+  message   String         @db.Text
+  rating    Int?
+  status    FeedbackStatus @default(OPEN)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  handledAt DateTime?
+
+  @@index([createdAt])
+  @@index([status, createdAt])
 }
 
 model ContactMessage {

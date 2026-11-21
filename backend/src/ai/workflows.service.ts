@@ -117,6 +117,8 @@ export interface WorkflowInput {
   targetLanguage: string | null;
   excerptsOnly?: boolean;
   preferences?: string;
+  /** Who asked, for usage analytics. */
+  userId?: string;
 }
 
 export interface TaskSection {
@@ -169,7 +171,11 @@ export class WorkflowsService {
         { role: 'user', content: userMessage },
       ],
       def.schema,
-      { temperature: 0.2, maxTokens: def.maxTokens + 1500 },
+      {
+        temperature: 0.2,
+        maxTokens: def.maxTokens + 1500,
+        usage: { userId: input.userId, feature: 'ANALYSIS' },
+      },
     );
 
     return { task: input.task, title: def.title, data };

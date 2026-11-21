@@ -160,6 +160,26 @@ export type ConversionJob = Prisma.ConversionJobModel
  */
 export type UserPreference = Prisma.UserPreferenceModel
 /**
+ * Model AiUsage
+ * 
+ */
+export type AiUsage = Prisma.AiUsageModel
+/**
+ * Model ApiRequestLog
+ * 
+ */
+export type ApiRequestLog = Prisma.ApiRequestLogModel
+/**
+ * Model FailedProcessingLog
+ * 
+ */
+export type FailedProcessingLog = Prisma.FailedProcessingLogModel
+/**
+ * Model Feedback
+ * 
+ */
+export type Feedback = Prisma.FeedbackModel
+/**
  * Model ContactMessage
  * 
  */

@@ -37,7 +37,7 @@ export class TaskDetectorService {
 
   constructor(private readonly ai: OpenRouterService) {}
 
-  async detect(instruction: string): Promise<DetectionResult> {
+  async detect(instruction: string, userId?: string): Promise<DetectionResult> {
     try {
       const detected = await this.ai.completeJson(
         [
@@ -45,7 +45,7 @@ export class TaskDetectorService {
           { role: 'user', content: `Instruction:\n"""\n${instruction}\n"""` },
         ],
         detectionSchema,
-        { temperature: 0, maxTokens: 1500 },
+        { temperature: 0, maxTokens: 1500, usage: { userId, feature: 'ANALYSIS' } },
       );
 
       const tasks = [...new Set(detected.tasks)];

@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { randomUUID } from 'node:crypto';
@@ -18,7 +22,7 @@ const tokenSelect = {
   replacedById: true,
   revokedAt: true,
   expiresAt: true,
-  user: { select: publicUserSelect },
+  user: { select: { ...publicUserSelect, isBlocked: true } },
 } as const;
 
 interface LoadedToken {
@@ -28,7 +32,7 @@ interface LoadedToken {
   replacedById: string | null;
   revokedAt: Date | null;
   expiresAt: Date;
-  user: PublicUser;
+  user: PublicUser & { isBlocked: boolean };
 }
 
 @Injectable()
@@ -71,6 +75,9 @@ export class SessionsService {
       select: tokenSelect,
     });
     if (!token) throw new UnauthorizedException('Invalid session');
+    if (token.user.isBlocked) {
+      throw new ForbiddenException('This account has been blocked');
+    }
 
     const now = new Date();
     if (token.revokedAt) return this.handleRevoked(token, now);

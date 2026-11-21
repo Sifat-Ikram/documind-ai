@@ -75,6 +75,10 @@ export const ModelName = {
   GenerationLog: 'GenerationLog',
   ConversionJob: 'ConversionJob',
   UserPreference: 'UserPreference',
+  AiUsage: 'AiUsage',
+  ApiRequestLog: 'ApiRequestLog',
+  FailedProcessingLog: 'FailedProcessingLog',
+  Feedback: 'Feedback',
   ContactMessage: 'ContactMessage'
 } as const
 
@@ -99,6 +103,11 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  role: 'role',
+  isBlocked: 'isBlocked',
+  blockedAt: 'blockedAt',
+  lastLoginAt: 'lastLoginAt',
+  lastActiveAt: 'lastActiveAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -124,6 +133,7 @@ export const DocumentScalarFieldEnum = {
   versionNote: 'versionNote',
   archivedAt: 'archivedAt',
   trashedAt: 'trashedAt',
+  processingStatus: 'processingStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -391,6 +401,64 @@ export const UserPreferenceScalarFieldEnum = {
 } as const
 
 export type UserPreferenceScalarFieldEnum = (typeof UserPreferenceScalarFieldEnum)[keyof typeof UserPreferenceScalarFieldEnum]
+
+
+export const AiUsageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  feature: 'feature',
+  model: 'model',
+  promptTokens: 'promptTokens',
+  completionTokens: 'completionTokens',
+  totalTokens: 'totalTokens',
+  latencyMs: 'latencyMs',
+  success: 'success',
+  error: 'error',
+  createdAt: 'createdAt'
+} as const
+
+export type AiUsageScalarFieldEnum = (typeof AiUsageScalarFieldEnum)[keyof typeof AiUsageScalarFieldEnum]
+
+
+export const ApiRequestLogScalarFieldEnum = {
+  id: 'id',
+  method: 'method',
+  path: 'path',
+  status: 'status',
+  durationMs: 'durationMs',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type ApiRequestLogScalarFieldEnum = (typeof ApiRequestLogScalarFieldEnum)[keyof typeof ApiRequestLogScalarFieldEnum]
+
+
+export const FailedProcessingLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fileName: 'fileName',
+  fileType: 'fileType',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type FailedProcessingLogScalarFieldEnum = (typeof FailedProcessingLogScalarFieldEnum)[keyof typeof FailedProcessingLogScalarFieldEnum]
+
+
+export const FeedbackScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  subject: 'subject',
+  message: 'message',
+  rating: 'rating',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  handledAt: 'handledAt'
+} as const
+
+export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
 
 
 export const ContactMessageScalarFieldEnum = {

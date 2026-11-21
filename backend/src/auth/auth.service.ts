@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  ForbiddenException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -49,12 +50,24 @@ export class AuthService {
     if (!user || !valid) {
       throw new UnauthorizedException('Invalid email or password');
     }
+    if (user.isBlocked) {
+      throw new ForbiddenException(
+        'This account has been blocked. Contact support if you think this is a mistake.',
+      );
+    }
+
+    const now = new Date();
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: { lastLoginAt: now, lastActiveAt: now },
+    });
 
     return {
       user: {
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
         createdAt: user.createdAt,
       },
       tokens: await this.sessions.issueSession(user.id, user.email),

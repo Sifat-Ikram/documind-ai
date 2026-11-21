@@ -252,6 +252,7 @@ export class ChatService {
     ];
 
     return {
+      userId,
       conversationId,
       title,
       userMessage,
@@ -269,7 +270,11 @@ export class ChatService {
     try {
       for await (const token of this.ai.streamText(
         prepared.aiMessages,
-        { temperature: 0.3, maxTokens: 4000 },
+        {
+          temperature: 0.3,
+          maxTokens: 4000,
+          usage: { userId: prepared.userId, feature: 'CHAT' },
+        },
         signal,
       )) {
         answer += token;
