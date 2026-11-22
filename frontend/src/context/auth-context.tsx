@@ -119,13 +119,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const logout = useCallback(async () => {
-    try {
-      await api("/auth/logout", { method: "POST" });
-    } catch {}
     clearSessionFlag();
     setUser(null);
     setStatus("unauthenticated");
-    router.replace("/login");
+    router.replace("/");
+
+    try {
+      await api("/auth/logout", { method: "POST" });
+    } catch {}
   }, [router]);
 
   const value = useMemo<AuthContextValue>(

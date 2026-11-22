@@ -39,8 +39,17 @@ export function LoginForm() {
     setErrors({});
     setSubmitting(true);
     try {
-      await login(parsed.data.email, parsed.data.password);
-      router.replace(safeNextPath(params.get("next")));
+      const user = await login(parsed.data.email, parsed.data.password);
+
+      const nextPath = params.get("next");
+
+      router.replace(
+        nextPath
+          ? safeNextPath(nextPath)
+          : user.role === "ADMIN"
+            ? "/admin"
+            : "/dashboard",
+      );
     } catch (err) {
       setFormError(
         err instanceof ApiError && err.status === 401

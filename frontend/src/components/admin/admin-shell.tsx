@@ -69,8 +69,7 @@ function AdminSidebar({
         )}
       </div>
 
-      <div className="mx-3 mt-1 flex items-center gap-2 rounded-lg bg-primary-soft px-3 py-2 text-xs font-semibold uppercase tracking-wide text-link">
-        <FiShield className="size-3.5" aria-hidden="true" />
+      <div className="mx-3 mt-5 flex items-center gap-2 px-3 py-2 text-xl font-bold uppercase tracking-wide text-[#18181b]">
         Admin Panel
       </div>
 
@@ -100,16 +99,6 @@ function AdminSidebar({
           })}
         </ul>
       </nav>
-
-      <div className="border-t border-border p-3">
-        <Link
-          href="/dashboard"
-          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface-muted hover:text-text"
-        >
-          <FiArrowLeft className="size-4" aria-hidden="true" />
-          Back to app
-        </Link>
-      </div>
     </div>
   );
 }
@@ -172,9 +161,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
           <p className="mt-1 text-sm text-text-muted">
             This area is only available to administrators.
           </p>
-          <Link href="/dashboard">
+          <Link href="/">
             <Button variant="secondary" className="mt-5">
-              Back to dashboard
+              Back Home
             </Button>
           </Link>
         </div>
@@ -224,11 +213,11 @@ export function AdminShell({ children }: { children: ReactNode }) {
 
           <div className="ml-auto flex items-center gap-2">
             <Link
-              href="/dashboard"
+              href="/"
               className="hidden items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface-muted hover:text-text sm:flex"
             >
               <FiArrowLeft className="size-4" aria-hidden="true" />
-              Back to app
+              Back Home
             </Link>
             <span className="hidden items-center gap-2 rounded-lg p-1.5 sm:flex">
               <span className="grid size-8 place-items-center rounded-full bg-surface-muted text-sm font-semibold text-text">

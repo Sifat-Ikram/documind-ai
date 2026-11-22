@@ -14,7 +14,6 @@ import ProjectShowcaseModal from "../ui/project-showcase-modal";
 
 const NAV_LINKS = [
   { href: "/generate", label: "AI Generator" },
-  { href: "/#features", label: "Features" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -243,7 +242,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
       </header>
 
       <main
-        className={`mx-auto w-11/12 ${pathname === "/" ? "mt-0" : "mt-10"}`}
+        className={`mx-auto w-11/12 ${pathname === "/" || pathname === "/generate" ? "mt-0" : "mt-10"}`}
       >
         {children}
       </main>

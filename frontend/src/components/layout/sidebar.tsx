@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiShield, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import { Logo } from "@/components/ui/logo";
-import { useAuth } from "@/context/auth-context";
 import { cn } from "@/lib/cn";
 import { HOME_ITEM, NAV_ITEMS, isActive, type NavItem } from "@/lib/nav";
 
@@ -65,7 +64,6 @@ export function SidebarContent({
   onClose?: () => void;
 }) {
   const pathname = usePathname();
-  const { user } = useAuth();
 
   return (
     <div className="flex h-full flex-col">
@@ -102,15 +100,6 @@ export function SidebarContent({
               />
             </li>
           ))}
-          {user?.role === "ADMIN" && (
-            <li>
-              <NavEntry
-                item={{ href: "/admin", label: "Admin Panel", icon: FiShield }}
-                pathname={pathname}
-                onNavigate={onNavigate}
-              />
-            </li>
-          )}
         </ul>
       </nav>
     </div>

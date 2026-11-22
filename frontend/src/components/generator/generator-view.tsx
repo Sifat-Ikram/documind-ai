@@ -62,11 +62,7 @@ const LENGTH_HINT: Record<GenerationLength, string> = {
   LONG: "about 1500 words",
 };
 
-const EXAMPLES = [
-  "A short report",
-  "A cover letter",
-  "A blog postt",
-];
+const EXAMPLES = ["A short report", "A cover letter", "A blog post"];
 
 const STORE_KEY = "documind-writer-v1";
 const STORE_TTL = 24 * 60 * 60 * 1000;
@@ -241,16 +237,7 @@ export function GeneratorView() {
     } catch {
       // ignore
     }
-  }, [
-    hydrated,
-    runningId,
-    messages,
-    docType,
-    length,
-    language,
-    tone,
-    title,
-  ]);
+  }, [hydrated, runningId, messages, docType, length, language, tone, title]);
 
   // leaving the page stops the draft; what was written is already saved by the server
   useEffect(() => () => abortRef.current?.abort(), []);
@@ -493,15 +480,7 @@ export function GeneratorView() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-wider text-ai">
-            AI Writer
-          </p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight text-text sm:text-3xl">
-            What should we write?
-          </h1>
-        </div>
+      <header className="flex flex-wrap items-center justify-end py-5">
         <Button
           variant="secondary"
           size="sm"
@@ -515,23 +494,11 @@ export function GeneratorView() {
 
       <div className="flex-1 space-y-6 py-6">
         {messages.length === 0 ? (
-          <div className="mx-auto max-w-2xl pt-4">
-            <div>
-              <p className="text-center text-xs font-medium uppercase tracking-wider text-text-muted">
-                Try an example
-              </p>
-              <div className="mt-3 flex flex-wrap justify-center gap-2">
-                {EXAMPLES.map((example) => (
-                  <button
-                    key={example}
-                    type="button"
-                    onClick={() => setInput(example)}
-                    className="max-w-full rounded-full border border-border px-3.5 py-2 text-left text-sm text-text-muted transition-colors hover:bg-surface-muted hover:text-text"
-                  >
-                    {example}
-                  </button>
-                ))}
-              </div>
+          <div className="mx-auto w-full pt-4">
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-[#52525b] sm:text-3xl lg:text-5xl">
+                What should we write?
+              </h1>
             </div>
           </div>
         ) : (
@@ -598,7 +565,8 @@ export function GeneratorView() {
 
                     {message.truncated && !message.error && (
                       <p className="mt-3 rounded-md bg-warning-soft px-3.5 py-2.5 text-sm text-warning">
-                        The draft stopped early. Continue writing to add the rest.
+                        The draft stopped early. Continue writing to add the
+                        rest.
                       </p>
                     )}
                   </div>
@@ -666,6 +634,20 @@ export function GeneratorView() {
           void send();
         }}
       >
+        {messages.length === 0 && (
+          <div className="mb-3 flex items-center justify-start gap-4">
+            {EXAMPLES.map((example) => (
+              <button
+                key={example}
+                type="button"
+                onClick={() => setInput(example)}
+                className="max-w-full rounded-full border border-border px-3.5 py-2 text-left text-sm text-text-muted transition-colors hover:bg-surface-muted hover:text-text"
+              >
+                {example}
+              </button>
+            ))}
+          </div>
+        )}
         {optionsOpen && (
           <div className="mb-3 grid gap-3 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2">
             <div>
