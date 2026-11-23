@@ -19,11 +19,11 @@ The frontend never calls the backend URL directly: Next.js rewrites every `/api/
 
 The admin panel is available at **`/admin`** after signing in through the normal login page. An account only reaches it if its database role is `ADMIN`; the backend enforces this on every admin endpoint, not just in the UI.
 
-| | |
-| --- | --- |
-| Admin panel URL | `/admin` |
-| Email | `sifatikram@gmail.com` |
-| Password | `sifat123` |
+|                 |                        |
+| --------------- | ---------------------- |
+| Admin panel URL | `/admin`               |
+| Email           | `sifatikram@gmail.com` |
+| Password        | `sifat123`             |
 
 > The migration `20261121140000_admin_panel` promotes `sifatikram@gmail.com` to `ADMIN` automatically. If you re-seed or recreate the database, run that migration (or `prisma migrate deploy`) so the role is applied. Change this password before exposing the app publicly.
 
@@ -33,42 +33,42 @@ The admin panel is available at **`/admin`** after signing in through the normal
 
 ### Frontend
 
-| Area | Technology |
-| --- | --- |
-| Framework | **Next.js 16.4.6** (App Router, Turbopack) |
-| UI library | **React 19.3** |
-| Language | **TypeScript 5** |
-| Styling | **Tailwind CSS v4** (`@tailwindcss/turbopack`), `tailwind-merge`, `clsx` |
-| Animation | **Framer Motion** |
-| Icons | **react-icons** (Feather set) |
-| Rich text editor | **Tiptap 3** (`starter-kit`, `extension-table`, `pm`) |
-| PDF rendering | **pdfjs-dist** (worker copied into `public/` by `scripts/copy-pdf-worker.mjs`) |
-| DOCX preview | **docx-preview** |
-| Markdown | **react-markdown** |
-| Toasts | **sonner** |
-| Validation | **zod** |
-| Linting | ESLint 9 + `eslint-config-next` |
+| Area             | Technology                                                                     |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Framework        | **Next.js 16.4.6** (App Router, Turbopack)                                     |
+| UI library       | **React 19.3**                                                                 |
+| Language         | **TypeScript 5**                                                               |
+| Styling          | **Tailwind CSS v4** (`@tailwindcss/turbopack`), `tailwind-merge`, `clsx`       |
+| Animation        | **Framer Motion**                                                              |
+| Icons            | **react-icons** (Feather set)                                                  |
+| Rich text editor | **Tiptap 3** (`starter-kit`, `extension-table`, `pm`)                          |
+| PDF rendering    | **pdfjs-dist** (worker copied into `public/` by `scripts/copy-pdf-worker.mjs`) |
+| DOCX preview     | **docx-preview**                                                               |
+| Markdown         | **react-markdown**                                                             |
+| Toasts           | **sonner**                                                                     |
+| Validation       | **zod**                                                                        |
+| Linting          | ESLint 9 + `eslint-config-next`                                                |
 
 ### Backend
 
-| Area | Technology |
-| --- | --- |
-| Framework | **NestJS 12** (Express platform) |
-| Language | **TypeScript 6** |
-| Runtime | **Node.js 24.x** |
-| Database | **PostgreSQL** via **Prisma 7** (`@prisma/adapter-pg`, `prisma-client` generator) |
-| Auth | **@nestjs/jwt** access tokens + rotating refresh tokens, **bcryptjs** password hashing, **cookie-parser** |
-| AI | **OpenAI SDK 7** pointed at **OpenRouter** (primary model + fallback list), streaming SSE |
-| File storage | **Cloudinary** |
-| Document parsing | **pdf-parse**, **mammoth** (DOCX), plain text |
-| Document generation | **pdfkit**, **docx** |
-| Markdown/HTML | **marked**, **node-html-parser** |
-| Diffing | **diff** (document version comparison) |
-| Security | **helmet**, CORS locked to the frontend origin, **@nestjs/throttler** rate limiting, global exception filter, zod env validation |
-| Scheduled cleanup | Secret-protected `/api/cron/purge` endpoint, triggered by Vercel Cron (`backend/vercel.json`) |
-| Observability | `@nestjs/observe`, custom API metrics interceptor |
-| Testing | Jest 30 + Supertest |
-| Linting | oxlint (type-aware) + Prettier |
+| Area                | Technology                                                                                                                       |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Framework           | **NestJS 12** (Express platform)                                                                                                 |
+| Language            | **TypeScript 6**                                                                                                                 |
+| Runtime             | **Node.js 24.x**                                                                                                                 |
+| Database            | **PostgreSQL** via **Prisma 7** (`@prisma/adapter-pg`, `prisma-client` generator)                                                |
+| Auth                | **@nestjs/jwt** access tokens + rotating refresh tokens, **bcryptjs** password hashing, **cookie-parser**                        |
+| AI                  | **OpenAI SDK 7** pointed at **OpenRouter** (primary model + fallback list), streaming SSE                                        |
+| File storage        | **Cloudinary**                                                                                                                   |
+| Document parsing    | **pdf-parse**, **mammoth** (DOCX), plain text                                                                                    |
+| Document generation | **pdfkit**, **docx**                                                                                                             |
+| Markdown/HTML       | **marked**, **node-html-parser**                                                                                                 |
+| Diffing             | **diff** (document version comparison)                                                                                           |
+| Security            | **helmet**, CORS locked to the frontend origin, **@nestjs/throttler** rate limiting, global exception filter, zod env validation |
+| Scheduled cleanup   | Secret-protected `/api/cron/purge` endpoint, triggered by Vercel Cron (`backend/vercel.json`)                                    |
+| Observability       | `@nestjs/observe`, custom API metrics interceptor                                                                                |
+| Testing             | Jest 30 + Supertest                                                                                                              |
+| Linting             | oxlint (type-aware) + Prettier                                                                                                   |
 
 ---
 
@@ -133,18 +133,26 @@ The admin panel is available at **`/admin`** after signing in through the normal
 
 ### Admin panel (`/admin`)
 
+|                                                                 |                                                               |
+| --------------------------------------------------------------- | ------------------------------------------------------------- |
+| ![Admin sign-in](./frontend/public/admin-entry.png)             | ![Overview](./frontend/public/admin-overview.png)             |
+| ![User management](./frontend/public/admin-users.png)           | ![Document management](./frontend/public/admin-documents.png) |
+| ![Document detail](./frontend/public/admin-document-detail.png) | ![AI usage and analytics](./frontend/public/admin-ai.png)     |
+| ![System monitoring](./frontend/public/admin-monitoring.png)    | ![Feedback and support](./frontend/public/admin-feedback.png) |
+| ![Admin settings](./frontend/public/admin-settings.png)         |                                                               |
+
 Server-side guarded: `AdminGuard` + role check on every endpoint, with dedicated admin schemas and services.
 
-| Section | What it does |
-| --- | --- |
-| **Overview** | Totals and growth for users, documents, storage, AI calls; recent activity. |
-| **User Management** | List/search users, inspect a user (documents, storage, AI usage), change role, block/unblock, delete a user. Admin accounts are protected from destructive actions. |
-| **Document Management** | Browse all documents across users, inspect details, filter by type/date/status, delete. |
-| **AI Usage & Analytics** | Token usage per feature/model, latency, success rate, error breakdown, time-series charts. |
-| **System Analytics** | API request metrics (method, path, status, duration) and activity trends. |
-| **System Monitoring** | Health, database/storage figures, failed processing logs, purge status. |
-| **Feedback & Support** | User feedback and bug reports plus contact messages, with status workflow (`OPEN` → `IN_REVIEW` → `RESOLVED`). |
-| **Admin Settings** | Manage admin accounts (promote/demote, add/remove admins). |
+| Section                  | What it does                                                                                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Overview**             | Totals and growth for users, documents, storage, AI calls; recent activity.                                                                                         |
+| **User Management**      | List/search users, inspect a user (documents, storage, AI usage), change role, block/unblock, delete a user. Admin accounts are protected from destructive actions. |
+| **Document Management**  | Browse all documents across users, inspect details, filter by type/date/status, delete.                                                                             |
+| **AI Usage & Analytics** | Token usage per feature/model, latency, success rate, error breakdown, time-series charts.                                                                          |
+| **System Analytics**     | API request metrics (method, path, status, duration) and activity trends.                                                                                           |
+| **System Monitoring**    | Health, database/storage figures, failed processing logs, purge status.                                                                                             |
+| **Feedback & Support**   | User feedback and bug reports plus contact messages, with status workflow (`OPEN` → `IN_REVIEW` → `RESOLVED`).                                                      |
+| **Admin Settings**       | Manage admin accounts (promote/demote, add/remove admins).                                                                                                          |
 
 ### Platform / infrastructure
 
@@ -312,26 +320,26 @@ Other scripts: `npm run build`, `npm run start`, `npm run lint`. `predev`/`prebu
 
 All routes are prefixed with `/api`.
 
-| Prefix | Purpose |
-| --- | --- |
-| `/api/health` | Liveness/readiness |
-| `/api/auth` | register, login, refresh, logout, me |
-| `/api/users`, `/api/users/preferences`, `/api/users/data` | profile, preferences, data export |
-| `/api/documents` | CRUD, upload, content, archive, bulk actions, categories, tags, notes, views, comments |
-| `/api/documents/:id/versions` | version history, restore, diff |
-| `/api/analyses` | run an analysis, list history, fetch result |
-| `/api/chat` | conversations and streamed messages |
-| `/api/generate` | AI document generation (guest + user quotas) |
-| `/api/search` | search across documents |
-| `/api/converter` | format conversion jobs and downloads |
-| `/api/collections` | collections and members |
-| `/api/documents/:id/shares` | sharing |
-| `/api/tags`, `/api/categories` | taxonomy |
-| `/api/trash` | list, restore, purge |
-| `/api/dashboard` | dashboard statistics |
-| `/api/feedback`, `/api/contact` | feedback and contact form |
-| `/api/cron/purge` | scheduled cleanup (secret-protected) |
-| `/api/admin/*` | admin-only: overview, users, documents, AI usage, analytics, monitoring, feedback, settings |
+| Prefix                                                    | Purpose                                                                                     |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `/api/health`                                             | Liveness/readiness                                                                          |
+| `/api/auth`                                               | register, login, refresh, logout, me                                                        |
+| `/api/users`, `/api/users/preferences`, `/api/users/data` | profile, preferences, data export                                                           |
+| `/api/documents`                                          | CRUD, upload, content, archive, bulk actions, categories, tags, notes, views, comments      |
+| `/api/documents/:id/versions`                             | version history, restore, diff                                                              |
+| `/api/analyses`                                           | run an analysis, list history, fetch result                                                 |
+| `/api/chat`                                               | conversations and streamed messages                                                         |
+| `/api/generate`                                           | AI document generation (guest + user quotas)                                                |
+| `/api/search`                                             | search across documents                                                                     |
+| `/api/converter`                                          | format conversion jobs and downloads                                                        |
+| `/api/collections`                                        | collections and members                                                                     |
+| `/api/documents/:id/shares`                               | sharing                                                                                     |
+| `/api/tags`, `/api/categories`                            | taxonomy                                                                                    |
+| `/api/trash`                                              | list, restore, purge                                                                        |
+| `/api/dashboard`                                          | dashboard statistics                                                                        |
+| `/api/feedback`, `/api/contact`                           | feedback and contact form                                                                   |
+| `/api/cron/purge`                                         | scheduled cleanup (secret-protected)                                                        |
+| `/api/admin/*`                                            | admin-only: overview, users, documents, AI usage, analytics, monitoring, feedback, settings |
 
 ---
 
@@ -379,17 +387,17 @@ The two apps deploy separately; the frontend only needs to know where the backen
 
 ## Scripts Reference
 
-| Location | Command | Description |
-| --- | --- | --- |
-| `backend/` | `npm run start:dev` | Watch-mode API with `.env` |
-| `backend/` | `npm run build` / `npm run start:prod` | Production build / run |
-| `backend/` | `npm run migrate:deploy` | Apply Prisma migrations |
-| `backend/` | `npm run test` / `npm run test:e2e` | Jest suites |
-| `backend/` | `npm run lint` / `npm run format` | oxlint / Prettier |
-| `backend/` | `npm run embed-fonts` | Embed PDF fonts |
-| `frontend/` | `npm run dev` | Dev server on :3000 |
-| `frontend/` | `npm run build` / `npm run start` | Production build / run |
-| `frontend/` | `npm run lint` | ESLint |
+| Location    | Command                                | Description                |
+| ----------- | -------------------------------------- | -------------------------- |
+| `backend/`  | `npm run start:dev`                    | Watch-mode API with `.env` |
+| `backend/`  | `npm run build` / `npm run start:prod` | Production build / run     |
+| `backend/`  | `npm run migrate:deploy`               | Apply Prisma migrations    |
+| `backend/`  | `npm run test` / `npm run test:e2e`    | Jest suites                |
+| `backend/`  | `npm run lint` / `npm run format`      | oxlint / Prettier          |
+| `backend/`  | `npm run embed-fonts`                  | Embed PDF fonts            |
+| `frontend/` | `npm run dev`                          | Dev server on :3000        |
+| `frontend/` | `npm run build` / `npm run start`      | Production build / run     |
+| `frontend/` | `npm run lint`                         | ESLint                     |
 
 ---
 
