@@ -3,7 +3,6 @@
 /* ==========================================================================
    DocuMind AI colour system
    Change a hex value here and it changes everywhere.
-   Palette: teal primary + orange accent (the accent keeps the "ai" token names)
    ========================================================================== */
 :root {
   color-scheme: light;
@@ -18,18 +17,18 @@
   --text: #18181b;
   --text-muted: #52525b;
 
-  /* PRIMARY (teal) */
-  --primary: #0f766e;
-  --primary-hover: #115e59;
+  /* PRIMARY */
+  --primary: #2646a3;
+  --primary-hover: #1e3a8a;
   --primary-foreground: #ffffff;
-  --primary-soft: #f0fdfa;
-  --link: #0f766e;
+  --primary-soft: #eef2ff;
+  --link: #2646a3;
 
-  /* AI accent (orange) */
-  --ai: #c2410c; /* text and icons */
-  --ai-soft: #fff7ed;
-  --ai-decor: #fb923c; /* glow / decoration only, never text */
-  --focus: #c2410c;
+  /* AI accent */
+  --ai: #7055d8; /* text and icons */
+  --ai-soft: #f3f0ff;
+  --ai-decor: #a995f5; /* glow / decoration only, never text */
+  --focus: #7055d8;
 
   /* status */
   --success: #15803d;
@@ -38,8 +37,8 @@
   --error-text: #b91c1c; /* text */
   --error-soft: #fef2f2;
   --error-foreground: #ffffff; /* text on a solid error button */
-  --warning: #a16207; /* yellow, so it stays distinct from the orange accent */
-  --warning-soft: #fefce8;
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
 
   /* file type chips */
   --file-pdf: #b91c1c;
@@ -63,17 +62,17 @@
     --text: #e4e4e7;
     --text-muted: #a1a1aa;
 
-    /* PRIMARY (teal): light teal fill with dark text for good contrast */
-    --primary: #2dd4bf;
-    --primary-hover: #5eead4;
-    --primary-foreground: #042f2e;
-    --primary-soft: color-mix(in srgb, #2dd4bf 16%, transparent);
-    --link: #5eead4;
+    /* PRIMARY */
+    --primary: #5275d1;
+    --primary-hover: #6b8ce0;
+    --primary-foreground: #ffffff;
+    --primary-soft: color-mix(in srgb, #5275d1 18%, transparent);
+    --link: #9bb5ff;
 
-    --ai: #fb923c;
-    --ai-soft: color-mix(in srgb, #fb923c 14%, transparent);
-    --ai-decor: #fb923c;
-    --focus: #fb923c;
+    --ai: #b39afb;
+    --ai-soft: color-mix(in srgb, #b39afb 14%, transparent);
+    --ai-decor: #b39afb;
+    --focus: #b39afb;
 
     --success: #4ade80;
     --success-soft: color-mix(in srgb, #4ade80 14%, transparent);
@@ -81,8 +80,8 @@
     --error-text: #f87171;
     --error-soft: color-mix(in srgb, #f87171 14%, transparent);
     --error-foreground: #0b0b0d;
-    --warning: #facc15;
-    --warning-soft: color-mix(in srgb, #facc15 14%, transparent);
+    --warning: #fbbf24;
+    --warning-soft: color-mix(in srgb, #fbbf24 14%, transparent);
 
     --file-pdf: #f87171;
     --file-pdf-soft: color-mix(in srgb, #f87171 14%, transparent);
