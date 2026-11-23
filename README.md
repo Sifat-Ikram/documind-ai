@@ -90,9 +90,9 @@ The admin panel is available at **`/admin`** after signing in through the normal
 - **AI Document Generator** (`/generate`) — pick a document type, length and language, write a prompt and get a document. Guests get a small per-browser quota (`GENERATE_GUEST_PER_BROWSER`, plus a shared `GENERATE_GUEST_POOL`); logged-in users get `GENERATE_USER_LIMIT` per period. Generated text can be copied, downloaded, or saved as a real document once signed in.
 - **Features, About, FAQ, Contact, Privacy Policy, Terms** pages. Contact submissions are stored and show up in the admin panel.
 
-| ![Landing page](./frontend/public/public-home.png) | ![Features page](./frontend/public/public-features.png) | ![AI Writer](./frontend/public/public-generate.png) |
-| --- | --- | --- |
-| Landing page | Features page | AI Writer (no account needed) |
+| ![Landing page](./frontend/public/public-home.png) | ![AI Writer](./frontend/public/public-generate.png) |
+| --- | --- |
+| Landing page — hero, features and AI generator sections | AI Writer (`/generate`) — no account needed |
 
 ### Authentication
 
