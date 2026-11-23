@@ -81,7 +81,7 @@ function AuthActions({ compact = false }: { compact?: boolean }) {
             variant="ghost"
             size={size}
             loading={loggingOut}
-            className="rounded-full bg-surface-muted text-[#2646a3] hover:bg-surface-muted hover:text-[#2646a3]"
+            className="rounded-full bg-surface-muted text-[#2646a3] hover:bg-surface-muted hover:text-[#2646a3] [[data-theme=dark]_&]:text-white [[data-theme=dark]_&]:hover:text-white"
             onClick={async () => {
               setLoggingOut(true);
               await logout();
@@ -98,7 +98,7 @@ function AuthActions({ compact = false }: { compact?: boolean }) {
               variant: "ghost",
               size,
               className:
-                "rounded-full bg-surface-muted text-[#2646a3] hover:bg-surface-muted hover:text-[#2646a3]",
+                "rounded-full bg-surface-muted text-[#2646a3] hover:bg-surface-muted hover:text-[#2646a3] [[data-theme=dark]_&]:text-white [[data-theme=dark]_&]:hover:text-white",
             })}
           >
             Login

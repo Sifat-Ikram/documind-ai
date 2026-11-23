@@ -4,9 +4,11 @@ import {
   Children,
   forwardRef,
   isValidElement,
+  useCallback,
   useEffect,
   useId,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
   useState,
   type ReactNode,
@@ -15,6 +17,16 @@ import {
 } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { cn } from "@/lib/cn";
+
+const DROPDOWN_GAP = 4;
+const DROPDOWN_MAX_HEIGHT = 320; // matches max-h-80
+const DROPDOWN_MIN_HEIGHT = 96;
+const VIEWPORT_EDGE = 8;
+
+type DropdownPosition = {
+  placement: "down" | "up";
+  maxHeight: number;
+};
 
 type OptionProps = {
   value?: string | number;
@@ -63,6 +75,7 @@ export const Select = forwardRef<
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => selectRef.current!);
 
@@ -73,6 +86,10 @@ export const Select = forwardRef<
   const [internalValue, setInternalValue] = useState(getInitialValue);
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [position, setPosition] = useState<DropdownPosition>({
+    placement: "down",
+    maxHeight: DROPDOWN_MAX_HEIGHT,
+  });
 
   const selectedValue = value !== undefined ? String(value) : internalValue;
 
@@ -89,6 +106,52 @@ export const Select = forwardRef<
       setInternalValue(String(value));
     }
   }, [value]);
+
+  const placeDropdown = useCallback(() => {
+    const container = containerRef.current;
+    const dropdown = dropdownRef.current;
+
+    if (!container || !dropdown) return;
+
+    const rect = container.getBoundingClientRect();
+    const height = dropdown.offsetHeight;
+    const spaceBelow =
+      window.innerHeight - rect.bottom - DROPDOWN_GAP - VIEWPORT_EDGE;
+    const spaceAbove = rect.top - DROPDOWN_GAP - VIEWPORT_EDGE;
+
+    // open upward only when it does not fit below and there is more room above
+    const openUp = height > spaceBelow && spaceAbove > spaceBelow;
+    const available = Math.max(
+      openUp ? spaceAbove : spaceBelow,
+      DROPDOWN_MIN_HEIGHT,
+    );
+    const maxHeight = Math.min(DROPDOWN_MAX_HEIGHT, available);
+    const placement = openUp ? "up" : "down";
+
+    setPosition((previous) =>
+      previous.placement === placement && previous.maxHeight === maxHeight
+        ? previous
+        : { placement, maxHeight },
+    );
+  }, []);
+
+  useLayoutEffect(() => {
+    if (isOpen) placeDropdown();
+  }, [isOpen, options.length, placeDropdown]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleViewportChange = () => placeDropdown();
+
+    window.addEventListener("resize", handleViewportChange);
+    window.addEventListener("scroll", handleViewportChange, true);
+
+    return () => {
+      window.removeEventListener("resize", handleViewportChange);
+      window.removeEventListener("scroll", handleViewportChange, true);
+    };
+  }, [isOpen, placeDropdown]);
 
   useEffect(() => {
     function handleOutsideClick(event: PointerEvent) {
@@ -213,7 +276,7 @@ export const Select = forwardRef<
   return (
     <div
       ref={containerRef}
-      className={cn("relative inline-block w-full min-w-48", containerClassName)}
+      className={cn("relative inline-block w-full", containerClassName)}
     >
       <select
         ref={selectRef}
@@ -262,10 +325,15 @@ export const Select = forwardRef<
 
       {isOpen && (
         <div
+          ref={dropdownRef}
           id={listboxId}
           role="listbox"
           aria-label={props["aria-label"] ?? "Options"}
-          className="absolute right-0 top-full z-50 mt-1 max-h-80 w-max min-w-full overflow-y-auto rounded-md border border-border-strong bg-surface py-1 shadow-lg scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          style={{ maxHeight: position.maxHeight }}
+          className={cn(
+            "absolute right-0 z-50 w-max min-w-full overflow-y-auto rounded-md border border-border-strong bg-surface py-1 shadow-lg scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+            position.placement === "up" ? "bottom-full mb-1" : "top-full mt-1",
+          )}
         >
           {options.map((option, index) => {
             const isSelected = option.value === selectedValue;

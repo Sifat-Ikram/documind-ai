@@ -42,14 +42,15 @@ export function LoginForm() {
       const user = await login(parsed.data.email, parsed.data.password);
 
       const nextPath = params.get("next");
+      const target =
+        user.role === "ADMIN"
+          ? "/admin"
+          : nextPath
+            ? safeNextPath(nextPath)
+            : "/dashboard";
 
-      router.replace(
-        nextPath
-          ? safeNextPath(nextPath)
-          : user.role === "ADMIN"
-            ? "/admin"
-            : "/dashboard",
-      );
+      router.replace(target);
+      router.refresh();
     } catch (err) {
       setFormError(
         err instanceof ApiError && err.status === 401

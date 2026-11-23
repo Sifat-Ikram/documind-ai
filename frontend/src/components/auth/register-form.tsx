@@ -41,7 +41,7 @@ export function RegisterForm() {
     setSubmitting(true);
     try {
       await register(parsed.data.name, parsed.data.email, parsed.data.password);
-      router.replace("/dashboard");
+      router.replace("/");
     } catch (err) {
       if (err instanceof ApiError && err.status === 409) {
         setErrors({ email: "An account with this email already exists." });

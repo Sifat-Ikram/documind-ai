@@ -119,13 +119,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const logout = useCallback(async () => {
-    clearSessionFlag();
-    setUser(null);
-    setStatus("unauthenticated");
-    router.replace("/");
-
     try {
       await api("/auth/logout", { method: "POST" });
+      clearSessionFlag();
+      setUser(null);
+      setStatus("unauthenticated");
+      router.replace("/");
     } catch {}
   }, [router]);
 
