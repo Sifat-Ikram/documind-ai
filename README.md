@@ -15,6 +15,16 @@ The frontend never calls the backend URL directly: Next.js rewrites every `/api/
 
 ---
 
+## Live Demo
+
+| | Link |
+| --- | --- |
+| **Web app** | https://documind-ai-pi-nine.vercel.app/ |
+| **Backend API** | https://documind-ai-backend-one.vercel.app/ |
+| **Admin panel** | https://documind-ai-pi-nine.vercel.app/admin |
+
+---
+
 ## Admin Access
 
 The admin panel is available at **`/admin`** after signing in through the normal login page. An account only reaches it if its database role is `ADMIN`; the backend enforces this on every admin endpoint, not just in the UI.
@@ -80,6 +90,10 @@ The admin panel is available at **`/admin`** after signing in through the normal
 - **AI Document Generator** (`/generate`) — pick a document type, length and language, write a prompt and get a document. Guests get a small per-browser quota (`GENERATE_GUEST_PER_BROWSER`, plus a shared `GENERATE_GUEST_POOL`); logged-in users get `GENERATE_USER_LIMIT` per period. Generated text can be copied, downloaded, or saved as a real document once signed in.
 - **Features, About, FAQ, Contact, Privacy Policy, Terms** pages. Contact submissions are stored and show up in the admin panel.
 
+| ![Landing page](./frontend/public/public-home.png) | ![Features page](./frontend/public/public-features.png) | ![AI Writer](./frontend/public/public-generate.png) |
+| --- | --- | --- |
+| Landing page | Features page | AI Writer (no account needed) |
+
 ### Authentication
 
 - Email + password **register** and **login**.
@@ -131,15 +145,21 @@ The admin panel is available at **`/admin`** after signing in through the normal
 - **Profile** page.
 - File download and clipboard helpers, upload progress, drag & drop.
 
+### Workspace (signed in)
+
+| ![Dashboard](./frontend/public/user-dashboard.png) | ![My Documents](./frontend/public/user-documents.png) |
+| --- | --- |
+| Dashboard — stats, recent documents and activity | My Documents — upload, search, filter and list/grid views |
+| ![Document detail](./frontend/public/user-document-detail.png) | ![Analysis history](./frontend/public/user-analysis-history.png) |
+| Document detail — preview, analyze, chat, versions, comments, notes | Analysis history — every saved AI result with its detected tasks |
+
 ### Admin panel (`/admin`)
 
-|                                                                 |                                                               |
-| --------------------------------------------------------------- | ------------------------------------------------------------- |
-| ![Admin sign-in](./frontend/public/admin-entry.png)             | ![Overview](./frontend/public/admin-overview.png)             |
-| ![User management](./frontend/public/admin-users.png)           | ![Document management](./frontend/public/admin-documents.png) |
-| ![Document detail](./frontend/public/admin-document-detail.png) | ![AI usage and analytics](./frontend/public/admin-ai.png)     |
-| ![System monitoring](./frontend/public/admin-monitoring.png)    | ![Feedback and support](./frontend/public/admin-feedback.png) |
-| ![Admin settings](./frontend/public/admin-settings.png)         |                                                               |
+| ![Admin sign-in](./frontend/public/admin-entry.png) | ![Overview](./frontend/public/admin-overview.png) |
+| --- | --- |
+| Admin sign-in | Overview — totals, growth and recent activity |
+| ![User management](./frontend/public/admin-users.png) | ![Document management](./frontend/public/admin-documents.png) |
+| User management — search, inspect, block, change role | Document management — every document across all users |
 
 Server-side guarded: `AdminGuard` + role check on every endpoint, with dedicated admin schemas and services.
 
