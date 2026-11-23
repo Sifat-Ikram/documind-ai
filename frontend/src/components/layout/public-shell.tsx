@@ -81,7 +81,7 @@ function AuthActions({ compact = false }: { compact?: boolean }) {
             variant="ghost"
             size={size}
             loading={loggingOut}
-            className="rounded-full bg-surface-muted text-[#2646a3] hover:bg-surface-muted hover:text-[#2646a3] in-data-[theme=dark]:text-white in-data-[theme=dark]:hover:text-white"
+            className="rounded-full bg-surface-muted text-[#0f766e] hover:bg-surface-muted hover:text-[#0f766e] in-data-[theme=dark]:text-white in-data-[theme=dark]:hover:text-white"
             onClick={async () => {
               setLoggingOut(true);
               await logout();
@@ -98,7 +98,7 @@ function AuthActions({ compact = false }: { compact?: boolean }) {
               variant: "ghost",
               size,
               className:
-                "rounded-full bg-surface-muted text-[#2646a3] hover:bg-surface-muted hover:text-[#2646a3] in-data-[theme=dark]:text-white in-data-[theme=dark]:hover:text-white",
+                "rounded-full bg-surface-muted text-[#0f766e] hover:bg-surface-muted hover:text-[#0f766e] in-data-[theme=dark]:text-white in-data-[theme=dark]:hover:text-white",
             })}
           >
             Login
